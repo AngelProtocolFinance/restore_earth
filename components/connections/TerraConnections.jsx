@@ -23,7 +23,7 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
   } = useWallet();
 
   return (
-    <ul>
+    <>
       {availableConnections
         .filter(({ type }) => type != ConnectType.READONLY)
         .map(({ type, name, icon, identifier = "" }) => (
@@ -34,7 +34,7 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
             </button>
           </li>
         ))}
-    </ul>
+    </>
   );
 };
 
