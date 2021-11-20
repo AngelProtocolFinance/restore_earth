@@ -6,6 +6,8 @@ import TerraConnections from "../components/connections/TerraConnections";
 import EthereumConnections from "../components/connections/EthereumConnections";
 
 import { useState } from "react";
+import { disconnect } from "process";
+import { Wallet } from "@terra-money/terra.js";
 
 const steps = {
   CONNECT: 1,
@@ -30,13 +32,13 @@ const Connect = ({ onConnectionSuccess, onConnectionError }) => {
   );
 };
 
-const Donate = ({ setStep, connection }) => {
-  const [accounts, setAccounts] = useState([]);
+const Donate = ({ setStep, wallet }) => {
+  // const [accounts, setAccounts] = useState([]);
 
-  connection?.eth?.getAccounts()?.then((accounts) => {
-    console.log(accounts);
-    setAccounts(accounts);
-  });
+  // wallet?.eth?.getAccounts()?.then((accounts) => {
+  //   console.log(accounts);
+  //   setAccounts(accounts);
+  // });
 
   const onSuccess = () => {
     setStep(steps.THANKYOU);
@@ -48,8 +50,7 @@ const Donate = ({ setStep, connection }) => {
   return (
     <section>
       <h1>Donation Form</h1>
-      <p>Connected as: {accounts[0]}</p>
-      <p>Default account: {connection.defaultAccount}</p>
+      <p>Connected as: {wallet.methods.address()}</p>
     </section>
   );
 };
@@ -60,17 +61,16 @@ const ThankYou = () => {
 
 const DonatePage: NextPage = () => {
   const [step, setStep] = useState(steps.CONNECT);
-  const [connection, setConnection] = useState(undefined);
-  const onConnectionSuccess = (connection) => {
-    console.log("connected successfully: ", connection);
-    setConnection(connection);
+  const [wallet, setWallet] = useState(undefined);
+  const onConnectionSuccess = (wallet) => {
+    console.log("connected successfully: ", wallet);
+    setWallet(wallet);
     setStep(steps.DONATE);
   };
 
   const onConnectionError = (error) => {
     console.log("could not connect: ", error);
-    console.log(error);
-    setConnection(undefined);
+    setWallet(undefined);
     setStep(steps.CONNECT);
   };
 
@@ -88,9 +88,7 @@ const DonatePage: NextPage = () => {
             onConnectionError={onConnectionError}
           />
         )}
-        {step == steps.DONATE && (
-          <Donate setStep={setStep} connection={connection} />
-        )}
+        {step == steps.DONATE && <Donate setStep={setStep} wallet={wallet} />}
         {step == steps.THANKYOU && <ThankYou />}
       </div>
       {/* <Footer /> */}

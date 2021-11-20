@@ -1,8 +1,10 @@
 //import Image from "next/image";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { NewConnection, WalletChains } from "./Wallet";
 import {
   useWallet,
+  useConnectedWallet,
   getChainOptions,
   WalletProvider,
   WalletStatus,
@@ -18,9 +20,26 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
     // availableInstallTypes,
     availableConnections,
     connect,
-    // install,
-    // disconnect,
+    disconnect,
   } = useWallet();
+
+  const connectedWallet = useConnectedWallet();
+  useEffect(() => {
+    if (connectedWallet) {
+      const chain = WalletChains.TERRA;
+      const connection = connectedWallet;
+      const methods = {
+        address: () => {
+          return connection.walletAddress;
+        },
+        disconnect: () => {
+          console.log("disconnecting");
+          return disconnect();
+        },
+      };
+      onConnectionSuccess(NewConnection({ chain, connection, methods }));
+    }
+  }, [disconnect, onConnectionSuccess, connectedWallet]);
 
   return (
     <>
