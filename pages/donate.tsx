@@ -9,6 +9,8 @@ import { useState } from "react";
 import { disconnect } from "process";
 import { Wallet } from "@terra-money/terra.js";
 
+import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
+
 const steps = {
   CONNECT: 1,
   DONATE: 2,
@@ -38,13 +40,71 @@ const Connect = ({
   );
 };
 
-const Donate = ({ setStep, wallet }) => {
-  // const [address, setAddress] = useState("");
+const TOKENS = {
+  ETHEREUM: "ETH",
+  TERRA: "UST",
+};
 
-  // then((address) => {
-  //   setAddress(address);
-  // });
+const Donate = ({ setStep, wallet, onDonate }) => {
+  const [amount, setAmount] = useState("");
+  const [receiveNft, setReceiveNft] = useState(false);
+  const [receiveReceipt, setReceiveReceipt] = useState(false);
+  const [tcaMember, setTcaMember] = useState(false);
+
+  interface nftDataType {
+    address: string;
+  }
+  const [nftData, setNftData]: [nftDataType, (args: any) => void] = useState({
+    address: "",
+  });
+  const onChangeNftData = (newData: any) => {
+    const data: nftDataType = {
+      ...nftData,
+      ...newData,
+    };
+    setNftData(data);
+  };
+
+  interface kycDataType {
+    name: string;
+    email: string;
+    streetAddress: string;
+    country: string;
+    city: string;
+    zipcode: string;
+  }
+  const [kycData, setKycData]: [kycDataType, (args: any) => void] = useState({
+    email: "",
+    name: "",
+    streetAddress: "",
+    country: "",
+    city: "",
+    zipcode: "",
+  });
+  const onChangeKycData = (newData: any) => {
+    const data: kycDataType = {
+      ...kycData,
+      ...newData,
+    };
+    setKycData(data);
+  };
+
+  interface tcaDataType {
+    affiliateId: string;
+  }
+  const [tcaData, setTcaData]: [tcaDataType, (args: any) => void] = useState({
+    affiliateId: "",
+  });
+  const onChangeTcaData = (newData: any) => {
+    const data: tcaDataType = {
+      ...tcaData,
+      ...newData,
+    };
+    setTcaData(data);
+  };
+
   const address = wallet.methods.address();
+  const token = TOKENS[wallet.chain];
 
   const onSuccess = () => {
     setStep(steps.THANKYOU);
@@ -63,6 +123,182 @@ const Donate = ({ setStep, wallet }) => {
       <h1>Donation Form</h1>
       <p>Connected as: {address}</p>
       <button onClick={onClickDisconnect}>disconnect</button>
+      <Form onSubmit={onDonate}>
+        <Form.Group className="mb-3" controlId="formAmount">
+          <Form.Label>Amount</Form.Label>
+          <InputGroup>
+            <InputGroup.Text>{token}</InputGroup.Text>
+            <Form.Control
+              type="text"
+              name="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.currentTarget.value)}
+            />
+          </InputGroup>
+          <Form.Text className="text-muted">
+            The amount you want to donate
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Check
+          type="checkbox"
+          id="formReceiveNFT"
+          checked={receiveNft}
+          label={`Check this box if you'd like to receive an NFT`}
+          onClick={() => {
+            setReceiveNft(!receiveNft);
+          }}
+        />
+
+        {receiveNft && (
+          <>
+            <Form.Group className="mb-3" controlId="formAddress">
+              <Form.Label>Address</Form.Label>
+              <InputGroup>
+                <InputGroup.Text>Terra Address</InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  name="formAddress"
+                  value={nftData.address}
+                  onChange={(e) => {
+                    const address = e.currentTarget.value;
+                    onChangeNftData({ address });
+                  }}
+                />
+              </InputGroup>
+              <Form.Text className="text-muted">
+                The address that will receive the NFT
+              </Form.Text>
+            </Form.Group>
+          </>
+        )}
+
+        <Form.Check
+          type="checkbox"
+          id="formReceiveReceipt"
+          checked={receiveReceipt}
+          label={`Check this box if you'd like to be emailed a tax receipt`}
+          onClick={() => {
+            setReceiveReceipt(!receiveReceipt);
+          }}
+        />
+
+        {receiveReceipt && (
+          <>
+            <p>
+              Please note that our tax receipts are issued by an US-based
+              501(c)(3) nonprofit. Please consult with your local lawyer,
+              accountant or tax advisor to determine the eligibility of your
+              donation for a tax relief in your country of residence.
+            </p>
+            <Form.Group className="mb-3" controlId="formFullName">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="formFullName"
+                value={kycData.name}
+                onChange={(e) => {
+                  const name = e.currentTarget.value;
+                  onChangeKycData({ name });
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type="email"
+                name="formEmail"
+                value={kycData.email}
+                onChange={(e) => {
+                  const email = e.currentTarget.value;
+                  onChangeKycData({ email });
+                }}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Label>Address</Form.Label>
+              <Row>
+                <Col>
+                  <Form.Control
+                    placeholder="Street address"
+                    value={kycData.streetAddress}
+                    onChange={(e) => {
+                      const streetAddress = e.currentTarget.value;
+                      onChangeKycData({ streetAddress });
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Control
+                    placeholder="Country"
+                    value={kycData.country}
+                    onChange={(e) => {
+                      const country = e.currentTarget.value;
+                      onChangeKycData({ country });
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Control
+                    placeholder="City"
+                    value={kycData.city}
+                    onChange={(e) => {
+                      const city = e.currentTarget.value;
+                      onChangeKycData({ city });
+                    }}
+                  />
+                </Col>
+                <Col>
+                  <Form.Control
+                    placeholder="Zipcode"
+                    value={kycData.zipcode}
+                    onChange={(e) => {
+                      console.log("changing zipcode");
+
+                      const zipcode = e.currentTarget.value;
+                      console.log(kycData.zipcode);
+                      onChangeKycData({ zipcode });
+                    }}
+                  />
+                </Col>
+              </Row>
+            </Form.Group>
+          </>
+        )}
+
+        <Form.Check
+          type="checkbox"
+          id="formTerraCharityAlliance"
+          checked={tcaMember}
+          label={`Check this box if you're a member of Terra's Charity Alliance`}
+          onClick={() => {
+            setTcaMember(!tcaMember);
+          }}
+        />
+
+        {tcaMember && (
+          <Form.Select
+            aria-label="Affiliated TCA Member"
+            onChange={(e) => {
+              const affiliateId = e.currentTarget.value;
+              onChangeTcaData({ affiliateId });
+            }}
+          >
+            <option>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </Form.Select>
+        )}
+
+        <Button variant="primary" type="submit">
+          Donate Now
+        </Button>
+      </Form>
     </section>
   );
 };
@@ -79,6 +315,10 @@ const DonatePage: NextPage = () => {
     setWallet(wallet);
     setStep(steps.DONATE);
     //wallet.methods.disconnect();
+  };
+
+  const onDonate = () => {
+    setStep(steps.THANKYOU);
   };
 
   const onConnectionError = (error) => {
@@ -98,7 +338,7 @@ const DonatePage: NextPage = () => {
       </Head>
       {/* <Header /> */}
 
-      <div className="content-wrap">
+      <div className="container">
         {step == steps.CONNECT && (
           <Connect
             onConnectionSuccess={onConnectionSuccess}
@@ -106,7 +346,9 @@ const DonatePage: NextPage = () => {
             onWalletDisconnect={onWalletDisconnect}
           />
         )}
-        {step == steps.DONATE && <Donate setStep={setStep} wallet={wallet} />}
+        {step == steps.DONATE && (
+          <Donate setStep={setStep} wallet={wallet} onDonate={onDonate} />
+        )}
         {step == steps.THANKYOU && <ThankYou />}
       </div>
       {/* <Footer /> */}
