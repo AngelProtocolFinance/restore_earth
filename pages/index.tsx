@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -50,6 +51,9 @@ function CustomToggle({ children, eventKey }) {
 const Index: NextPage = () => {
   return (
     <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
       <Header />
 
       <div className="content-wrap">

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import { ConnectWalletConnect } from "../libs/providers";
 import { useEffect, useState } from "react";
@@ -174,13 +174,13 @@ const DonatePage: NextPage = () => {
   };
 
   return (
-    <main>
-      <header>
-        <div>Connect</div>
-        <div>Donate</div>
-        <div>Confirm</div>
-      </header>
-      <section>
+    <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
+      <Header />
+
+      <div className="content-wrap">
         {step == steps.CONNECT && (
           <Connect
             onConnectionSuccess={onConnectionSuccess}
@@ -191,8 +191,9 @@ const DonatePage: NextPage = () => {
           <Donate setStep={setStep} connection={connection} />
         )}
         {step == steps.THANKYOU && <ThankYou />}
-      </section>
-    </main>
+      </div>
+      <Footer />
+    </>
   );
 };
 
