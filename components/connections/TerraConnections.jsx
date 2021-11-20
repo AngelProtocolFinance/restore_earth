@@ -1,3 +1,4 @@
+//import Image from "next/image";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
@@ -5,6 +6,7 @@ import {
   getChainOptions,
   WalletProvider,
   WalletStatus,
+  ConnectType,
 } from "@terra-money/wallet-provider";
 
 const Terra = ({ onConnectionSuccess, onConnectionError }) => {
@@ -12,9 +14,9 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
     // status,
     // network,
     // wallets,
-    availableConnectTypes,
+    //availableConnectTypes,
     // availableInstallTypes,
-    // availableConnections,
+    availableConnections,
     connect,
     // install,
     // disconnect,
@@ -22,13 +24,16 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
 
   return (
     <ul>
-      {availableConnectTypes.map((connectType) => (
-        <li key={"connect-" + connectType}>
-          <button onClick={() => connect(connectType)}>
-            Connect {connectType}
-          </button>
-        </li>
-      ))}
+      {availableConnections
+        .filter(({ type }) => type != ConnectType.READONLY)
+        .map(({ type, name, icon, identifier = "" }) => (
+          <li key={"connection-" + type + identifier}>
+            <button onClick={() => connect(type, identifier)}>
+              <img src={icon} alt={name} width={16} height={16} />
+              {name}
+            </button>
+          </li>
+        ))}
     </ul>
   );
 };
