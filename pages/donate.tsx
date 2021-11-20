@@ -15,30 +15,36 @@ const steps = {
   THANKYOU: 3,
 };
 
-const Connect = ({ onConnectionSuccess, onConnectionError }) => {
+const Connect = ({
+  onConnectionSuccess,
+  onConnectionError,
+  onWalletDisconnect,
+}) => {
   return (
     <div>
       <h1>Terra</h1>
       <TerraConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
+        onWalletDisconnect={onWalletDisconnect}
       />
       <h1>Ethereum</h1>
       <EthereumConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
+        onWalletDisconnect={onWalletDisconnect}
       />
     </div>
   );
 };
 
 const Donate = ({ setStep, wallet }) => {
-  // const [accounts, setAccounts] = useState([]);
+  // const [address, setAddress] = useState("");
 
-  // wallet?.eth?.getAccounts()?.then((accounts) => {
-  //   console.log(accounts);
-  //   setAccounts(accounts);
+  // then((address) => {
+  //   setAddress(address);
   // });
+  const address = wallet.methods.address();
 
   const onSuccess = () => {
     setStep(steps.THANKYOU);
@@ -47,10 +53,16 @@ const Donate = ({ setStep, wallet }) => {
   const onError = () => {
     setStep(steps.DONATE);
   };
+
+  const onClickDisconnect = () => {
+    wallet.methods.disconnect();
+  };
+
   return (
     <section>
       <h1>Donation Form</h1>
-      <p>Connected as: {wallet.methods.address()}</p>
+      <p>Connected as: {address}</p>
+      <button onClick={onClickDisconnect}>disconnect</button>
     </section>
   );
 };
@@ -66,10 +78,15 @@ const DonatePage: NextPage = () => {
     console.log("connected successfully: ", wallet);
     setWallet(wallet);
     setStep(steps.DONATE);
+    //wallet.methods.disconnect();
   };
 
   const onConnectionError = (error) => {
     console.log("could not connect: ", error);
+    onWalletDisconnect();
+  };
+
+  const onWalletDisconnect = () => {
     setWallet(undefined);
     setStep(steps.CONNECT);
   };
@@ -86,6 +103,7 @@ const DonatePage: NextPage = () => {
           <Connect
             onConnectionSuccess={onConnectionSuccess}
             onConnectionError={onConnectionError}
+            onWalletDisconnect={onWalletDisconnect}
           />
         )}
         {step == steps.DONATE && <Donate setStep={setStep} wallet={wallet} />}

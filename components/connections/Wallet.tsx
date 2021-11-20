@@ -3,14 +3,14 @@ declare enum WalletChains {
   ETHEREUM = "ETHEREUM",
 }
 
-interface NewConnectionProps {
+interface NewWalletProps {
   chain: WalletChains;
   connection: any;
   methods: any;
 }
 
-const NewConnection = ({ chain, connection, methods }: NewConnectionProps) => {
+const NewWallet = ({ chain, connection, methods }: NewWalletProps) => {
   return { chain, connection, methods };
 };
 
-export { NewConnection, WalletChains };
+export { NewWallet, WalletChains };

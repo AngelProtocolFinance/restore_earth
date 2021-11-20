@@ -1,7 +1,7 @@
 //import Image from "next/image";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { NewConnection, WalletChains } from "./Wallet";
+import { NewWallet, WalletChains } from "./Wallet";
 import {
   useWallet,
   useConnectedWallet,
@@ -11,7 +11,11 @@ import {
   ConnectType,
 } from "@terra-money/wallet-provider";
 
-const Terra = ({ onConnectionSuccess, onConnectionError }) => {
+const Terra = ({
+  onConnectionSuccess,
+  onConnectionError,
+  onWalletDisconnect,
+}) => {
   const {
     // status,
     // network,
@@ -33,13 +37,13 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
           return connection.walletAddress;
         },
         disconnect: () => {
-          console.log("disconnecting");
-          return disconnect();
+          disconnect();
+          onWalletDisconnect();
         },
       };
-      onConnectionSuccess(NewConnection({ chain, connection, methods }));
+      onConnectionSuccess(NewWallet({ chain, connection, methods }));
     }
-  }, [disconnect, onConnectionSuccess, connectedWallet]);
+  }, [disconnect, onConnectionSuccess, connectedWallet, onWalletDisconnect]);
 
   return (
     <>
@@ -57,20 +61,28 @@ const Terra = ({ onConnectionSuccess, onConnectionError }) => {
   );
 };
 
-const TerraConnections = ({ onConnectionSuccess, onConnectionError }) => {
+const TerraConnections = ({
+  onConnectionSuccess,
+  onConnectionError,
+  onWalletDisconnect,
+}) => {
   useEffect(() => {
-    getChainOptions().then((chainOptions) => {
-      ReactDOM.render(
-        <WalletProvider {...chainOptions}>
-          <Terra
-            onConnectionSuccess={onConnectionSuccess}
-            onConnectionError={onConnectionError}
-          />
-        </WalletProvider>,
-        document.getElementById("terra-wallet-connect")
-      );
-    });
-  });
+    const el = document.getElementById("terra-wallet-connect");
+    if (el) {
+      getChainOptions().then((chainOptions) => {
+        ReactDOM.render(
+          <WalletProvider {...chainOptions}>
+            <Terra
+              onConnectionSuccess={onConnectionSuccess}
+              onConnectionError={onConnectionError}
+              onWalletDisconnect={onWalletDisconnect}
+            />
+          </WalletProvider>,
+          el
+        );
+      });
+    }
+  }, [onConnectionSuccess, onConnectionError, onWalletDisconnect]);
 
   return <ul id="terra-wallet-connect"></ul>;
 };
