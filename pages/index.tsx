@@ -84,7 +84,7 @@ const Index: NextPage = () => {
               <div className="col-lg-5 me-auto">
                 <img
                   className="img-fluid d-block d-sm-none"
-                  src={earth5}
+                  src={earth5.src}
                   alt="earth"
                 />
 
@@ -192,9 +192,9 @@ const Index: NextPage = () => {
                     className="progress-bar text-dark"
                     role="progressbar"
                     style={{ width: "28%" }}
-                    aria-valuenow="28"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
+                    aria-valuenow={28}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
                   >
                     $28.5M
                   </div>
@@ -202,9 +202,9 @@ const Index: NextPage = () => {
                     className="progress-bar bg-info text-dark"
                     role="progressbar"
                     style={{ width: "28%" }}
-                    aria-valuenow="28"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
+                    aria-valuenow={28}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
                   >
                     $28.5M
                   </div>

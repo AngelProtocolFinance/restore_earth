@@ -12,7 +12,7 @@ const ConnectWalletConnect = ({ onConnectionSuccess, onConnectionError }) => {
   provider
     .enable()
     .then(() => {
-      const web3 = new Web3(provider);
+      const web3 = new Web3(<any>provider);
       onConnectionSuccess(web3);
     })
     .catch(onConnectionError);
