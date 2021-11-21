@@ -79,6 +79,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     email: string;
     streetAddress: string;
     country: string;
+    state: "";
     city: string;
     zipcode: string;
   }
@@ -87,6 +88,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     name: "",
     streetAddress: "",
     country: "",
+    state: "",
     city: "",
     zipcode: "",
   });
@@ -260,18 +262,6 @@ const Donate = ({ setStep, wallet, onDonate }) => {
               <Row>
                 <Col>
                   <Form.Control
-                    placeholder="Country"
-                    value={kycData.country}
-                    onChange={(e) => {
-                      const country = e.currentTarget.value;
-                      onChangeKycData({ country });
-                    }}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Control
                     placeholder="City"
                     value={kycData.city}
                     onChange={(e) => {
@@ -282,13 +272,32 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 </Col>
                 <Col>
                   <Form.Control
+                    placeholder="State"
+                    value={kycData.state}
+                    onChange={(e) => {
+                      const state = e.currentTarget.value;
+                      onChangeKycData({ state });
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Control
+                    placeholder="Country"
+                    value={kycData.country}
+                    onChange={(e) => {
+                      const country = e.currentTarget.value;
+                      onChangeKycData({ country });
+                    }}
+                  />
+                </Col>
+                <Col>
+                  <Form.Control
                     placeholder="Zipcode"
                     value={kycData.zipcode}
                     onChange={(e) => {
-                      console.log("changing zipcode");
-
                       const zipcode = e.currentTarget.value;
-                      console.log(kycData.zipcode);
                       onChangeKycData({ zipcode });
                     }}
                   />
