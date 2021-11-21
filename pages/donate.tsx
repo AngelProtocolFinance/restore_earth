@@ -134,19 +134,27 @@ const Donate = ({ setStep, wallet, onDonate }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formattedAmount = wallet.methods.toUnit(amount);
+    setPendingRequest(true);
 
     postKycData({ amount, nftData, kycData, tcaData })
       .then((result) => {
         wallet.methods
           .donate(formattedAmount)
           .then((result) => {
+            setPendingRequest(false);
             onDonate({ amount, nftData, kycData, tcaData });
           })
           .catch((error) => {
-            console.log("error donating to wallet: ", error);
+            setPendingRequest(false);
+            setError(true);
+            setErrorMessage(error);
+            // console.log("error donating to wallet: ", error);
           });
       })
       .catch((error) => {
+        setPendingRequest(false);
+        setError(true);
+        setErrorMessage(error);
         console.log("error posting kyc data: ", error);
       });
   };
