@@ -1,7 +1,11 @@
+import Image from "next/image";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { WalletChains, NewWallet } from "./Wallet";
+
+import MetaMaskLogo from "../../public/images/chains/metamask_logo.svg";
+import WalletConnectLogo from "../../public/images/chains/walletconnect_logo.svg";
 
 const ConnectMetaMask = ({
   onConnectionSuccess,
@@ -30,6 +34,12 @@ const ConnectMetaMask = ({
             disconnect: () => {
               onWalletDisconnect();
             },
+            donate: (amount) => {
+              console.log("metamask send transaction");
+              return new Promise((resolve, reject) => {
+                resolve();
+              });
+            },
           };
           onConnectionSuccess(NewWallet({ chain, connection, methods }));
         })
@@ -37,8 +47,11 @@ const ConnectMetaMask = ({
     };
 
     return (
-      <li>
-        <button onClick={onClickConnect}>MetaMask</button>
+      <li className="connection__item">
+        <button onClick={onClickConnect} className="rounded">
+          <img width={32} height={32} src={MetaMaskLogo.src} />
+          <span className="connection__item__title">MetaMask</span>
+        </button>
       </li>
     );
   }
@@ -71,6 +84,12 @@ const ConnectWalletConnect = ({
             connectedWallet.currentProvider.disconnect();
             onWalletDisconnect();
           },
+          donate: (amount) => {
+            console.log("walletconnect send transaction");
+            return new Promise((resolve, reject) => {
+              resolve();
+            });
+          },
         };
         onConnectionSuccess(NewWallet({ chain, connection, methods }));
       })
@@ -78,8 +97,11 @@ const ConnectWalletConnect = ({
   };
 
   return (
-    <li>
-      <button onClick={onClickConnect}>Wallet Connect</button>
+    <li className="connection__item">
+      <button onClick={onClickConnect} className="rounded">
+        <img width={32} height={32} src={WalletConnectLogo.src} />
+        <span className="connection__item__title">Wallet Connect</span>
+      </button>
     </li>
   );
 };
@@ -90,7 +112,7 @@ const EthereumConnections = ({
   onWalletDisconnect,
 }) => {
   return (
-    <ul>
+    <ul className="connection__list">
       <ConnectWalletConnect
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}

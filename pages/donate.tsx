@@ -24,13 +24,14 @@ const Connect = ({
 }) => {
   return (
     <div>
-      <h1>Terra</h1>
+      <h1>Connect</h1>
+      <h3>Terra</h3>
       <TerraConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
         onWalletDisconnect={onWalletDisconnect}
       />
-      <h1>Ethereum</h1>
+      <h3>Ethereum</h3>
       <EthereumConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
@@ -120,7 +121,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
 
   return (
     <section>
-      <h1>Donation Form</h1>
+      <h1>Donate</h1>
       <p>Connected as: {address}</p>
       <button onClick={onClickDisconnect}>disconnect</button>
       <Form onSubmit={onDonate}>
@@ -314,7 +315,6 @@ const DonatePage: NextPage = () => {
     console.log("connected successfully: ", wallet);
     setWallet(wallet);
     setStep(steps.DONATE);
-    //wallet.methods.disconnect();
   };
 
   const onDonate = () => {
@@ -336,22 +336,28 @@ const DonatePage: NextPage = () => {
       <Head>
         <meta name="robots" content="noindex" />
       </Head>
-      {/* <Header /> */}
+      <Header />
 
-      <div className="container">
-        {step == steps.CONNECT && (
-          <Connect
-            onConnectionSuccess={onConnectionSuccess}
-            onConnectionError={onConnectionError}
-            onWalletDisconnect={onWalletDisconnect}
-          />
-        )}
-        {step == steps.DONATE && (
-          <Donate setStep={setStep} wallet={wallet} onDonate={onDonate} />
-        )}
-        {step == steps.THANKYOU && <ThankYou />}
+      <div className="content-wrap">
+        <div className="container pt-160 pb-100 position-relative">
+          <div className="row">
+            <div className="col-md-8 mx-auto">
+              {step == steps.CONNECT && (
+                <Connect
+                  onConnectionSuccess={onConnectionSuccess}
+                  onConnectionError={onConnectionError}
+                  onWalletDisconnect={onWalletDisconnect}
+                />
+              )}
+              {step == steps.DONATE && (
+                <Donate setStep={setStep} wallet={wallet} onDonate={onDonate} />
+              )}
+              {step == steps.THANKYOU && <ThankYou />}
+            </div>
+          </div>
+        </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

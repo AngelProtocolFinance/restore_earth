@@ -14,3 +14,27 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.connection__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.connection__item {
+}
+
+.connection__item img {
+}
+
+.connection__item button {
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+  border: 0px;
+}
+
+.connection__item__title {
+  margin-left: 24px;
+  line-height: 32px;
+}
