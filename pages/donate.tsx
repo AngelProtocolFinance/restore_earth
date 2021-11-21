@@ -18,9 +18,9 @@ const steps = {
   THANKYOU: 3,
 };
 
-const postKycData = (kycData) => {
+const postKycData = ({ amount, nftData, kycData, tcaData }) => {
   return new Promise((resolve, reject) => {
-    console.log("posting kycData: ", kycData);
+    console.log("posting data: ", amount, nftData, kycData, tcaData);
     resolve(200);
   });
 };
@@ -79,7 +79,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     email: string;
     streetAddress: string;
     country: string;
-    state: "";
+    state: string;
     city: string;
     zipcode: string;
   }
@@ -132,16 +132,17 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     e.preventDefault();
     const formattedAmount = wallet.methods.toUnit(amount);
 
-    postKycData(kycData)
+    postKycData({ amount, nftData, kycData, tcaData })
       .then((result) => {
-        wallet.methods
-          .donate(formattedAmount)
-          .then((result) => {
-            onDonate({ amount, kycData });
-          })
-          .catch((error) => {
-            console.log("error donating to wallet: ", error);
-          });
+        onDonate({ amount, nftData, kycData, tcaData });
+        // wallet.methods
+        //   .donate(formattedAmount)
+        //   .then((result) => {
+        //     onDonate({ amount, nftData, kycData, tcaData });
+        //   })
+        //   .catch((error) => {
+        //     console.log("error donating to wallet: ", error);
+        //   });
       })
       .catch((error) => {
         console.log("error posting kyc data: ", error);
@@ -353,7 +354,7 @@ const DonatePage: NextPage = () => {
     setStep(steps.DONATE);
   };
 
-  const onDonate = ({ amount, kycData }) => {
+  const onDonate = ({ amount, nftData, kycData, tcaData }) => {
     setStep(steps.THANKYOU);
   };
 
