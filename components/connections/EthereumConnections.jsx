@@ -7,6 +7,9 @@ import { WalletChains, NewWallet } from "./Wallet";
 import MetaMaskLogo from "../../public/images/chains/metamask_logo.svg";
 import WalletConnectLogo from "../../public/images/chains/walletconnect_logo.svg";
 
+const charityWalletAddress = "0x000000000000000000000000000000000000dEaD";
+const infuraId = "0475a33555e04d22a562b66af06d4b83";
+
 const ConnectMetaMask = ({
   onConnectionSuccess,
   onConnectionError,
@@ -24,20 +27,39 @@ const ConnectMetaMask = ({
         .send("eth_requestAccounts")
         .then((accounts) => {
           const connectedWallet = new Web3(provider);
+          const address = accounts.result[0];
 
           const chain = WalletChains.ETHEREUM;
           const connection = connectedWallet;
           const methods = {
             address: () => {
-              return accounts.result[0];
+              return address;
             },
             disconnect: () => {
               onWalletDisconnect();
             },
+            toUnit: (amount) => Web3.utils.toWei(amount),
+            fromUnit: (amount) => Web3.utils.fromWei(amount),
             donate: (amount) => {
-              console.log("metamask send transaction");
               return new Promise((resolve, reject) => {
-                resolve();
+                connectedWallet.eth
+                  .sendTransaction({
+                    from: address,
+                    to: charityWalletAddress,
+                    value: amount,
+                  })
+                  .then((receipt) => {
+                    console.log(
+                      "metamask send transaction for amount: ",
+                      amount
+                    );
+                    console.log(receipt);
+                    resolve(receipt);
+                  })
+                  .catch((error) => {
+                    console.log("error sending transaction: ", error);
+                    reject(error);
+                  });
               });
             },
           };
@@ -65,7 +87,7 @@ const ConnectWalletConnect = ({
   onWalletDisconnect,
 }) => {
   const provider = new WalletConnectProvider({
-    infuraId: "0475a33555e04d22a562b66af06d4b83",
+    infuraId: infuraId,
   });
 
   const onClickConnect = () => {
@@ -73,21 +95,39 @@ const ConnectWalletConnect = ({
       .enable()
       .then((accounts) => {
         const connectedWallet = new Web3(provider);
+        const address = accounts[0];
 
         const chain = WalletChains.ETHEREUM;
         const connection = connectedWallet;
         const methods = {
           address: () => {
-            return accounts[0];
+            return address;
           },
           disconnect: () => {
             connectedWallet.currentProvider.disconnect();
             onWalletDisconnect();
           },
+          toUnit: (amount) => Web3.utils.toWei(amount),
+          fromUnit: (amount) => Web3.utils.fromWei(amount),
           donate: (amount) => {
-            console.log("walletconnect send transaction");
             return new Promise((resolve, reject) => {
-              resolve();
+              connectedWallet.eth
+                .sendTransaction({
+                  from: address,
+                  to: charityWalletAddress,
+                  value: amount,
+                })
+                .then((receipt) => {
+                  console.log(
+                    "walletconnect send transaction for amount: ",
+                    amount
+                  );
+                  resolve(receipt);
+                })
+                .catch((error) => {
+                  console.log("error sending transaction: ", error);
+                  reject(error);
+                });
             });
           },
         };

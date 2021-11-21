@@ -10,11 +10,19 @@ import { disconnect } from "process";
 import { Wallet } from "@terra-money/terra.js";
 
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
+import { METHODS } from "http";
 
 const steps = {
   CONNECT: 1,
   DONATE: 2,
   THANKYOU: 3,
+};
+
+const postKycData = (kycData) => {
+  return new Promise((resolve, reject) => {
+    console.log("posting kycData: ", kycData);
+    resolve(200);
+  });
 };
 
 const Connect = ({
@@ -89,7 +97,6 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     };
     setKycData(data);
   };
-
   interface tcaDataType {
     affiliateId: string;
   }
@@ -119,12 +126,32 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     wallet.methods.disconnect();
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formattedAmount = wallet.methods.toUnit(amount);
+
+    postKycData(kycData)
+      .then((result) => {
+        wallet.methods
+          .donate(formattedAmount)
+          .then((result) => {
+            onDonate({ amount, kycData });
+          })
+          .catch((error) => {
+            console.log("error donating to wallet: ", error);
+          });
+      })
+      .catch((error) => {
+        console.log("error posting kyc data: ", error);
+      });
+  };
+
   return (
     <section>
       <h1>Donate</h1>
       <p>Connected as: {address}</p>
       <button onClick={onClickDisconnect}>disconnect</button>
-      <Form onSubmit={onDonate}>
+      <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formAmount">
           <Form.Label>Amount</Form.Label>
           <InputGroup>
@@ -146,7 +173,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
           id="formReceiveNFT"
           checked={receiveNft}
           label={`Check this box if you'd like to receive an NFT`}
-          onClick={() => {
+          onChange={() => {
             setReceiveNft(!receiveNft);
           }}
         />
@@ -179,7 +206,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
           id="formReceiveReceipt"
           checked={receiveReceipt}
           label={`Check this box if you'd like to be emailed a tax receipt`}
-          onClick={() => {
+          onChange={() => {
             setReceiveReceipt(!receiveReceipt);
           }}
         />
@@ -276,7 +303,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
           id="formTerraCharityAlliance"
           checked={tcaMember}
           label={`Check this box if you're a member of Terra's Charity Alliance`}
-          onClick={() => {
+          onChange={() => {
             setTcaMember(!tcaMember);
           }}
         />
@@ -317,7 +344,7 @@ const DonatePage: NextPage = () => {
     setStep(steps.DONATE);
   };
 
-  const onDonate = () => {
+  const onDonate = ({ amount, kycData }) => {
     setStep(steps.THANKYOU);
   };
 

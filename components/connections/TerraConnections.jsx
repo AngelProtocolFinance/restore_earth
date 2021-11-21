@@ -40,8 +40,11 @@ const Terra = ({
           disconnect();
           onWalletDisconnect();
         },
+        toUnit: (amount) => amount,
+        fromUnit: (amount) => amount,
         donate: (amount) => {
-          console.log("terra send transaction");
+          console.log("terra send transaction for amount: ", amount);
+
           return new Promise((resolve, reject) => {
             resolve();
           });
