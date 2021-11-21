@@ -55,6 +55,9 @@ const TOKENS = {
 };
 
 const Donate = ({ setStep, wallet, onDonate }) => {
+  const [pendingRequest, setPendingRequest] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [amount, setAmount] = useState("");
   const [receiveNft, setReceiveNft] = useState(false);
   const [receiveReceipt, setReceiveReceipt] = useState(false);
@@ -134,15 +137,14 @@ const Donate = ({ setStep, wallet, onDonate }) => {
 
     postKycData({ amount, nftData, kycData, tcaData })
       .then((result) => {
-        onDonate({ amount, nftData, kycData, tcaData });
-        // wallet.methods
-        //   .donate(formattedAmount)
-        //   .then((result) => {
-        //     onDonate({ amount, nftData, kycData, tcaData });
-        //   })
-        //   .catch((error) => {
-        //     console.log("error donating to wallet: ", error);
-        //   });
+        wallet.methods
+          .donate(formattedAmount)
+          .then((result) => {
+            onDonate({ amount, nftData, kycData, tcaData });
+          })
+          .catch((error) => {
+            console.log("error donating to wallet: ", error);
+          });
       })
       .catch((error) => {
         console.log("error posting kyc data: ", error);
