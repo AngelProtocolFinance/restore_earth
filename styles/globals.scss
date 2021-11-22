@@ -73,7 +73,10 @@ a {
   line-height: 32px;
 }
 
-.donate__form__address_input {
+.donate__form__amount__input,
+.donate__form__nft__input,
+.donate__form__kyc__input,
+.donate__form__tca__input {
   background-color: $color-grey-light !important;
   padding: 8px 16px !important;
 }
