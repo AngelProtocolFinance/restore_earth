@@ -16,6 +16,7 @@ import { Wallet } from "@terra-money/terra.js";
 
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { METHODS } from "http";
+import classNames from "classnames";
 
 const steps = {
   CONNECT: 1,
@@ -25,10 +26,28 @@ const steps = {
 
 const DonateHeader = ({ step }) => {
   return (
-    <div className="row justify-content-md-center">
-      <div className="col col-md-3 center">Connect</div>
-      <div className="col col-md-3 center">Donate</div>
-      <div className="col col-md-3 center">Thank you!</div>
+    <div className="row justify-content-md-center donate__header">
+      <div
+        className={classNames("col col-md-3 donate__step", {
+          donate__step__active: step == steps.CONNECT,
+        })}
+      >
+        <span>Connect</span>
+      </div>
+      <div
+        className={classNames("col col-md-3 donate__step", {
+          donate__step__active: step == steps.DONATE,
+        })}
+      >
+        <span>Donate</span>
+      </div>
+      <div
+        className={classNames("col col-md-3 donate__step", {
+          donate__step__active: step == steps.THANKYOU,
+        })}
+      >
+        <span>Thank you!</span>
+      </div>
     </div>
   );
 };
@@ -214,6 +233,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
               name="amount"
               value={amount}
               onChange={(e) => setAmount(e.currentTarget.value)}
+              className="donate__form__address_input"
             />
           </InputGroup>
           <Form.Text className="text-muted">
@@ -233,18 +253,19 @@ const Donate = ({ setStep, wallet, onDonate }) => {
 
         {receiveNft && (
           <>
-            <Form.Group className="mb-3" controlId="formAddress">
+            <Form.Group className="mb-3" controlId="walletAddress">
               <Form.Label>Address</Form.Label>
               <InputGroup>
                 <InputGroup.Text>Terra Address</InputGroup.Text>
                 <Form.Control
                   type="text"
-                  name="formAddress"
+                  name="walletAddress"
                   value={nftData.address}
                   onChange={(e) => {
                     const address = e.currentTarget.value;
                     onChangeNftData({ address });
                   }}
+                  className="donate__form__address_input"
                 />
               </InputGroup>
               <Form.Text className="text-muted">
@@ -282,6 +303,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                   const name = e.currentTarget.value;
                   onChangeKycData({ name });
                 }}
+                className="donate__form__address_input"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formEmail">
@@ -294,6 +316,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                   const email = e.currentTarget.value;
                   onChangeKycData({ email });
                 }}
+                className="donate__form__address_input"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formEmail">
@@ -307,6 +330,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                       const streetAddress = e.currentTarget.value;
                       onChangeKycData({ streetAddress });
                     }}
+                    className="donate__form__address_input"
                   />
                 </Col>
               </Row>
@@ -319,6 +343,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                       const city = e.currentTarget.value;
                       onChangeKycData({ city });
                     }}
+                    className="donate__form__address_input"
                   />
                 </Col>
                 <Col>
@@ -329,6 +354,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                       const state = e.currentTarget.value;
                       onChangeKycData({ state });
                     }}
+                    className="donate__form__address_input"
                   />
                 </Col>
               </Row>
@@ -341,6 +367,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                       const country = e.currentTarget.value;
                       onChangeKycData({ country });
                     }}
+                    className="donate__form__address_input"
                   />
                 </Col>
                 <Col>
@@ -351,6 +378,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                       const zipcode = e.currentTarget.value;
                       onChangeKycData({ zipcode });
                     }}
+                    className="donate__form__address_input"
                   />
                 </Col>
               </Row>
@@ -427,7 +455,7 @@ const DonatePage: NextPage = () => {
 
       <div className="content-wrap">
         <div className="container pt-160 pb-100 position-relative">
-          <DonateHeader />
+          <DonateHeader step={step} />
           <div className="row">
             <div className="col-md-9 mx-auto">
               {step == steps.CONNECT && (

@@ -1,3 +1,5 @@
+@import "variables";
+
 html,
 body {
   padding: 0;
@@ -13,6 +15,23 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.donate__step {
+  border-bottom: 5px solid $color-grey;
+  color: $color-grey-dark;
+  cursor: pointer;
+}
+
+.donate__step.donate__step__active {
+  border-bottom: 5px solid $primary;
+  color: $color-dark;
+  font-weight: bold;
+}
+
+.donate__step span {
+  padding-left: 16px;
+  line-height: 32px;
 }
 
 .connection__chain__list {
@@ -52,4 +71,9 @@ a {
 .connection__item__title {
   margin-left: 24px;
   line-height: 32px;
+}
+
+.donate__form__address_input {
+  background-color: $color-grey-light !important;
+  padding: 8px 16px !important;
 }
