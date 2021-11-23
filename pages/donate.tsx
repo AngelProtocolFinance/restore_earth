@@ -6,6 +6,11 @@ import Footer from "../components/Footer";
 import TerraConnections from "../components/connections/TerraConnections";
 import EthereumConnections from "../components/connections/EthereumConnections";
 
+import DonateHeader from "../components/Donate/Header";
+import DonateForm from "../components/Donate/Donate";
+import ConnectForm from "../components/Donate/Connect";
+import ThankYou from "../components/Donate/ThankYou";
+
 import terraLogo from "../public/images/chains/terra_blue_logo.svg";
 import ethereumLogo from "../public/images/chains/ethereum_logo.png";
 import bitcoinLogo from "../public/images/chains/bitcoin_logo.svg";
@@ -22,34 +27,6 @@ const steps = {
   CONNECT: 1,
   DONATE: 2,
   THANKYOU: 3,
-};
-
-const DonateHeader = ({ step }) => {
-  return (
-    <div className="row justify-content-md-center donate__header">
-      <div
-        className={classNames("col col-md-3 donate__step", {
-          donate__step__active: step == steps.CONNECT,
-        })}
-      >
-        <span>Connect</span>
-      </div>
-      <div
-        className={classNames("col col-md-3 donate__step", {
-          donate__step__active: step == steps.DONATE,
-        })}
-      >
-        <span>Donate</span>
-      </div>
-      <div
-        className={classNames("col col-md-3 donate__step", {
-          donate__step__active: step == steps.THANKYOU,
-        })}
-      >
-        <span>Thank you!</span>
-      </div>
-    </div>
-  );
 };
 
 const postKycData = ({ amount, nftData, kycData, tcaData }) => {
@@ -463,10 +440,6 @@ const Donate = ({ setStep, wallet, onDonate }) => {
   );
 };
 
-const ThankYou = () => {
-  return <section>Thank You!</section>;
-};
-
 const DonatePage: NextPage = () => {
   const [step, setStep] = useState(steps.CONNECT);
   const [wallet, setWallet] = useState(undefined);
@@ -499,7 +472,7 @@ const DonatePage: NextPage = () => {
 
       <div className="content-wrap">
         <div className="container pt-160 pb-100 position-relative">
-          <DonateHeader step={step} />
+          <DonateHeader currentStep={step} />
           <div className="row">
             <div className="col-md-9 mx-auto">
               {step == steps.CONNECT && (
