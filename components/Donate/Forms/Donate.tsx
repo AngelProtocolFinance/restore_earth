@@ -2,6 +2,12 @@ import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 
 import { STEPS } from "components/Donate/variables";
+import useNFTData from "../Data/NFTData";
+import { NFTDataType } from "../Data/NFTData";
+import useKYCData from "../Data/KYCData";
+import { KYCDataType } from "../Data/KYCData";
+import useTCAData from "../Data/TCAData";
+import { TCADataType } from "../Data/TCAData";
 
 const TOKENS = {
   BITCOIN: "BTC",
@@ -15,9 +21,9 @@ const SUGGESTED_DONATION_AMOUNTS = {
   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
 };
 
-const postKycData = ({ amount, nftData, kycData, tcaData }) => {
+const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
   return new Promise((resolve, reject) => {
-    console.log("posting data: ", amount, nftData, kycData, tcaData);
+    console.log("posting data: ", amount, NFTData, KYCData, TCAData);
     resolve(200);
   });
 };
@@ -28,62 +34,15 @@ const Donate = ({ setStep, wallet, onDonate }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
+
   const [receiveNft, setReceiveNft] = useState(false);
+  const [NFTData, setNFTData] = useNFTData();
+
   const [receiveReceipt, setReceiveReceipt] = useState(false);
+  const [KYCData, setKYCData] = useKYCData();
+
   const [tcaMember, setTcaMember] = useState(false);
-
-  interface nftDataType {
-    address: string;
-  }
-  const [nftData, setNftData]: [nftDataType, (args: any) => void] = useState({
-    address: "",
-  });
-  const onChangeNftData = (newData: any) => {
-    const data: nftDataType = {
-      ...nftData,
-      ...newData,
-    };
-    setNftData(data);
-  };
-
-  interface kycDataType {
-    name: string;
-    email: string;
-    streetAddress: string;
-    country: string;
-    state: string;
-    city: string;
-    zipcode: string;
-  }
-  const [kycData, setKycData]: [kycDataType, (args: any) => void] = useState({
-    email: "",
-    name: "",
-    streetAddress: "",
-    country: "",
-    state: "",
-    city: "",
-    zipcode: "",
-  });
-  const onChangeKycData = (newData: any) => {
-    const data: kycDataType = {
-      ...kycData,
-      ...newData,
-    };
-    setKycData(data);
-  };
-  interface tcaDataType {
-    affiliateId: string;
-  }
-  const [tcaData, setTcaData]: [tcaDataType, (args: any) => void] = useState({
-    affiliateId: "",
-  });
-  const onChangeTcaData = (newData: any) => {
-    const data: tcaDataType = {
-      ...tcaData,
-      ...newData,
-    };
-    setTcaData(data);
-  };
+  const [TCAData, setTCAData] = useTCAData();
 
   const address = wallet.methods.address();
   const token = TOKENS[wallet.chain];
@@ -110,13 +69,13 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     const formattedAmount = wallet.methods.toUnit(amount);
     setPendingRequest(true);
 
-    postKycData({ amount, nftData, kycData, tcaData })
+    postKycData({ amount, NFTData, KYCData, TCAData })
       .then((result) => {
         wallet.methods
           .donate(formattedAmount)
           .then((result) => {
             setPendingRequest(false);
-            onDonate({ amount, nftData, kycData, tcaData });
+            onDonate({ amount, NFTData, KYCData, TCAData });
           })
           .catch((error) => {
             setPendingRequest(false);
@@ -205,10 +164,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Form.Control
                   type="text"
                   name="walletAddress"
-                  value={nftData.address}
+                  value={NFTData.address}
                   onChange={(e) => {
                     const address = e.currentTarget.value;
-                    onChangeNftData({ address });
+                    setNFTData({ address });
                   }}
                   className="donate__form__nft__input"
                 />
@@ -243,10 +202,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
               <Form.Control
                 type="text"
                 name="formFullName"
-                value={kycData.name}
+                value={KYCData.name}
                 onChange={(e) => {
                   const name = e.currentTarget.value;
-                  onChangeKycData({ name });
+                  setKYCData({ name });
                 }}
                 className="donate__form__kyc__input"
               />
@@ -256,10 +215,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
               <Form.Control
                 type="email"
                 name="formEmail"
-                value={kycData.email}
+                value={KYCData.email}
                 onChange={(e) => {
                   const email = e.currentTarget.value;
-                  onChangeKycData({ email });
+                  setKYCData({ email });
                 }}
                 className="donate__form__kyc__input"
               />
@@ -270,10 +229,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Col>
                   <Form.Control
                     placeholder="Street address"
-                    value={kycData.streetAddress}
+                    value={KYCData.streetAddress}
                     onChange={(e) => {
                       const streetAddress = e.currentTarget.value;
-                      onChangeKycData({ streetAddress });
+                      setKYCData({ streetAddress });
                     }}
                     className="donate__form__kyc__input"
                   />
@@ -283,10 +242,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Col>
                   <Form.Control
                     placeholder="City"
-                    value={kycData.city}
+                    value={KYCData.city}
                     onChange={(e) => {
                       const city = e.currentTarget.value;
-                      onChangeKycData({ city });
+                      setKYCData({ city });
                     }}
                     className="donate__form__kyc__input"
                   />
@@ -294,10 +253,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Col>
                   <Form.Control
                     placeholder="State"
-                    value={kycData.state}
+                    value={KYCData.state}
                     onChange={(e) => {
                       const state = e.currentTarget.value;
-                      onChangeKycData({ state });
+                      setKYCData({ state });
                     }}
                     className="donate__form__kyc__input"
                   />
@@ -307,10 +266,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Col>
                   <Form.Control
                     placeholder="Country"
-                    value={kycData.country}
+                    value={KYCData.country}
                     onChange={(e) => {
                       const country = e.currentTarget.value;
-                      onChangeKycData({ country });
+                      setKYCData({ country });
                     }}
                     className="donate__form__kyc__input"
                   />
@@ -318,10 +277,10 @@ const Donate = ({ setStep, wallet, onDonate }) => {
                 <Col>
                   <Form.Control
                     placeholder="Zipcode"
-                    value={kycData.zipcode}
+                    value={KYCData.zipcode}
                     onChange={(e) => {
                       const zipcode = e.currentTarget.value;
-                      onChangeKycData({ zipcode });
+                      setKYCData({ zipcode });
                     }}
                     className="donate__form__kyc__input"
                   />
@@ -346,7 +305,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
             aria-label="Affiliated TCA Member"
             onChange={(e) => {
               const affiliateId = e.currentTarget.value;
-              onChangeTcaData({ affiliateId });
+              setTCAData({ affiliateId });
             }}
             className="donate__form__tca__input"
           >

@@ -21,7 +21,7 @@ const DonatePage: NextPage = () => {
     setStep(STEPS.DONATE);
   };
 
-  const onDonate = ({ amount, nftData, kycData, tcaData }) => {
+  const onDonate = ({ amount, NFTData, KYCData, TCAData }) => {
     setStep(STEPS.THANKYOU);
   };
 
