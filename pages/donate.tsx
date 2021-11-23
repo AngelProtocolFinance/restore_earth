@@ -1,27 +1,17 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import TerraConnections from "../components/connections/TerraConnections";
-import EthereumConnections from "../components/connections/EthereumConnections";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
-import DonateHeader from "../components/Donate/Header";
-import DonateForm from "../components/Donate/Donate";
-import ConnectForm from "../components/Donate/Connect";
-import ThankYou from "../components/Donate/ThankYou";
-
-import terraLogo from "../public/images/chains/terra_blue_logo.svg";
-import ethereumLogo from "../public/images/chains/ethereum_logo.png";
-import bitcoinLogo from "../public/images/chains/bitcoin_logo.svg";
+import DonateHeader from "components/Donate/Header";
+import DonateForm from "components/Donate/Forms/Donate";
+import ConnectForm from "components/Donate/Forms/Connect";
+import ThankYou from "components/Donate/ThankYou";
 
 import { useState } from "react";
-import { disconnect } from "process";
-import { Wallet } from "@terra-money/terra.js";
 
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-import { METHODS } from "http";
-import classNames from "classnames";
 
 const steps = {
   CONNECT: 1,
@@ -34,55 +24,6 @@ const postKycData = ({ amount, nftData, kycData, tcaData }) => {
     console.log("posting data: ", amount, nftData, kycData, tcaData);
     resolve(200);
   });
-};
-
-const Connect = ({
-  onConnectionSuccess,
-  onConnectionError,
-  onWalletDisconnect,
-}) => {
-  return (
-    <div className="connection__chain__list">
-      <h2>Select a donation method:</h2>
-      <h3 className="connection__chain__title">
-        <img width={32} height={32} src={terraLogo.src} />
-        <span>[TODO] Terra</span>
-      </h3>
-      <TerraConnections
-        onConnectionSuccess={onConnectionSuccess}
-        onConnectionError={onConnectionError}
-        onWalletDisconnect={onWalletDisconnect}
-      />
-      <h3 className="connection__chain__title">
-        <img
-          width={32}
-          height={32}
-          style={{ paddingLeft: "6px", paddingRight: "6px" }}
-          src={ethereumLogo.src}
-        />
-        <span>Ethereum</span>
-      </h3>
-      <EthereumConnections
-        onConnectionSuccess={onConnectionSuccess}
-        onConnectionError={onConnectionError}
-        onWalletDisconnect={onWalletDisconnect}
-      />
-      <h3 className="connection__chain__title">
-        <img width={32} height={32} src={bitcoinLogo.src} />
-        <span>Bitcoin</span>
-      </h3>
-      <ul className="connection__list">
-        <li className="connection__item">
-          <button className="rounded">
-            <img width={32} height={32} src={bitcoinLogo.src} />
-            <span className="connection__item__title">
-              [TODO] Donate Manually
-            </span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  );
 };
 
 const TOKENS = {
@@ -473,10 +414,11 @@ const DonatePage: NextPage = () => {
       <div className="content-wrap">
         <div className="container pt-160 pb-100 position-relative">
           <DonateHeader currentStep={step} />
+
           <div className="row">
             <div className="col-md-9 mx-auto">
               {step == steps.CONNECT && (
-                <Connect
+                <ConnectForm
                   onConnectionSuccess={onConnectionSuccess}
                   onConnectionError={onConnectionError}
                   onWalletDisconnect={onWalletDisconnect}

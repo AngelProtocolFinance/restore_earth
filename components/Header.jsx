@@ -2,8 +2,8 @@ import * as React from "react";
 import Scrollspy from "react-scrollspy";
 import Link from "next/link";
 
-import angelProtocolLogo from "../public/images/angel-protocol.png";
-import terraLogo from "../public/images/chains/terra.png";
+import angelProtocolLogo from "public/images/angel-protocol.png";
+import terraLogo from "public/images/chains/terra.png";
 
 const Header = ({}) => {
   return (

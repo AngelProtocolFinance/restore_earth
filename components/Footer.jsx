@@ -1,7 +1,7 @@
 import * as React from "react";
 import Image from "next/image";
 
-import angelProtocolLogo from "../public/images/angel-protocol.png";
+import angelProtocolLogo from "public/images/angel-protocol.png";
 
 const Footer = () => {
   return (
