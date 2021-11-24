@@ -11,6 +11,11 @@ import { KYCDataType } from "components/Donate/Data/KYCData";
 import useTCAData from "components/Donate/Data/TCAData";
 import { TCADataType } from "components/Donate/Data/TCAData";
 
+import {
+  sendKYCData,
+  KYCTransactionData,
+} from "components/Donate/AngelProtocol/index";
+
 const TOKENS = {
   BITCOIN: "BTC",
   ETHEREUM: "ETH",
@@ -23,12 +28,12 @@ const SUGGESTED_DONATION_AMOUNTS = {
   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
 };
 
-const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
-  return new Promise((resolve, reject) => {
-    console.log("posting data: ", amount, NFTData, KYCData, TCAData);
-    resolve(200);
-  });
-};
+// const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
+//   return new Promise((resolve, reject) => {
+//     console.log("posting data: ", amount, NFTData, KYCData, TCAData);
+//     resolve(200);
+//   });
+// };
 
 const DonationAmountForm = ({
   wallet,
@@ -318,10 +323,17 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     const formattedAmount = wallet.methods.toUnit(amount);
     setPendingRequest(true);
 
-    postKycData({ amount, NFTData, KYCData, TCAData })
-      .then((result) => {
-        wallet.methods
-          .donate(formattedAmount)
+    wallet.methods
+      .donate(formattedAmount)
+      .then((transactionData) => {
+        sendKYCData({
+          amount,
+          wallet,
+          transactionData,
+          NFTData,
+          KYCData,
+          TCAData,
+        })
           .then((result) => {
             setPendingRequest(false);
             onDonationSuccess({ amount, NFTData, KYCData, TCAData });

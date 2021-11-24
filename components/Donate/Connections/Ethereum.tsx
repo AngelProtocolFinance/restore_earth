@@ -6,8 +6,8 @@ import { WalletChains, NewWallet } from "./Wallet";
 
 import MetaMaskLogo from "public/images/chains/metamask_logo.svg";
 import WalletConnectLogo from "public/images/chains/walletconnect_logo.svg";
+import { KYCTransactionDataType, ETH_WALLET_ADDRESS } from "../AngelProtocol";
 
-const charityWalletAddress = "0x5a882Eb704EA153B117Ab2b1797bA46a1B09Da2c";
 const infuraId = "0475a33555e04d22a562b66af06d4b83";
 
 const ConnectMetaMask = ({
@@ -18,7 +18,7 @@ const ConnectMetaMask = ({
   const [provider, setProvider] = useState(undefined);
 
   useEffect(() => {
-    setProvider(window.ethereum);
+    setProvider(window["ethereum"]);
   }, [onConnectionSuccess, onConnectionError]);
 
   if (provider) {
@@ -45,7 +45,7 @@ const ConnectMetaMask = ({
                 connectedWallet.eth
                   .sendTransaction({
                     from: address,
-                    to: charityWalletAddress,
+                    to: ETH_WALLET_ADDRESS,
                     value: amount,
                   })
                   .then((receipt) => {
@@ -54,7 +54,13 @@ const ConnectMetaMask = ({
                       amount
                     );
                     console.log(receipt);
-                    resolve(receipt);
+                    const transactionData: KYCTransactionDataType = {
+                      transactionId: receipt.transactionHash,
+                      blockId: receipt.blockHash,
+                      blockNumber: receipt.blockNumber,
+                      status: receipt.status,
+                    };
+                    resolve(transactionData);
                   })
                   .catch((error) => {
                     console.log("error sending transaction: ", error);
@@ -94,7 +100,8 @@ const ConnectWalletConnect = ({
     provider
       .enable()
       .then((accounts) => {
-        const connectedWallet = new Web3(provider);
+        const formattedProvider: WalletConnectProvider = provider;
+        const connectedWallet = new Web3(formattedProvider as any);
         const address = accounts[0];
 
         const chain = WalletChains.ETHEREUM;
@@ -104,7 +111,9 @@ const ConnectWalletConnect = ({
             return address;
           },
           disconnect: () => {
-            connectedWallet.currentProvider.disconnect();
+            // TODO: Disconnect Ethereum wallet
+            // this is what we were using
+            // connectedWallet.currentProvider.disconnect();
             onWalletDisconnect();
           },
           toUnit: (amount) => Web3.utils.toWei(amount),
@@ -114,7 +123,7 @@ const ConnectWalletConnect = ({
               connectedWallet.eth
                 .sendTransaction({
                   from: address,
-                  to: charityWalletAddress,
+                  to: ETH_WALLET_ADDRESS,
                   value: amount,
                 })
                 .then((receipt) => {
