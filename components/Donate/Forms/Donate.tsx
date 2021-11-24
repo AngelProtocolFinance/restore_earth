@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { WalletStatus } from "components/Donate/Connections/Wallet";
 
-import { STEPS } from "components/Donate/variables";
+import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
 import useNFTData from "components/Donate/Data/NFTData";
 import { NFTDataType } from "components/Donate/Data/NFTData";
 import useKYCData from "components/Donate/Data/KYCData";
@@ -11,6 +11,9 @@ import { KYCDataType } from "components/Donate/Data/KYCData";
 import useTCAData from "components/Donate/Data/TCAData";
 import { TCADataType } from "components/Donate/Data/TCAData";
 
+import { sendKYCData } from "components/Donate/AngelProtocol/index";
+
+const TWITTER_HANDLE = "example";
 const TOKENS = {
   BITCOIN: "BTC",
   ETHEREUM: "ETH",
@@ -23,12 +26,12 @@ const SUGGESTED_DONATION_AMOUNTS = {
   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
 };
 
-const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
-  return new Promise((resolve, reject) => {
-    console.log("posting data: ", amount, NFTData, KYCData, TCAData);
-    resolve(200);
-  });
-};
+// const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
+//   return new Promise((resolve, reject) => {
+//     console.log("posting data: ", amount, NFTData, KYCData, TCAData);
+//     resolve(200);
+//   });
+// };
 
 const DonationAmountForm = ({
   wallet,
@@ -283,12 +286,12 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   );
 };
 
-const Donate = ({ setStep, wallet, onDonate }) => {
-  // TODO: use pendingRequest to disable button and show loading state
-  const [pendingRequest, setPendingRequest] = useState(false);
-  // TODO: use error to display error and allow user to retry
-  const [error, setError] = useState(false);
+const Donate = ({ setStep, wallet, onDonationSuccess }) => {
+  const [transactionStep, setTransactionStep] = useState(
+    TRANSACTION_STEPS.FORM
+  );
   const [errorMessage, setErrorMessage] = useState("");
+
   // TODO: make amount adjustment simpler
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
@@ -313,29 +316,53 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     onClickDisconnect();
   };
 
+  const onTransactionSuccess = ({
+    amount,
+    wallet,
+    transactionData,
+    NFTData,
+    KYCData,
+    TCAData,
+  }) => {
+    sendKYCData({
+      amount,
+      wallet,
+      transactionData,
+      NFTData,
+      KYCData,
+      TCAData,
+    })
+      .then((result) => {
+        setTransactionStep(TRANSACTION_STEPS.SUCCESS);
+        onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+      })
+      .catch((error) => {
+        setTransactionStep(TRANSACTION_STEPS.ERROR_KYC);
+        setErrorMessage(error);
+      });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formattedAmount = wallet.methods.toUnit(amount);
-    setPendingRequest(true);
+    setTransactionStep(TRANSACTION_STEPS.SENDING_TRANSACTION);
 
-    postKycData({ amount, NFTData, KYCData, TCAData })
-      .then((result) => {
-        wallet.methods
-          .donate(formattedAmount)
-          .then((result) => {
-            setPendingRequest(false);
-            onDonate({ amount, NFTData, KYCData, TCAData });
-          })
-          .catch((error) => {
-            setPendingRequest(false);
-            setError(true);
-            setErrorMessage(error);
-          });
+    wallet.methods
+      .donate(formattedAmount)
+      .then((transactionData) => {
+        onTransactionSuccess({
+          amount,
+          wallet,
+          transactionData,
+          NFTData,
+          KYCData,
+          TCAData,
+        });
+        setTransactionStep(TRANSACTION_STEPS.SENDING_KYC);
       })
       .catch((error) => {
-        setPendingRequest(false);
-        setError(true);
-        setErrorMessage(error);
+        setTransactionStep(TRANSACTION_STEPS.ERROR_TRANSACTION);
+        setErrorMessage(error.message);
       });
   };
 
@@ -343,22 +370,70 @@ const Donate = ({ setStep, wallet, onDonate }) => {
     <section>
       <h1>Donate</h1>
       <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect} />
-      <Form onSubmit={onSubmit}>
-        <DonationAmountForm
-          wallet={wallet}
-          amount={amount}
-          setAmount={setAmount}
-          selectedAmount={selectedAmount}
-          setSelectedAmount={setSelectedAmount}
-        />
-        <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
-        <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
-        <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
+      {transactionStep == TRANSACTION_STEPS.FORM && (
+        <Form onSubmit={onSubmit}>
+          <DonationAmountForm
+            wallet={wallet}
+            amount={amount}
+            setAmount={setAmount}
+            selectedAmount={selectedAmount}
+            setSelectedAmount={setSelectedAmount}
+          />
+          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
+          <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
+          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
 
-        <Button variant="primary" type="submit">
-          Donate Now
-        </Button>
-      </Form>
+          <Button variant="primary" type="submit">
+            Donate Now
+          </Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.SENDING_TRANSACTION && (
+        <Form>
+          <Button disabled variant="primary" type="submit">
+            Sending Transaction…
+          </Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.SENDING_KYC && (
+        <Form>
+          <Button disabled variant="primary" type="submit">
+            Updating campaign status…
+          </Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.ERROR_TRANSACTION && (
+        <Form onSubmit={onSubmit}>
+          <p>The transaction failed, try again or reconnect your wallet?</p>
+          <p>{errorMessage}</p>
+          <Button variant="primary" type="submit">
+            Retry
+          </Button>
+          <Button onClick={wallet.methods.disconnect}>Reconnect Wallet</Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.ERROR_KYC && (
+        <Form>
+          <p>
+            There was an error updating the campaign status. If you wanted a
+            receipt, please reach out to us directly at{" "}
+            <a
+              href={`https://twitter.com/
+            ${TWITTER_HANDLE}`}
+            >
+              twitter.com/ ${TWITTER_HANDLE}
+            </a>
+          </p>
+          <Button variant="primary" type="submit">
+            Retry
+          </Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.SUCCESS && (
+        <Form>
+          <p>Nice! We should be advancing you to the next screen.</p>
+        </Form>
+      )}
     </section>
   );
 };
