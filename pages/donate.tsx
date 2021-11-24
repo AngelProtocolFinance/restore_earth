@@ -11,6 +11,7 @@ import DonateHeader from "components/Donate/Header";
 import DonateForm from "components/Donate/Forms/Donate";
 import ConnectForm from "components/Donate/Forms/Connect";
 import ThankYou from "components/Donate/ThankYou";
+import * as React from "react";
 
 const DonatePage: NextPage = () => {
   const [step, setStep] = useState(STEPS.CONNECT);
@@ -39,6 +40,9 @@ const DonatePage: NextPage = () => {
     <>
       <Head>
         <title>Restore Earth</title>
+        <link rel="shortcut icon" href="/images/favicon.png"/>
+        <meta name="description" content="Amplify your impact this holiday season by giving through Angel Protocol."/>
+        <meta property="og:image" content="/images/meta.png"/>
       </Head>
       <Header />
 
