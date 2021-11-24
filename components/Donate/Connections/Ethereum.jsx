@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import Web3 from "web3";
 import { WalletChains, NewWallet } from "./Wallet";
 
-import MetaMaskLogo from "../../public/images/chains/metamask_logo.svg";
-import WalletConnectLogo from "../../public/images/chains/walletconnect_logo.svg";
+import MetaMaskLogo from "public/images/chains/metamask_logo.svg";
+import WalletConnectLogo from "public/images/chains/walletconnect_logo.svg";
 
 const charityWalletAddress = "0x5a882Eb704EA153B117Ab2b1797bA46a1B09Da2c";
 const infuraId = "0475a33555e04d22a562b66af06d4b83";

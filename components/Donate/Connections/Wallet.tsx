@@ -1,9 +1,10 @@
 declare enum WalletChains {
   TERRA = "TERRA",
   ETHEREUM = "ETHEREUM",
+  BITCOIN = "BITCOIN",
 }
 
-interface NewWalletProps {
+export interface NewWalletProps {
   chain: WalletChains;
   connection: any;
   methods: any;

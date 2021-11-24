@@ -29,9 +29,12 @@ const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
 };
 
 const Donate = ({ setStep, wallet, onDonate }) => {
+  // TODO: use pendingRequest to disable button and show loading state
   const [pendingRequest, setPendingRequest] = useState(false);
+  // TODO: use error to display error and allow user to retry
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  // TODO: make amount adjustment simpler
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
 
