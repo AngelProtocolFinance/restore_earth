@@ -52,7 +52,7 @@ const Index: NextPage = () => {
   return (
     <>
       <Head>
-        <meta name="robots" content="noindex" />
+        <title>Restore Earth</title>
       </Head>
       <Header />
 
