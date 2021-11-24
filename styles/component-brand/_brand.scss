@@ -5,32 +5,38 @@
   align-items: center;
 
   img {
-    position: absolute;
+    //position: absolute;
     cursor: pointer;
-    will-change: opacity;
-    transition: opacity .15s ease-in-out;
+    will-change: filter;
+    transition: filter .15s ease-in-out;
     max-width: 200px;
     width: 90%;
-  }
+    filter: grayscale(100%);
 
-  .gray {
-    opacity: 1;
-  }
-
-  .color {
-    opacity: 0;
-  }
-
-  &:hover,
-  &:focus {
-    .gray {
-      opacity: 0;
-    }
-
-    .color {
-      opacity: 1;
+    &:hover,
+    &:focus {
+      filter: grayscale(0%);
     }
   }
+
+  //.gray {
+  //  opacity: 1;
+  //}
+  //
+  //.color {
+  //  opacity: 0;
+  //}
+  //
+  //&:hover,
+  //&:focus {
+  //  .gray {
+  //    opacity: 0;
+  //  }
+  //
+  //  .color {
+  //    opacity: 1;
+  //  }
+  //}
 }
 
 .brand-bordered {

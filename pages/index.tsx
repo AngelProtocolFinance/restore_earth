@@ -10,7 +10,7 @@ import * as React from "react";
 import {useContext} from "react";
 
 import RellaxWrapper from "react-rellax-wrapper";
-import {Accordion, AccordionContext, Nav, Tab, useAccordionButton,} from "react-bootstrap";
+import {Accordion, AccordionContext, Nav, OverlayTrigger, Tab, Tooltip, useAccordionButton,} from "react-bootstrap";
 
 import processImage from "../public/images/process.svg";
 import iconSun from "../public/images/icons/sun.svg";
@@ -45,7 +45,7 @@ function CustomToggle({children, eventKey}) {
   });
   let classNames = "btn btn-block px-12 w-100 btn-outline-light border-top";
   if (isCurrentEventKey) {
-    classNames = "btn btn-block px-12 w-100 btn-outline-primary border-top";
+    classNames = "btn btn-block px-12 w-100 btn-outline-primary border-top bg-opacity";
   }
   return (
     <button type="button" className={classNames} onClick={decoratedOnClick}>
@@ -66,7 +66,7 @@ const Index: NextPage = () => {
         <div id="trigger"/>
 
         {/* Hero */}
-        <div className="pt-160 pb-100 position-relative">
+        <div className="padding-spacer-top pb-100 position-relative">
           <div className="background">
             <div className="background-overlay"></div>
             <video
@@ -150,7 +150,8 @@ const Index: NextPage = () => {
                   Amplify your impact this holiday season by giving through
                   Angel Protocol.
                 </p>
-                <span className="badge rounded-pill bg-light text-dark mb-12 d-inline-block d-sm-none">
+                <span
+                  className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
                   Top Donor: {topCharityAlliance}
                 </span>
                 <div className="flex flex-row justify-content-center align-items-center">
@@ -178,7 +179,7 @@ const Index: NextPage = () => {
         </div>
 
         {/* Progress */}
-        <div className="py-160 shape-parent overflow-hidden">
+        <div className="padding-spacer-top padding-spacer-bottom shape-parent overflow-hidden">
           <div className="shape mt-n160">
             <RellaxWrapper speed={-1}>
               <svg
@@ -242,26 +243,52 @@ const Index: NextPage = () => {
                     height: "30px",
                   }}
                 >
-                  <div
-                    className="progress-bar text-dark"
-                    role="progressbar"
-                    style={{width: `${totalDonations / totalDonationsGoals * 100}%`}}
-                    aria-valuenow={totalDonations}
-                    aria-valuemin={0}
-                    aria-valuemax={totalDonationsGoals}
+                  <OverlayTrigger
+                    key={'key'}
+                    placement={'top'}
+                    overlay={
+                      <Tooltip id={`tooltip-top`}>
+                        Donations
+                      </Tooltip>
+                    }
                   >
-                    ${humanize.compactInteger(totalDonations, 1)}
-                  </div>
-                  <div
-                    className="progress-bar bg-info text-dark"
-                    role="progressbar"
-                    style={{width: `${totalDonationsImpact / totalDonationsGoals * 100}%`}}
-                    aria-valuenow={totalDonationsImpact}
-                    aria-valuemin={0}
-                    aria-valuemax={totalDonationsGoals}
+                    <div
+                      className="progress-bar text-dark"
+                      role="progressbar"
+                      style={{width: `${totalDonations / totalDonationsGoals * 100}%`}}
+                      aria-valuenow={totalDonations}
+                      aria-valuemin={0}
+                      aria-valuemax={totalDonationsGoals}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Donations"
+                    >
+                      ${humanize.compactInteger(totalDonations, 1)}
+                    </div>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    key={'key'}
+                    placement={'top'}
+                    overlay={
+                      <Tooltip id={`tooltip-top`}>
+                        AP Impact
+                      </Tooltip>
+                    }
                   >
-                    ${humanize.compactInteger(totalDonationsImpact, 1)}
-                  </div>
+                    <div
+                      className="progress-bar bg-info text-dark"
+                      role="progressbar"
+                      style={{width: `${totalDonationsImpact / totalDonationsGoals * 100}%`}}
+                      aria-valuenow={totalDonationsImpact}
+                      aria-valuemin={0}
+                      aria-valuemax={totalDonationsGoals}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="AP Impact"
+                    >
+                      ${humanize.compactInteger(totalDonationsImpact, 1)}
+                    </div>
+                  </OverlayTrigger>
                 </div>
 
                 <p className="mb-12">
@@ -271,13 +298,13 @@ const Index: NextPage = () => {
                   low-risk / high-yield DeFi products.
                 </p>
                 <p>
-                  Donations via Angel Protocol earn over 15% yield for partner
+                  Donations via Angel Protocol currently earn over 15% yield for partner
                   non-profits every year, in perpetuity. Thanks to Angel
                   Protocol, when donors give once, they give forever.
                 </p>
                 <hr/>
                 <div
-                  className="row gh-2 gv-2 justify-content-around justify-content-sm-center text-center text-sm-start">
+                  className="row gh-1 gv-2 justify-content-around justify-content-sm-center text-center text-sm-start">
                   <div className="col-4">
                     <div className="number-box">
                       <div className="number-box-title h4">${humanize.compactInteger(totalDonations, 1)}</div>
@@ -293,15 +320,15 @@ const Index: NextPage = () => {
                   <div className="col-4">
                     <div className="number-box">
                       <div className="number-box-title h4">15%+</div>
-                      <div className="number-box-subtitle">yield</div>
+                      <div className="number-box-subtitle">current yield</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="row text-center mt-160">
-              <div className="col-4">
+            <div className="row text-center margin-spacer-top">
+              <div className="col-12 col-sm-4">
                 <a
                   href="https://www.5gyres.org/"
                   target="_blank"
@@ -309,18 +336,13 @@ const Index: NextPage = () => {
                   className="brand"
                 >
                   <img
-                    src={charity5gyresGray.src}
-                    className="p-2 my-12 gray"
-                    alt="5 Gyres Institute logo"
-                  />
-                  <img
                     src={charity5gyresColor.src}
                     className="p-2 my-12 color"
                     alt="5 Gyres Institute logo"
                   />
                 </a>
               </div>
-              <div className="col-4">
+              <div className="col-12 col-sm-4">
                 <a
                   href="https://www.globalbrigades.org/"
                   target="_blank"
@@ -328,29 +350,19 @@ const Index: NextPage = () => {
                   className="brand"
                 >
                   <img
-                    src={charityGlobalGray.src}
-                    className="p-2 my-12 gray"
-                    alt="Global Brigades logo"
-                  />
-                  <img
                     src={charityGlobalColor.src}
                     className="p-2 my-12 color"
                     alt="Global Brigades logo"
                   />
                 </a>
               </div>
-              <div className="col-4">
+              <div className="col-12 col-sm-4">
                 <a
                   href="https://www.self.org/"
                   target="_blank"
                   rel="noreferrer"
                   className="brand"
                 >
-                  <img
-                    src={charitySelfGray.src}
-                    className="p-2 my-12 gray"
-                    alt="Self logo"
-                  />
                   <img
                     src={charitySelfColor.src}
                     className="p-2 my-12 color"
@@ -465,7 +477,7 @@ const Index: NextPage = () => {
         </div>
 
         {/* Process */}
-        <div className="py-160">
+        <div className="padding-spacer-top padding-spacer-bottom">
           <div className="container">
             <div className="row gh-5 gv-3 justify-content-center">
               <div className="col-12 col-lg-10">
@@ -523,7 +535,7 @@ const Index: NextPage = () => {
         </div>
 
         {/* Punks */}
-        <div className="py-160 mt-n8 shape-parent bg-dark overflow-hidden text-white">
+        <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent bg-dark overflow-hidden text-white">
           {/*<div className="shape justify-content-end mt-n160">*/}
           {/*    <RellaxWrapper speed={-1}>*/}
           {/*        <svg className="mt-n160" width="415" height="641"*/}
@@ -575,7 +587,7 @@ const Index: NextPage = () => {
               </div>
               <div className="d-none d-xl-block col-1"/>
               <div className="col-12 col-lg-6 col-xl-5">
-                <Accordion defaultActiveKey="1" className="bg-dark">
+                <Accordion defaultActiveKey="1" className="bg-dark border-bottom border">
                   <CustomToggle eventKey="1">
                     <div className="d-flex flex-row align-item-center justify-content-between">
                       <div className="fw-bolder">Tier 1</div>
@@ -583,7 +595,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="1">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk1.src}
                         className="img-thumbnail p-2 my-12"
@@ -605,7 +617,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="2">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk2.src}
                         className="img-thumbnail p-2 my-12"
@@ -627,7 +639,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="3">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk3.src}
                         className="img-thumbnail p-2 my-12"
@@ -649,7 +661,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="4">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk4.src}
                         className="img-thumbnail p-2 my-12"
@@ -671,7 +683,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="5">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk5.src}
                         className="img-thumbnail p-2 my-12"
@@ -693,7 +705,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="6">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk6.src}
                         className="img-thumbnail p-2 my-12"
@@ -715,7 +727,7 @@ const Index: NextPage = () => {
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="7">
-                    <div className="d-flex flex-row border-top border-secondary align-items-center pb-12">
+                    <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
                         src={punk7.src}
                         className="img-thumbnail p-2 my-12"
