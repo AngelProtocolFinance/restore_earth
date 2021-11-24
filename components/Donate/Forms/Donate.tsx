@@ -96,8 +96,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
   return (
     <section>
       <h1>Donate</h1>
-      <p>Connected as: {address}</p>
-      <button onClick={onClickDisconnect}>disconnect</button>
+      <WalletStatus wallet={wallet} onDisconect={onClickDisconnect} />
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formAmount">
           <Form.Label>Amount</Form.Label>

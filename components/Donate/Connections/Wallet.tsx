@@ -14,4 +14,13 @@ const NewWallet = ({ chain, connection, methods }: NewWalletProps) => {
   return { chain, connection, methods };
 };
 
-export { NewWallet, WalletChains };
+const WalletStatus = ({ wallet, onClickDisconnect }) => {
+  return (
+    <>
+      <p>Connected as: {wallet.address()}</p>
+      <button onClick={onClickDisconnect}>disconnect</button>
+    </>
+  );
+};
+
+export { NewWallet, WalletChains, WalletStatus };

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import bitcoinLogo from "public/images/chains/bitcoin_logo.svg";
 
 const ConnectBitcoin = ({
@@ -9,6 +11,7 @@ const ConnectBitcoin = ({
 
   const onClickConnect = () => {
     // TODO: Open modal to add address
+    alert("WIP");
   };
 
   return (
