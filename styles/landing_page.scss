@@ -7,15 +7,25 @@
 // Theme
 @import 'themebau';
 
+.background-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  background: #001328;
+  mix-blend-mode: screen;
+}
+
+.Button__gradient {
+  background: -webkit-linear-gradient(315deg, #4be8c7, $primary);
+}
+
 .Text__gradient {
   background: -webkit-linear-gradient(315deg, #5494f8, $primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.redddd {
-  background: red;
-  color: red;
 }
 
 .Planets {
@@ -32,6 +42,11 @@
   }
 
   @include media-breakpoint-up(md) {
+    top: 170px;
+    margin-top: -90px;
+  }
+
+  @include media-breakpoint-up(lg) {
     top: 200px;
     margin-top: -90px;
   }

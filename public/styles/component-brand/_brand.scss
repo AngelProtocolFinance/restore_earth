@@ -1,51 +1,59 @@
 .brand {
-    display: block;
-    filter: brightness(1);
-    will-change: filter;
-    transition: filter .15s ease-in-out;
+  display: block;
+  filter: brightness(1);
+  will-change: opacity;
+  transition: opacity .15s ease-in-out;
 
-    &.text-grey {
-        &:hover,
-        &:focus {
-            filter: brightness(.8);
-        }
+  img {
+    position: absolute;
+  }
+
+  .gray {
+    opacity: 1;
+  }
+
+  .color {
+    opacity: 0;
+  }
+
+  &:hover,
+  &:focus {
+    .gray {
+      opacity: 0;
     }
 
-    &.text-grey-dark {
-        &:hover,
-        &:focus {
-            filter: brightness(1.4);
-        }
+    .color {
+      opacity: 1;
     }
+  }
 }
 
-
 .brand-bordered {
-    display: flex;
-    justify-content: center;
-    min-width: 178px;
-    min-height: 130px;
-    border: 1px solid $color-border;
-    transition: border-color .15s ease-in-out;
+  display: flex;
+  justify-content: center;
+  min-width: 178px;
+  min-height: 130px;
+  border: 1px solid $color-border;
+  transition: border-color .15s ease-in-out;
+
+  svg {
+    display: block;
+    align-self: center;
+  }
+
+  @include is-ie {
+    position: relative;
 
     svg {
-        display: block;
-        align-self: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
+  }
 
-    @include is-ie {
-        position: relative;
-
-        svg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    }
-
-    &:hover,
-    &:focus {
-        border-color: $dark;
-    }
+  &:hover,
+  &:focus {
+    border-color: $dark;
+  }
 }
