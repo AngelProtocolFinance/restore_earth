@@ -29,11 +29,8 @@ import punk5 from "../public/images/punks/punk5.png";
 import punk6 from "../public/images/punks/punk6.png";
 import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
-import charity5gyresGray from "../public/images/charities/5gyres-gray.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
-import charityGlobalGray from "../public/images/charities/global-gray.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
-import charitySelfGray from "../public/images/charities/self-gray.png";
 import {topCharityAlliance, totalDonations, totalDonationsGoals, totalDonationsImpact} from '../scripts/constants.js'
 
 const humanize = require('humanize-plus');
@@ -59,6 +56,9 @@ const Index: NextPage = () => {
     <>
       <Head>
         <title>Restore Earth</title>
+        <link rel="shortcut icon" href="/images/favicon.png"/>
+        <meta name="description" content="Amplify your impact this holiday season by giving through Angel Protocol."/>
+        <meta property="og:image" content="/images/meta.png"/>
       </Head>
       <Header/>
 

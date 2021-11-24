@@ -1,3 +1,0 @@
-@function parse-int($number) {
-    @return $number / ($number * 0 + 1);
-}
