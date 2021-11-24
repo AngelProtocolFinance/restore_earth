@@ -17,7 +17,7 @@ const NewWallet = ({ chain, connection, methods }: NewWalletProps) => {
 const WalletStatus = ({ wallet, onClickDisconnect }) => {
   return (
     <>
-      <p>Connected as: {wallet.address()}</p>
+      <p>Connected as: {wallet.methods.address()}</p>
       <button onClick={onClickDisconnect}>disconnect</button>
     </>
   );
