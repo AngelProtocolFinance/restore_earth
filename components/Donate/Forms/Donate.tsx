@@ -287,11 +287,11 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
 };
 
 const Donate = ({ setStep, wallet, onDonationSuccess }) => {
-  const [transactionStep, setTransactionStep]: [
-    transactionStep: number,
-    setTransactionStep: any
-  ] = useState(TRANSACTION_STEPS.FORM);
+  const [transactionStep, setTransactionStep] = useState(
+    TRANSACTION_STEPS.FORM
+  );
   const [errorMessage, setErrorMessage] = useState("");
+
   // TODO: make amount adjustment simpler
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
@@ -316,6 +316,32 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     onClickDisconnect();
   };
 
+  const onTransactionSuccess = ({
+    amount,
+    wallet,
+    transactionData,
+    NFTData,
+    KYCData,
+    TCAData,
+  }) => {
+    sendKYCData({
+      amount,
+      wallet,
+      transactionData,
+      NFTData,
+      KYCData,
+      TCAData,
+    })
+      .then((result) => {
+        setTransactionStep(TRANSACTION_STEPS.SUCCESS);
+        onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+      })
+      .catch((error) => {
+        setTransactionStep(TRANSACTION_STEPS.ERROR_KYC);
+        setErrorMessage(error);
+      });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formattedAmount = wallet.methods.toUnit(amount);
@@ -324,27 +350,19 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     wallet.methods
       .donate(formattedAmount)
       .then((transactionData) => {
-        setTransactionStep(TRANSACTION_STEPS.SENDING_KYC);
-        sendKYCData({
+        onTransactionSuccess({
           amount,
           wallet,
           transactionData,
           NFTData,
           KYCData,
           TCAData,
-        })
-          .then((result) => {
-            setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-            onDonationSuccess({ amount, NFTData, KYCData, TCAData });
-          })
-          .catch((error) => {
-            setTransactionStep(TRANSACTION_STEPS.ERROR_KYC);
-            setErrorMessage(error);
-          });
+        });
+        setTransactionStep(TRANSACTION_STEPS.SENDING_KYC);
       })
       .catch((error) => {
         setTransactionStep(TRANSACTION_STEPS.ERROR_TRANSACTION);
-        setErrorMessage(error);
+        setErrorMessage(error.message);
       });
   };
 
@@ -387,15 +405,14 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
       {transactionStep == TRANSACTION_STEPS.ERROR_TRANSACTION && (
         <Form onSubmit={onSubmit}>
           <p>The transaction failed, try again or reconnect your wallet?</p>
+          <p>{errorMessage}</p>
           <Button variant="primary" type="submit">
             Retry
           </Button>
-          <Button onClick={wallet.methods.disconnect()}>
-            Reconnect Wallet
-          </Button>
+          <Button onClick={wallet.methods.disconnect}>Reconnect Wallet</Button>
         </Form>
       )}
-      {transactionStep == TRANSACTION_STEPS.SENDING_KYC && (
+      {transactionStep == TRANSACTION_STEPS.ERROR_KYC && (
         <Form>
           <p>
             There was an error updating the campaign status. If you wanted a
@@ -407,7 +424,14 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
               twitter.com/ ${TWITTER_HANDLE}
             </a>
           </p>
-          <Button disabled variant="primary" type="submit"></Button>
+          <Button variant="primary" type="submit">
+            Retry
+          </Button>
+        </Form>
+      )}
+      {transactionStep == TRANSACTION_STEPS.SUCCESS && (
+        <Form>
+          <p>Nice! We should be advancing you to the next screen.</p>
         </Form>
       )}
     </section>

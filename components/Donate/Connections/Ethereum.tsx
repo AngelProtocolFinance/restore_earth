@@ -49,11 +49,6 @@ const ConnectMetaMask = ({
                     value: amount,
                   })
                   .then((receipt) => {
-                    console.log(
-                      "metamask send transaction for amount: ",
-                      amount
-                    );
-                    console.log(receipt);
                     const transactionData: KYCTransactionDataType = {
                       transactionId: receipt.transactionHash,
                       blockId: receipt.blockHash,
