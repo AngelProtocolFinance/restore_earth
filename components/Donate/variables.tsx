@@ -4,6 +4,15 @@ const STEPS = {
   THANKYOU: 3,
 };
 
+const TRANSACTION_STEPS = {
+  FORM: 1,
+  SENDING_TRANSACTION: 2,
+  SENDING_KYC: 3,
+  ERROR_TRANSACTION: 4,
+  ERROR_KYC: 5,
+  SUCCESS: 6,
+};
+
 const STEP_TITLES = (step: number) => {
   switch (step) {
     case STEPS.CONNECT:
@@ -17,16 +26,4 @@ const STEP_TITLES = (step: number) => {
   }
 };
 
-export { STEPS, STEP_TITLES };
-
-// const TOKENS = {
-//   BITCOIN: "BTC",
-//   ETHEREUM: "ETH",
-//   TERRA: "UST",
-// };
-
-// const SUGGESTED_DONATION_AMOUNTS = {
-//   BITCOIN: ["0.0017", "0.0087", "0.017", "0.087", "0.44", "0.87", "1.74"],
-//   ETHEREUM: ["0.024", "0.12", "0.24", "1.2", "6", "12", "24"],
-//   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
-// };
+export { STEPS, STEP_TITLES, TRANSACTION_STEPS };

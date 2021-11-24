@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { NFTDataType } from "../Data/NFTData";
+import { TCADataType } from "../Data/TCAData";
+import { KYCDataType } from "../Data/KYCData";
 
 const KYC_ENDPOINT =
   "https://9t0u8zpqjk.execute-api.us-east-1.amazonaws.com/donation?app=restore-earth";
@@ -12,7 +15,7 @@ const kycClient = axios.create({
   withCredentials: true,
 });
 
-interface KYCDataType {
+interface KYCSendBodyType {
   amount: string;
   receiptRequested: boolean;
   fullName?: string;
@@ -44,12 +47,19 @@ const buildKYCData = ({
   NFTData,
   KYCData,
   TCAData,
-}: SendKYCDataProps): KYCDataType => {
-  const data: KYCDataType = {
+}: SendKYCDataProps): KYCSendBodyType => {
+  const data: KYCSendBodyType = {
     walletAddress: wallet.methods.address(),
     denomination: wallet.denomination,
     amount: amount,
-    receiptRequested: false,
+    receiptRequested: true,
+    fullName: KYCData.name,
+    email: KYCData.email,
+    streetAddress: KYCData.streetAddress,
+    city: KYCData.city,
+    zipCode: KYCData.zipcode,
+    stateAddress: KYCData.state,
+    country: KYCData.country,
     fundId: 6,
     transactionId: transactionData.transactionId,
     transactionDate: new Date().toLocaleString([], {
@@ -66,9 +76,9 @@ export interface SendKYCDataProps {
   wallet: any;
   amount: any;
   transactionData: KYCTransactionDataType;
-  NFTData: any;
-  KYCData: any;
-  TCAData: any;
+  NFTData: NFTDataType;
+  KYCData: KYCDataType;
+  TCAData: TCADataType;
 }
 
 const sendKYCData = ({
