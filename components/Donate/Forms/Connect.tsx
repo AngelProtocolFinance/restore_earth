@@ -2,8 +2,18 @@ import terraLogo from "public/images/chains/terra_blue_logo.svg";
 import ethereumLogo from "public/images/chains/ethereum_logo.png";
 import bitcoinLogo from "public/images/chains/bitcoin_logo.svg";
 
-import TerraConnections from "components/connections/TerraConnections";
-import EthereumConnections from "components/connections/EthereumConnections";
+import TerraConnections from "components/Donate/Connections/Terra";
+import EthereumConnections from "components/Donate/Connections/Ethereum";
+import BitcoinConnections from "components/Donate/Connections/Bitcoin";
+
+const ChainTitle = ({ logoSrc, title }) => {
+  return (
+    <h3 className="connection__chain__title">
+      <img width={32} height={32} src={logoSrc} alt={`${title} logo`} />
+      <span>{title}</span>
+    </h3>
+  );
+};
 
 const Connect = ({
   onConnectionSuccess,
@@ -13,43 +23,26 @@ const Connect = ({
   return (
     <div className="connection__chain__list">
       <h2>Select a donation method:</h2>
-      <h3 className="connection__chain__title">
-        <img width={32} height={32} src={terraLogo.src} />
-        <span>[TODO] Terra</span>
-      </h3>
+      <ChainTitle logoSrc={terraLogo.src} title={"[TODO Terra]"} />
       <TerraConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
         onWalletDisconnect={onWalletDisconnect}
       />
-      <h3 className="connection__chain__title">
-        <img
-          width={32}
-          height={32}
-          style={{ paddingLeft: "6px", paddingRight: "6px" }}
-          src={ethereumLogo.src}
-        />
-        <span>Ethereum</span>
-      </h3>
+      {/* TODO: Add 6px left padding and 6px right padding to Ethereum logo */}
+      <ChainTitle logoSrc={ethereumLogo.src} title={"Ethereum"} />
       <EthereumConnections
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
         onWalletDisconnect={onWalletDisconnect}
       />
-      <h3 className="connection__chain__title">
-        <img width={32} height={32} src={bitcoinLogo.src} />
-        <span>Bitcoin</span>
-      </h3>
-      <ul className="connection__list">
-        <li className="connection__item">
-          <button className="rounded">
-            <img width={32} height={32} src={bitcoinLogo.src} />
-            <span className="connection__item__title">
-              [TODO] Donate Manually
-            </span>
-          </button>
-        </li>
-      </ul>
+      {/* TODO: Handle BTC connection */}
+      <ChainTitle logoSrc={bitcoinLogo.src} title={"[TODO] Bitcoin"} />
+      <BitcoinConnections
+        onConnectionSuccess={onConnectionSuccess}
+        onConnectionError={onConnectionError}
+        onWalletDisconnect={onWalletDisconnect}
+      />
     </div>
   );
 };
