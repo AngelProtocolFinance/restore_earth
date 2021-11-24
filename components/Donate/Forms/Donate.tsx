@@ -283,7 +283,7 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   );
 };
 
-const Donate = ({ setStep, wallet, onDonate }) => {
+const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   // TODO: use pendingRequest to disable button and show loading state
   const [pendingRequest, setPendingRequest] = useState(false);
   // TODO: use error to display error and allow user to retry
@@ -324,7 +324,7 @@ const Donate = ({ setStep, wallet, onDonate }) => {
           .donate(formattedAmount)
           .then((result) => {
             setPendingRequest(false);
-            onDonate({ amount, NFTData, KYCData, TCAData });
+            onDonationSuccess({ amount, NFTData, KYCData, TCAData });
           })
           .catch((error) => {
             setPendingRequest(false);

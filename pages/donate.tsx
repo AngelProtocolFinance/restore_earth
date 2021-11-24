@@ -21,13 +21,13 @@ const DonatePage: NextPage = () => {
     setStep(STEPS.DONATE);
   };
 
-  const onDonate = ({ amount, NFTData, KYCData, TCAData }) => {
-    setStep(STEPS.THANKYOU);
-  };
-
   const onConnectionError = (error) => {
     console.log("could not connect: ", error);
     onWalletDisconnect();
+  };
+
+  const onDonationSuccess = ({ amount, NFTData, KYCData, TCAData }) => {
+    setStep(STEPS.THANKYOU);
   };
 
   const onWalletDisconnect = () => {
@@ -59,7 +59,7 @@ const DonatePage: NextPage = () => {
                 <DonateForm
                   setStep={setStep}
                   wallet={wallet}
-                  onDonate={onDonate}
+                  onDonationSuccess={onDonationSuccess}
                 />
               )}
               {step == STEPS.THANKYOU && <ThankYou />}
