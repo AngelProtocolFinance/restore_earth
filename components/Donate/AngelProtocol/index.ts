@@ -34,8 +34,8 @@ interface KYCSendBodyType {
 
 export interface KYCTransactionDataType {
   transactionId: string;
-  blockId: string;
-  blockNumber: any;
+  blockId?: string;
+  blockNumber?: any;
   status: any;
 }
 

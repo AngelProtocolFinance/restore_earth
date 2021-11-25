@@ -21,6 +21,7 @@ import {
 import {
   APES_FUND_ID,
   TERRA_CONTRACT_ADDRESS,
+  KYCTransactionDataType,
 } from "components/Donate/AngelProtocol";
 
 // async createDepositTx(
@@ -41,16 +42,7 @@ const Terra = ({
   onConnectionError,
   onWalletDisconnect,
 }) => {
-  const {
-    // status,
-    // network,
-    // wallets,
-    //availableConnectTypes,
-    // availableInstallTypes,
-    availableConnections,
-    connect,
-    disconnect,
-  } = useWallet();
+  const { availableConnections, connect, disconnect } = useWallet();
 
   const connectedWallet = useConnectedWallet();
   useEffect(() => {
@@ -92,8 +84,11 @@ const Terra = ({
                 ],
               })
               .then((nextTxResult) => {
-                console.log(nextTxResult);
-                resolve(nextTxResult);
+                const transactionData: KYCTransactionDataType = {
+                  transactionId: nextTxResult.result.txhash,
+                  status: nextTxResult.success,
+                };
+                resolve(transactionData);
               })
               .catch((reason) => {
                 console.log(reason);
