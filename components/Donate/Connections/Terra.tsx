@@ -87,7 +87,7 @@ const Terra = ({
                 {
                   deposit: {
                     fund_id: APES_FUND_ID,
-                    split: "50",
+                    split: "70",
                   },
                 },
                 [new Coin("uusd", amount)]

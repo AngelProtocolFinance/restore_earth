@@ -163,14 +163,14 @@ const Index: NextPage = () => {
                   Top Donor: {topCharityAlliance}
                 </span>
                 <div className="flex flex-row justify-content-center align-items-center">
-                  <Link href="/donate">
+                  {/* <Link href="/donate">
                     <a
                       target="_blank"
                       className="btn btn-primary me-12 Button__gradient"
                     >
                       Donate now
                     </a>
-                  </Link>
+                  </Link> */}
                   <a href="#nft" className="btn btn-outline-light">
                     Earn NFTs
                   </a>
@@ -588,7 +588,7 @@ const Index: NextPage = () => {
                   based on individual donation level and cumulative campaign
                   donations.
                 </p>
-                <Link href="/donate">
+                {/* <Link href="/donate">
                   <a
                     target="_blank"
                     className="btn btn-primary Button__gradient mt-30"
@@ -618,7 +618,7 @@ const Index: NextPage = () => {
                       />
                     </svg>
                   </a>
-                </Link>
+                </Link> */}
               </div>
               <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">
