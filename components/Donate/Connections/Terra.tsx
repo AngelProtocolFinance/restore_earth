@@ -47,6 +47,9 @@ const Terra = ({
   const connectedWallet = useConnectedWallet();
   useEffect(() => {
     if (connectedWallet) {
+      const transactionURL = ({ tx }) => {
+        `https://finder.terra.money/${connectedWallet.network.chainID}/tx/${tx.hash}`;
+      };
       const chain = WalletChains.TERRA;
       const connection = connectedWallet;
       const methods = {
@@ -63,7 +66,7 @@ const Terra = ({
           console.log("terra send transaction for amount: ", amount);
 
           return new Promise((resolve, reject) => {
-            if (connection.network.chainID.startsWith("columbus")) {
+            if (connectedWallet.network.chainID.startsWith("columbus")) {
               alert(`Please only execute this example on Testnet`);
               reject({
                 message: `Please only execute this example on Testnet`,
