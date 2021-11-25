@@ -3,6 +3,14 @@ import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { NewWallet, WalletChains } from "./Wallet";
 import {
+  Coin,
+  CreateTxOptions,
+  Dec,
+  MsgExecuteContract,
+  Fee,
+  MsgSend,
+} from "@terra-money/terra.js";
+import {
   useWallet,
   useConnectedWallet,
   getChainOptions,
@@ -10,6 +18,23 @@ import {
   WalletStatus,
   ConnectType,
 } from "@terra-money/wallet-provider";
+import {
+  APES_FUND_ID,
+  TERRA_CONTRACT_ADDRESS,
+} from "components/Donate/AngelProtocol";
+
+// async createDepositTx(
+//   UST_amount: number | string,
+//   splitToLiquid: number
+// ): Promise<CreateTxOptions> {
+//   this.checkWallet();
+//   const pctLiquid = splitToLiquid / 100;
+//   const pctLocked = 1 - pctLiquid;
+//   const micro_UST_Amount = new Dec(UST_amount).mul(1e6).toNumber();
+//   // const fee = await this.estimateFee([depositMsg]);
+//   const fee = new StdFee(2500000, [new Coin(denoms.uusd, 1.5e6)]);
+//   return { msgs: [depositMsg], fee };
+// }
 
 const Terra = ({
   onConnectionSuccess,
@@ -46,7 +71,34 @@ const Terra = ({
           console.log("terra send transaction for amount: ", amount);
 
           return new Promise((resolve, reject) => {
-            resolve();
+            if (connection.network.chainID.startsWith("columbus")) {
+              alert(`Please only execute this example on Testnet`);
+              reject({
+                message: `Please only execute this example on Testnet`,
+              });
+            }
+
+            connectedWallet
+              .post({
+                fee: new Fee(1000000, "200000uusd"),
+                msgs: [
+                  new MsgSend(
+                    connection.walletAddress,
+                    TERRA_CONTRACT_ADDRESS,
+                    {
+                      uusd: amount,
+                    }
+                  ),
+                ],
+              })
+              .then((nextTxResult) => {
+                console.log(nextTxResult);
+                resolve(nextTxResult);
+              })
+              .catch((reason) => {
+                console.log(reason);
+                reject(reason);
+              });
           });
         },
       };
