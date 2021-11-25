@@ -102,14 +102,6 @@
 
   &.navbar-dark.transparent {
     background-color: transparent;
-
-    ul {
-      opacity: 0;
-
-      a {
-        cursor: default;
-      }
-    }
   }
 
   @include media-breakpoint-down(sm) {
@@ -119,9 +111,9 @@
     }
   }
 
-  .navbar-brand {
-    margin-right: 60px;
-  }
+  //.navbar-brand {
+  //  margin-right: 60px;
+  //}
 
   .navbar-nav {
     height: 100%;

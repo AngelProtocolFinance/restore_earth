@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import angelProtocolLogo from "public/images/angel-protocol.png";
 import terraLogo from "public/images/chains/terra.png";
+import {topCharityAlliance} from "../scripts/constants"
 
 const Header = ({}) => {
   return (
@@ -33,15 +34,20 @@ const Header = ({}) => {
                 />
               </a>
             </Link>
-            <ul className="nav m-0 text-white d-none d-md-flex">
-              <li className="nav-item navbar-dropdown">
-                <Link href="/donate">
-                  <a target="_blank" className="nav-link">
-                    <span className="nav-link-name">Donate now</span>
-                  </a>
-                </Link>
-              </li>
-            </ul>
+            <div className="justify-content-center align-items-center d-flex flex-row">
+              <div className="d-none d-sm-flex">
+                <span className="badge rounded-pill border-light text-light border border-2">Top Protocol: <strong>{topCharityAlliance}</strong></span>
+              </div>
+              <ul className="nav m-0 text-white">
+                <li className="nav-item navbar-dropdown">
+                  <Link href="/donate">
+                    <a target="_blank" className="nav-link">
+                      <span className="nav-link-name">Donate now</span>
+                    </a>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </nav>
         </header>
       </Scrollspy>
