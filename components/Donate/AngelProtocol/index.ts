@@ -4,13 +4,14 @@ import { NFTDataType } from "../Data/NFTData";
 import { TCADataType } from "../Data/TCAData";
 import { KYCDataType } from "../Data/KYCData";
 
-//const KYC_ENDPOINT = "//https://9t0u8zpqjk.execute-api.us-east-1.amazonaws.com";
-const KYC_ENDPOINT = "http://localhost:3000/api";
-// const ETH_WALLET_ADDRESS = "0x5a882Eb704EA153B117Ab2b1797bA46a1B09Da2c";
-const ETH_WALLET_ADDRESS = "0x95271440a9D2Eb30257fE2584112931F31F75114";
+const KYC_ENDPOINT = "//https://9t0u8zpqjk.execute-api.us-east-1.amazonaws.com";
+//const KYC_ENDPOINT = "http://localhost:3000/api";
+const ETH_WALLET_ADDRESS = "0x5a882Eb704EA153B117Ab2b1797bA46a1B09Da2c";
+//const ETH_WALLET_ADDRESS = "0x95271440a9D2Eb30257fE2584112931F31F75114";
 
 const BTC_WALLET_ADDRESS = "bc1qezneaj4976ev4kkqws40dk2dxgxwcjynggd8fq";
-const TERRA_CONTRACT_ADDRESS = "";
+const TERRA_CONTRACT_ADDRESS = "terra19cevhng6nunl7gmc90sph0syuqyvtqn7mlhwz0";
+// TEST: const TERRA_CONTRACT_ADDRESS = "terra1typpfzq9ynmvrt6tt459epfqn4gqejhy6lmu7d"
 
 const kycClient = axios.create({
   baseURL: KYC_ENDPOINT,
