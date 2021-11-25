@@ -6,6 +6,8 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta name="robots" content="noindex" />
+          <meta property="og:image" content="/images/meta.png" />
+          <link rel="shortcut icon" href="/images/favicon.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link

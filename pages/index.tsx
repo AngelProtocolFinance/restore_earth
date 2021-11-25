@@ -1,4 +1,4 @@
-import type {NextPage} from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,10 +7,18 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import * as React from "react";
-import {useContext} from "react";
+import { useContext } from "react";
 
 import RellaxWrapper from "react-rellax-wrapper";
-import {Accordion, AccordionContext, Nav, OverlayTrigger, Tab, Tooltip, useAccordionButton,} from "react-bootstrap";
+import {
+  Accordion,
+  AccordionContext,
+  Nav,
+  OverlayTrigger,
+  Tab,
+  Tooltip,
+  useAccordionButton,
+} from "react-bootstrap";
 
 import processImage from "../public/images/process.svg";
 import iconSun from "../public/images/icons/sun.svg";
@@ -31,18 +39,23 @@ import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
-import {topCharityAlliance, totalDonations, totalDonationsGoals, totalDonationsImpact} from '../scripts/constants.js'
+import {
+  topCharityAlliance,
+  totalDonations,
+  totalDonationsGoals,
+  totalDonationsImpact,
+} from "../scripts/constants.js";
 
-const humanize = require('humanize-plus');
+const humanize = require("humanize-plus");
 
-function CustomToggle({children, eventKey}) {
-  const {activeEventKey} = useContext(AccordionContext);
+function CustomToggle({ children, eventKey }) {
+  const { activeEventKey } = useContext(AccordionContext);
   const isCurrentEventKey = activeEventKey === eventKey;
-  const decoratedOnClick = useAccordionButton(eventKey, () => {
-  });
+  const decoratedOnClick = useAccordionButton(eventKey, () => {});
   let classNames = "btn btn-block px-12 w-100 btn-outline-light border-top";
   if (isCurrentEventKey) {
-    classNames = "btn btn-block px-12 w-100 btn-outline-primary border-top bg-opacity";
+    classNames =
+      "btn btn-block px-12 w-100 btn-outline-primary border-top bg-opacity";
   }
   return (
     <button type="button" className={classNames} onClick={decoratedOnClick}>
@@ -56,14 +69,15 @@ const Index: NextPage = () => {
     <>
       <Head>
         <title>Restore Earth</title>
-        <link rel="shortcut icon" href="/images/favicon.png"/>
-        <meta name="description" content="Amplify your impact this holiday season by giving through Angel Protocol."/>
-        <meta property="og:image" content="/images/meta.png"/>
+        <meta
+          name="description"
+          content="Amplify your impact this holiday season by giving through Angel Protocol."
+        />
       </Head>
-      <Header/>
+      <Header />
 
       <div className="content-wrap">
-        <div id="trigger"/>
+        <div id="trigger" />
 
         {/* Hero */}
         <div className="padding-spacer-top pb-100 position-relative">
@@ -76,13 +90,14 @@ const Index: NextPage = () => {
               loop
               muted
             >
-              <source src="/videos/stars.mp4" type="video/mp4"/>
+              <source src="/videos/stars.mp4" type="video/mp4" />
             </video>
             <div
               className="background-color"
               style={{
-                backgroundImage: "linear-gradient(180deg, rgba(14, 14, 14, 0) 0%, #001328 100%)",
-                zIndex: '1000000'
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(14, 14, 14, 0) 0%, #001328 100%)",
+                zIndex: "1000000",
               }}
             />
           </div>
@@ -112,9 +127,7 @@ const Index: NextPage = () => {
                     <p className="mb-0 mt-6">
                       <strong>Offset Carbon</strong>
                     </p>
-                    <p>
-                      SELF
-                    </p>
+                    <p>SELF</p>
                   </div>
                   <div className="text-center font-size-10">
                     <img
@@ -126,9 +139,7 @@ const Index: NextPage = () => {
                     <p className="mb-0 mt-6">
                       <strong>Plant Trees</strong>
                     </p>
-                    <p>
-                      Global Brigade
-                    </p>
+                    <p>Global Brigade</p>
                   </div>
                   <div className="text-center font-size-10">
                     <img
@@ -140,23 +151,23 @@ const Index: NextPage = () => {
                     <p className="mb-0 mt-6">
                       <strong>Reduce Ocean Plastic</strong>
                     </p>
-                    <p>
-                      5 Gyres
-                    </p>
+                    <p>5 Gyres</p>
                   </div>
                 </div>
-                <hr className="mt-0 border-white"/>
+                <hr className="mt-0 border-white" />
                 <p className="lead fw-normal">
                   Amplify your impact this holiday season by giving through
                   Angel Protocol.
                 </p>
-                <span
-                  className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
+                <span className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
                   Top Donor: {topCharityAlliance}
                 </span>
                 <div className="flex flex-row justify-content-center align-items-center">
                   <Link href="/donate">
-                    <a target="_blank" className="btn btn-primary me-12 Button__gradient">
+                    <a
+                      target="_blank"
+                      className="btn btn-primary me-12 Button__gradient"
+                    >
                       Donate now
                     </a>
                   </Link>
@@ -169,11 +180,11 @@ const Index: NextPage = () => {
             </div>
 
             <div className="Planets d-none d-sm-grid">
-              <Image className="img-fluid" src={earth1} alt="earth"/>
-              <Image className="img-fluid" src={earth2} alt="earth"/>
-              <Image className="img-fluid" src={earth3} alt="earth"/>
-              <Image className="img-fluid" src={earth4} alt="earth"/>
-              <Image className="img-fluid" src={earth5} alt="earth"/>
+              <Image className="img-fluid" src={earth1} alt="earth" />
+              <Image className="img-fluid" src={earth2} alt="earth" />
+              <Image className="img-fluid" src={earth3} alt="earth" />
+              <Image className="img-fluid" src={earth4} alt="earth" />
+              <Image className="img-fluid" src={earth5} alt="earth" />
             </div>
           </div>
         </div>
@@ -190,7 +201,7 @@ const Index: NextPage = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="197.5" cy="320.5" r="320.5" fill="#F5F5F5"/>
+                <circle cx="197.5" cy="320.5" r="320.5" fill="#F5F5F5" />
               </svg>
             </RellaxWrapper>
           </div>
@@ -201,9 +212,9 @@ const Index: NextPage = () => {
                 <div className="subtitle mt-n10">Angel Protocol</div>
                 <h2 className="h3">
                   Donate.
-                  <br/>
+                  <br />
                   Get rewarded.
-                  <br/>
+                  <br />
                   <span className="fw-bolder">Help Restore Earth.</span>
                 </h2>
                 <Link href="https://www.angelprotocol.io/">
@@ -235,7 +246,7 @@ const Index: NextPage = () => {
                   </a>
                 </Link>
               </div>
-              <div className="d-none d-xl-block col-1"/>
+              <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">
                 <div
                   className="progress mb-40"
@@ -244,18 +255,18 @@ const Index: NextPage = () => {
                   }}
                 >
                   <OverlayTrigger
-                    key={'key'}
-                    placement={'top'}
-                    overlay={
-                      <Tooltip id={`tooltip-top`}>
-                        Donations
-                      </Tooltip>
-                    }
+                    key={"key"}
+                    placement={"top"}
+                    overlay={<Tooltip id={`tooltip-top`}>Donations</Tooltip>}
                   >
                     <div
                       className="progress-bar text-dark"
                       role="progressbar"
-                      style={{width: `${totalDonations / totalDonationsGoals * 100}%`}}
+                      style={{
+                        width: `${
+                          (totalDonations / totalDonationsGoals) * 100
+                        }%`,
+                      }}
                       aria-valuenow={totalDonations}
                       aria-valuemin={0}
                       aria-valuemax={totalDonationsGoals}
@@ -267,18 +278,18 @@ const Index: NextPage = () => {
                     </div>
                   </OverlayTrigger>
                   <OverlayTrigger
-                    key={'key'}
-                    placement={'top'}
-                    overlay={
-                      <Tooltip id={`tooltip-top`}>
-                        AP Impact
-                      </Tooltip>
-                    }
+                    key={"key"}
+                    placement={"top"}
+                    overlay={<Tooltip id={`tooltip-top`}>AP Impact</Tooltip>}
                   >
                     <div
                       className="progress-bar bg-info text-dark"
                       role="progressbar"
-                      style={{width: `${totalDonationsImpact / totalDonationsGoals * 100}%`}}
+                      style={{
+                        width: `${
+                          (totalDonationsImpact / totalDonationsGoals) * 100
+                        }%`,
+                      }}
                       aria-valuenow={totalDonationsImpact}
                       aria-valuemin={0}
                       aria-valuemax={totalDonationsGoals}
@@ -298,16 +309,17 @@ const Index: NextPage = () => {
                   low-risk / high-yield DeFi products.
                 </p>
                 <p>
-                  Donations via Angel Protocol currently earn over 15% yield for partner
-                  non-profits every year, in perpetuity. Thanks to Angel
+                  Donations via Angel Protocol currently earn over 15% yield for
+                  partner non-profits every year, in perpetuity. Thanks to Angel
                   Protocol, when donors give once, they give forever.
                 </p>
-                <hr/>
-                <div
-                  className="row gh-1 gv-2 justify-content-around justify-content-sm-center text-center text-sm-start">
+                <hr />
+                <div className="row gh-1 gv-2 justify-content-around justify-content-sm-center text-center text-sm-start">
                   <div className="col-4">
                     <div className="number-box">
-                      <div className="number-box-title h4">${humanize.compactInteger(totalDonations, 1)}</div>
+                      <div className="number-box-title h4">
+                        ${humanize.compactInteger(totalDonations, 1)}
+                      </div>
                       <div className="number-box-subtitle">total donations</div>
                     </div>
                   </div>
@@ -379,7 +391,6 @@ const Index: NextPage = () => {
           <div className="container">
             <Tab.Container id="process" defaultActiveKey="one">
               <div className="row gh-1 gv-2 d-flex flex-row justify-content-center align-item-center">
-
                 <div className="col-12 col-md-7 col-lg-5 col-xl-4 align-self-center">
                   <Nav
                     variant="tabs"
@@ -403,7 +414,8 @@ const Index: NextPage = () => {
                     </Nav.Item>
                     <Nav.Item as="li" className="nav-item">
                       <Nav.Link as="button" eventKey="four">
-                        Get instant tax receipts <span className="badge">04</span>
+                        Get instant tax receipts{" "}
+                        <span className="badge">04</span>
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
@@ -415,14 +427,36 @@ const Index: NextPage = () => {
                       <div className="row gv-2 gh-2">
                         <div className="col-md-12">
                           <p className="mb-0">
-                            Donors will have the opportunity to give back to three charities dedicated to restoring our
-                            planet in different ways: <a className="link-light" href="https://www.5gyres.org/"
-                                                         target="_blank" rel="noreferrer">5
-                            Gyres</a> (ocean plastics), <a className="link-light" href="https://www.globalbrigades.org/"
-                                                           target="_blank" rel="noreferrer">Global
-                            Brigades</a> (reforestation), and <a
-                            className="link-light" href="https://www.self.org/" target="_blank"
-                            rel="noreferrer">SELF</a> (solar).
+                            Donors will have the opportunity to give back to
+                            three charities dedicated to restoring our planet in
+                            different ways:{" "}
+                            <a
+                              className="link-light"
+                              href="https://www.5gyres.org/"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              5 Gyres
+                            </a>{" "}
+                            (ocean plastics),{" "}
+                            <a
+                              className="link-light"
+                              href="https://www.globalbrigades.org/"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Global Brigades
+                            </a>{" "}
+                            (reforestation), and{" "}
+                            <a
+                              className="link-light"
+                              href="https://www.self.org/"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              SELF
+                            </a>{" "}
+                            (solar).
                           </p>
                         </div>
                       </div>
@@ -442,9 +476,10 @@ const Index: NextPage = () => {
                       <div className="row gv-2 gh-2">
                         <div className="col-md-12">
                           <p className="mb-0">
-                            A collection of Galactic Angel NFTs will
-                            be delivered to donors who meet certain thresholds for giving. These Galactic Angels will
-                            play a part in the Galactic Punks metaverse.
+                            A collection of Galactic Angel NFTs will be
+                            delivered to donors who meet certain thresholds for
+                            giving. These Galactic Angels will play a part in
+                            the Galactic Punks metaverse.
                           </p>
                         </div>
                       </div>
@@ -453,9 +488,11 @@ const Index: NextPage = () => {
                       <div className="row gv-2 gh-2">
                         <div className="col-md-12">
                           <p className="mb-0">
-                            Some donors can reduce their taxes by up to 50% of their pledge by donating to the Restore
-                            Earth campaign. All recipient organizations are 501(c)(3) nonprofits, and tax receipts are
-                            immediately generated if requested.
+                            Some donors can reduce their taxes by up to 50% of
+                            their pledge by donating to the Restore Earth
+                            campaign. All recipient organizations are 501(c)(3)
+                            nonprofits, and tax receipts are immediately
+                            generated if requested.
                           </p>
                         </div>
                       </div>
@@ -464,13 +501,8 @@ const Index: NextPage = () => {
                 </div>
 
                 <div className="d-none d-lg-block col-lg-3 col-xl-4 align-self-center">
-                  <img
-                    className="img-fluid "
-                    src={earth5.src}
-                    alt="earth"
-                  />
+                  <img className="img-fluid " src={earth5.src} alt="earth" />
                 </div>
-
               </div>
             </Tab.Container>
           </div>
@@ -489,7 +521,7 @@ const Index: NextPage = () => {
                     </h2>
                   </div>
                   <div className="col-lg-auto d-none d-lg-block">
-                    <hr className="mt-25 mb-0 width-70px"/>
+                    <hr className="mt-25 mb-0 width-70px" />
                   </div>
                 </div>
               </div>
@@ -557,7 +589,10 @@ const Index: NextPage = () => {
                   donations.
                 </p>
                 <Link href="/donate">
-                  <a target="_blank" className="btn btn-primary Button__gradient mt-30">
+                  <a
+                    target="_blank"
+                    className="btn btn-primary Button__gradient mt-30"
+                  >
                     Donate now
                     <svg
                       className="icon-arrow icon-arrow-right"
@@ -585,9 +620,12 @@ const Index: NextPage = () => {
                   </a>
                 </Link>
               </div>
-              <div className="d-none d-xl-block col-1"/>
+              <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">
-                <Accordion defaultActiveKey="1" className="bg-dark border-bottom border">
+                <Accordion
+                  defaultActiveKey="1"
+                  className="bg-dark border-bottom border"
+                >
                   <CustomToggle eventKey="1">
                     <div className="d-flex flex-row align-item-center justify-content-between">
                       <div className="fw-bolder">Tier 1</div>
@@ -748,7 +786,7 @@ const Index: NextPage = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

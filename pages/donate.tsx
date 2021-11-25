@@ -40,9 +40,10 @@ const DonatePage: NextPage = () => {
     <>
       <Head>
         <title>Restore Earth</title>
-        <link rel="shortcut icon" href="/images/favicon.png"/>
-        <meta name="description" content="Amplify your impact this holiday season by giving through Angel Protocol."/>
-        <meta property="og:image" content="/images/meta.png"/>
+        <meta
+          name="description"
+          content="Amplify your impact this holiday season by giving through Angel Protocol."
+        />
       </Head>
       <Header />
 
