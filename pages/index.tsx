@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import * as React from "react";
-import { useContext } from "react";
+import CustomToggle from "components/CustomToggle";
 
 import RellaxWrapper from "react-rellax-wrapper";
 import {
@@ -47,22 +47,6 @@ import {
 } from "../scripts/constants.js";
 
 const humanize = require("humanize-plus");
-
-function CustomToggle({ children, eventKey }) {
-  const { activeEventKey } = useContext(AccordionContext);
-  const isCurrentEventKey = activeEventKey === eventKey;
-  const decoratedOnClick = useAccordionButton(eventKey, () => {});
-  let classNames = "btn btn-block px-12 w-100 btn-outline-light border-top";
-  if (isCurrentEventKey) {
-    classNames =
-      "btn btn-block px-12 w-100 btn-outline-primary border-top bg-opacity";
-  }
-  return (
-    <button type="button" className={classNames} onClick={decoratedOnClick}>
-      {children}
-    </button>
-  );
-}
 
 const Index: NextPage = () => {
   return (
