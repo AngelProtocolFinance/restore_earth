@@ -1,13 +1,18 @@
 import { useState } from "react";
 
 export interface NFTDataType {
-  address: string;
+  nftRequested: boolean;
+  address?: string;
 }
 
-const useNFTData = (): [NFTDataType, (newData: any) => void] => {
+const useNFTData = ({
+  nftRequested = false,
+  address = "",
+}): [NFTDataType, (newData: any) => void] => {
   const [NFTData, setNFTData]: [NFTDataType, (newData: any) => void] = useState(
     {
-      address: "",
+      nftRequested,
+      address,
     }
   );
 

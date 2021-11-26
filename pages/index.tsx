@@ -715,7 +715,7 @@ const Index: NextPage = () => {
                   <CustomToggle eventKey="5">
                     <div className="d-flex flex-row align-item-center justify-content-between">
                       <div className="fw-bolder">Tier 5</div>
-                      <div>$25,00</div>
+                      <div>$25,000</div>
                     </div>
                   </CustomToggle>
                   <Accordion.Collapse eventKey="5">

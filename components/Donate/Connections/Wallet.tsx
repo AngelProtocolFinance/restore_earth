@@ -4,6 +4,12 @@ declare enum WalletChains {
   BITCOIN = "BITCOIN",
 }
 
+declare enum WalletChainNames {
+  TERRA = "Terra",
+  ETHEREUM = "Ethereum",
+  BITCOIN = "Bitcoin",
+}
+
 declare enum WalletDenominations {
   TERRA = "UST",
   ETHEREUM = "ETH",
@@ -15,7 +21,6 @@ declare enum WalletGlyphs {
   ETHEREUM = "Ξ",
   BITCOIN = "₿",
 }
-
 export interface NewWalletProps {
   chain: WalletChains;
   connection: any;
@@ -28,6 +33,7 @@ export interface WalletProps {
   glyph: WalletGlyphs;
   connection: any;
   methods: any;
+  chainName: WalletChainNames;
 }
 
 export interface TransactionResult {}
@@ -37,6 +43,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.TERRA,
       glyph: WalletGlyphs.TERRA,
+      chainName: "Terra",
     };
   }
 
@@ -44,6 +51,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.ETHEREUM,
       glyph: WalletGlyphs.ETHEREUM,
+      chainName: "Ethereum",
     };
   }
 
@@ -51,6 +59,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.BITCOIN,
       glyph: WalletGlyphs.BITCOIN,
+      chainName: "Bitcoin",
     };
   }
 };
@@ -61,14 +70,19 @@ const NewWallet = ({
   methods,
 }: NewWalletProps): WalletProps => {
   const { denomination, glyph } = getChainMeta(chain);
-  return { chain, denomination, glyph, connection, methods };
+  return { chain, denomination, glyph, connection, name, methods };
 };
 
 const WalletStatus = ({ wallet, onClickDisconnect }) => {
   return (
     <>
-      <p>Connected as: {wallet.methods.address()}</p>
-      <button onClick={onClickDisconnect}>disconnect</button>
+      <p className="mt-1rem mb-1rem">
+        You're currently connected to {wallet.chainName} as{" "}
+        <span className="font-monospace">{wallet.methods.address()}</span>.{" "}
+        <a href="#" onClick={onClickDisconnect} className="link pe-auto">
+          Disconnect?
+        </a>
+      </p>
     </>
   );
 };

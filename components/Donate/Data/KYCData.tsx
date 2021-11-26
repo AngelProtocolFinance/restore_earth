@@ -8,6 +8,7 @@ export interface KYCDataType {
   state: string;
   city: string;
   zipcode: string;
+  receiptRequested: boolean;
 }
 
 const useKYCData = (): [KYCDataType, (newData: any) => void] => {
@@ -20,6 +21,7 @@ const useKYCData = (): [KYCDataType, (newData: any) => void] => {
       state: "",
       city: "",
       zipcode: "",
+      receiptRequested: false,
     }
   );
 

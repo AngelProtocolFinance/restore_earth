@@ -15,10 +15,13 @@ const ConnectBitcoin = ({
   };
 
   return (
-    <li className="connection__item">
-      <button onClick={onClickConnect} className="rounded">
+    <li className="list-group-item">
+      <button
+        onClick={onClickConnect}
+        className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+      >
         <img width={32} height={32} src={bitcoinLogo.src} />
-        <span className="connection__item__title">Donate manually</span>
+        <span className="ml-1rem">Donate manually</span>
       </button>
     </li>
   );
@@ -30,7 +33,7 @@ const BitcoinConnections = ({
   onWalletDisconnect,
 }) => {
   return (
-    <ul className="connection__list">
+    <ul className="list-group">
       <ConnectBitcoin
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}

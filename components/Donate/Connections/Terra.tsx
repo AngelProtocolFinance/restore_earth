@@ -101,14 +101,14 @@ const Terra = ({
         .map(({ type, name, icon, identifier = "" }) => (
           <li
             key={"connection-" + type + identifier}
-            className="connection__item"
+            className="list-group-item"
           >
             <button
               onClick={() => connect(type, identifier)}
-              className="rounded"
+              className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
             >
               <img src={icon} alt={name} width={32} height={32} />
-              <span className="connection__item__title">{name}</span>
+              <span className="ml-1rem">{name}</span>
             </button>
           </li>
         ))}
@@ -139,7 +139,7 @@ const TerraConnections = ({
     }
   }, [onConnectionSuccess, onConnectionError, onWalletDisconnect]);
 
-  return <ul id="terra-wallet-connect" className="connection__list"></ul>;
+  return <ul id="terra-wallet-connect" className="list-group"></ul>;
 };
 
 export default TerraConnections;

@@ -6,11 +6,17 @@ import TerraConnections from "components/Donate/Connections/Terra";
 import EthereumConnections from "components/Donate/Connections/Ethereum";
 import BitcoinConnections from "components/Donate/Connections/Bitcoin";
 
-const ChainTitle = ({ logoSrc, title }) => {
+const ChainTitle = ({ logoSrc, title, imgClassName = "" }) => {
   return (
-    <h3 className="connection__chain__title">
-      <img width={32} height={32} src={logoSrc} alt={`${title} logo`} />
-      <span>{title}</span>
+    <h3 className="fs-6 pl-1rem text-start mt-2rem mb-1rem">
+      <img
+        width={32}
+        height={32}
+        className={imgClassName}
+        src={logoSrc}
+        alt={`${title} logo`}
+      />
+      <span className="ml-1rem">{title}</span>
     </h3>
   );
 };
@@ -21,29 +27,34 @@ const Connect = ({
   onWalletDisconnect,
 }) => {
   return (
-    <div className="connection__chain__list">
-      <h2>Select a donation method:</h2>
-      <ChainTitle logoSrc={terraLogo.src} title={"[TODO Terra]"} />
-      <TerraConnections
-        onConnectionSuccess={onConnectionSuccess}
-        onConnectionError={onConnectionError}
-        onWalletDisconnect={onWalletDisconnect}
-      />
-      {/* TODO: Add 6px left padding and 6px right padding to Ethereum logo */}
-      <ChainTitle logoSrc={ethereumLogo.src} title={"Ethereum"} />
-      <EthereumConnections
-        onConnectionSuccess={onConnectionSuccess}
-        onConnectionError={onConnectionError}
-        onWalletDisconnect={onWalletDisconnect}
-      />
-      {/* TODO: Handle BTC connection */}
-      <ChainTitle logoSrc={bitcoinLogo.src} title={"[TODO] Bitcoin"} />
-      <BitcoinConnections
-        onConnectionSuccess={onConnectionSuccess}
-        onConnectionError={onConnectionError}
-        onWalletDisconnect={onWalletDisconnect}
-      />
-    </div>
+    <>
+      <h2 className="h3">Connect your wallet</h2>
+      <div className="list-group">
+        <ChainTitle logoSrc={terraLogo.src} title={"Terra"} />
+        <TerraConnections
+          onConnectionSuccess={onConnectionSuccess}
+          onConnectionError={onConnectionError}
+          onWalletDisconnect={onWalletDisconnect}
+        />
+        <ChainTitle
+          logoSrc={ethereumLogo.src}
+          imgClassName="px-6"
+          title={"Ethereum"}
+        />
+        <EthereumConnections
+          onConnectionSuccess={onConnectionSuccess}
+          onConnectionError={onConnectionError}
+          onWalletDisconnect={onWalletDisconnect}
+        />
+        {/* TODO: Handle BTC connection */}
+        <ChainTitle logoSrc={bitcoinLogo.src} title={"Bitcoin"} />
+        <BitcoinConnections
+          onConnectionSuccess={onConnectionSuccess}
+          onConnectionError={onConnectionError}
+          onWalletDisconnect={onWalletDisconnect}
+        />
+      </div>
+    </>
   );
 };
 export default Connect;

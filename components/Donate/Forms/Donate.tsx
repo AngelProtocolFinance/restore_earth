@@ -1,7 +1,10 @@
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 
-import { WalletStatus } from "components/Donate/Connections/Wallet";
+import {
+  WalletChains,
+  WalletStatus,
+} from "components/Donate/Connections/Wallet";
 
 import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
 import useNFTData from "components/Donate/Data/NFTData";
@@ -44,90 +47,116 @@ const DonationAmountForm = ({
   const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
 
   return (
-    <Form.Group className="mb-3" controlId="formAmount">
-      <Form.Label>Amount</Form.Label>
-      {suggestedDonationAmounts.map((suggestedAmount) => {
-        return (
-          <Form.Check type="radio" key={suggestedAmount}>
-            <Form.Check.Input
-              type="radio"
-              name="formAmount"
-              onChange={(e) => {
-                const selectedAmount = e.currentTarget.value;
-                setSelectedAmount(selectedAmount);
-                setAmount(selectedAmount);
-              }}
-              value={suggestedAmount}
-              checked={selectedAmount == suggestedAmount}
-            />
-            <Form.Check.Label>
-              {suggestedAmount} {token}
-            </Form.Check.Label>
-          </Form.Check>
-        );
-      })}
-      <Form.Check type="radio" id={`formAmount-custom`}>
-        <Form.Check.Input
-          type="radio"
-          name="formAmount"
-          onChange={(e) => {
-            setSelectedAmount("custom");
-          }}
-        />
-        <Form.Check.Label>
-          <Form.Control
-            type="text"
-            name="amount"
-            value={amount}
-            onFocus={(e) => {
-              setAmount(e.currentTarget.value);
-              document.getElementById("formAmount-custom").click();
-            }}
-            onChange={(e) => setAmount(e.currentTarget.value)}
-            className="donate__form__amount__input"
-          />
-        </Form.Check.Label>
-      </Form.Check>
-      <Form.Text className="text-muted">
-        The amount you want to donate
-      </Form.Text>
-    </Form.Group>
+    // <Form.Group className="mb-3" controlId="formAmount">
+    //   {suggestedDonationAmounts.map((suggestedAmount) => {
+    //     return (
+    //       <>
+    //         <span className="mr-1rem">
+    //           <input
+    //             type="radio"
+    //             className="btn-check"
+    //             name="formAmount"
+    //             id={`formAmount-${suggestedAmount}`}
+    //             autoComplete="off"
+    //             value={suggestedAmount}
+    //             checked={selectedAmount == suggestedAmount}
+    //             onChange={(e) => {
+    //               const selectedAmount = e.currentTarget.value;
+    //               setSelectedAmount(selectedAmount);
+    //               setAmount(selectedAmount);
+    //             }}
+    //           />
+    //           <label
+    //             className="btn btn-secondary"
+    //             htmlFor={`formAmount-${suggestedAmount}`}
+    //           >
+    //             {suggestedAmount} {token}
+    //           </label>
+    //         </span>
+    //       </>
+    //     );
+    //   })}
+    //   <span className="mr-1rem">
+    //     <input
+    //       type="radio"
+    //       className="btn-check"
+    //       name="formAmount"
+    //       id={`formAmount-custom`}
+    //       autoComplete="off"
+    //       value="custom"
+    //       checked={selectedAmount == "custom"}
+    //       onChange={(e) => {
+    //         setSelectedAmount("custom");
+    //       }}
+    //     />
+    //     <label className="btn btn-secondary" htmlFor="formAmount-custom">
+    //       Custom:
+    //       <Form.Control
+    //         type="text"
+    //         name="amount"
+    //         value={amount}
+    //         onFocus={(e) => {
+    //           setAmount(e.currentTarget.value);
+    //           document.getElementById("formAmount-custom").click();
+    //         }}
+    //         onChange={(e) => setAmount(e.currentTarget.value)}
+    //         className="donate__form__amount__input"
+    //       />
+    //     </label>
+    //   </span>
+    // </Form.Group>
+    <>
+      <Form.Control
+        type="text"
+        name="amount"
+        value={amount}
+        onChange={(e) => setAmount(e.currentTarget.value)}
+        className="donate__form__amount__input"
+        placeholder={`How much ${wallet.glyph}${wallet.denomination} would you like to donate?`}
+        required
+      />
+    </>
   );
 };
 
 const NFTForm = ({ wallet, NFTData, setNFTData }) => {
-  const [receiveNft, setReceiveNft] = useState(false);
+  const nftRequested = NFTData.nftRequested;
+
   return (
     <>
       <Form.Check
         type="checkbox"
         id="formReceiveNFT"
-        checked={receiveNft}
+        checked={nftRequested}
         label={`Check this box if you'd like to receive an NFT`}
         onChange={() => {
-          setReceiveNft(!receiveNft);
+          const nftRequested = !NFTData.nftRequested;
+          setNFTData({ nftRequested });
         }}
+        className="mt-1rem mb-2rem"
       />
-      {receiveNft && (
+      {nftRequested && (
         <>
-          <Form.Group className="mb-3" controlId="walletAddress">
-            <Form.Label>Address</Form.Label>
-            <InputGroup>
-              <InputGroup.Text>Terra Address</InputGroup.Text>
-              <Form.Control
-                type="text"
-                name="walletAddress"
-                value={NFTData.address}
-                onChange={(e) => {
-                  const address = e.currentTarget.value;
-                  setNFTData({ address });
-                }}
-                className="donate__form__nft__input"
-              />
-            </InputGroup>
-            <Form.Text className="text-muted">
-              The address that will receive the NFT
-            </Form.Text>
+          <p>
+            To receive a Galactic Punk,{" "}
+            <a href="https://station.terra.money/">create a wallet on Terra</a>{" "}
+            and enter your address below.
+          </p>
+          <Form.Group className="mb-2rem" controlId="walletAddress">
+            <Form.Label className="fs-6 ml-1rem">
+              Terra Wallet Address
+            </Form.Label>
+            <Form.Control
+              type="text"
+              name="walletAddress"
+              value={NFTData.address}
+              onChange={(e) => {
+                const address = e.currentTarget.value;
+                setNFTData({ address });
+              }}
+              className="donate__form__nft__input"
+              placeholder="terra************************"
+            />
           </Form.Group>
         </>
       )}
@@ -136,20 +165,22 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
 };
 
 const KYCForm = ({ wallet, KYCData, setKYCData }) => {
-  const [showKYC, setShowKYC] = useState(false);
+  const receiptRequested = KYCData.receiptRequested;
   return (
     <>
       <Form.Check
         type="checkbox"
         id="formReceiveReceipt"
-        checked={showKYC}
+        checked={receiptRequested}
+        className="mt-1rem mb-1rem"
         label={`Check this box if you'd like to be emailed a tax receipt`}
         onChange={() => {
-          setShowKYC(!showKYC);
+          const receiptRequested = !KYCData.receiptRequested;
+          setKYCData({ receiptRequested });
         }}
       />
 
-      {showKYC && (
+      {receiptRequested && (
         <>
           <p>
             Please note that our tax receipts are issued by an US-based
@@ -157,8 +188,8 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
             accountant or tax advisor to determine the eligibility of your
             donation for a tax relief in your country of residence.
           </p>
-          <Form.Group className="mb-3" controlId="formFullName">
-            <Form.Label>Full Name</Form.Label>
+          <Form.Group className="mb-2rem" controlId="formFullName">
+            <Form.Label className="fs-6 ml-1rem">Full Name</Form.Label>
             <Form.Control
               type="text"
               name="formFullName"
@@ -168,10 +199,12 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                 setKYCData({ name });
               }}
               className="donate__form__kyc__input"
+              placeholder="Full name"
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Email Address</Form.Label>
+          <Form.Group className="mb-2rem" controlId="formEmail">
+            <Form.Label className="fs-6 ml-1rem">Email Address</Form.Label>
             <Form.Control
               type="email"
               name="formEmail"
@@ -181,13 +214,16 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                 setKYCData({ email });
               }}
               className="donate__form__kyc__input"
+              placeholder="Email address"
+              required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Address</Form.Label>
-            <Row>
+          <Form.Group className="mb-2rem" controlId="formEmail">
+            <Form.Label className="fs-6 ml-1rem">Address</Form.Label>
+            <Row className="mt-1rem mb-1rem">
               <Col>
                 <Form.Control
+                  name="formStreetAddress"
                   placeholder="Street address"
                   value={KYCData.streetAddress}
                   onChange={(e) => {
@@ -195,12 +231,14 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                     setKYCData({ streetAddress });
                   }}
                   className="donate__form__kyc__input"
+                  required
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className="mt-1rem mb-1rem">
               <Col>
                 <Form.Control
+                  name="formCity"
                   placeholder="City"
                   value={KYCData.city}
                   onChange={(e) => {
@@ -208,10 +246,12 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                     setKYCData({ city });
                   }}
                   className="donate__form__kyc__input"
+                  required
                 />
               </Col>
               <Col>
                 <Form.Control
+                  name="formState"
                   placeholder="State"
                   value={KYCData.state}
                   onChange={(e) => {
@@ -219,12 +259,14 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                     setKYCData({ state });
                   }}
                   className="donate__form__kyc__input"
+                  required
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className="mt-1rem mb-1rem">
               <Col>
                 <Form.Control
+                  name="formCountry"
                   placeholder="Country"
                   value={KYCData.country}
                   onChange={(e) => {
@@ -232,10 +274,12 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                     setKYCData({ country });
                   }}
                   className="donate__form__kyc__input"
+                  required
                 />
               </Col>
               <Col>
                 <Form.Control
+                  name="formZipcode"
                   placeholder="Zipcode"
                   value={KYCData.zipcode}
                   onChange={(e) => {
@@ -243,6 +287,7 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                     setKYCData({ zipcode });
                   }}
                   className="donate__form__kyc__input"
+                  required
                 />
               </Col>
             </Row>
@@ -255,6 +300,7 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
 
 const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   const [showTCA, setShowTCA] = useState(false);
+  return null;
   return (
     <>
       <Form.Check
@@ -286,6 +332,20 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   );
 };
 
+const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
+  if (!amount || amount == "") {
+    return null;
+  }
+  return (
+    <>
+      <p className="mt-2rem mb-1rem">
+        You'll donate {wallet.glyph} {amount} {wallet.denomination} to Restore
+        Earth. Press donate to continue.
+      </p>
+    </>
+  );
+};
+
 const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   const [transactionStep, setTransactionStep] = useState(
     TRANSACTION_STEPS.FORM
@@ -296,7 +356,12 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
 
-  const [NFTData, setNFTData] = useNFTData();
+  const defaultNftAddress =
+    wallet.chain == WalletChains.TERRA ? wallet.methods.address() : "";
+  const [NFTData, setNFTData] = useNFTData({
+    nftRequested: false,
+    address: defaultNftAddress,
+  });
   const [KYCData, setKYCData] = useKYCData();
   const [TCAData, setTCAData] = useTCAData();
 
@@ -308,7 +373,10 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     setStep(STEPS.DONATE);
   };
 
-  const onClickDisconnect = () => {
+  const onClickDisconnect = (e?: any) => {
+    if (e) {
+      e.preventDefault();
+    }
     wallet.methods.disconnect();
   };
 
@@ -337,8 +405,13 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
         onDonationSuccess({ amount, NFTData, KYCData, TCAData });
       })
       .catch((error) => {
-        setTransactionStep(TRANSACTION_STEPS.ERROR_KYC);
-        setErrorMessage(error);
+        if (KYCData.receiptRequested) {
+          setTransactionStep(TRANSACTION_STEPS.ERROR_KYC);
+          setErrorMessage(error);
+        } else {
+          setTransactionStep(TRANSACTION_STEPS.SUCCESS);
+          onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+        }
       });
   };
 
@@ -368,7 +441,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
   return (
     <section>
-      <h1>Donate</h1>
+      <h2 className="h3">Your Donation</h2>
       <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect} />
       {transactionStep == TRANSACTION_STEPS.FORM && (
         <Form onSubmit={onSubmit}>
@@ -382,6 +455,14 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
           <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
           <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
+
+          <DonationSummary
+            wallet={wallet}
+            amount={amount}
+            NFTData={NFTData}
+            KYCData={KYCData}
+            TCAData={TCAData}
+          />
 
           <Button variant="primary" type="submit">
             Donate Now
@@ -409,26 +490,23 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           <Button variant="primary" type="submit">
             Retry
           </Button>
-          <Button onClick={wallet.methods.disconnect}>Reconnect Wallet</Button>
-        </Form>
-      )}
-      {transactionStep == TRANSACTION_STEPS.ERROR_KYC && (
-        <Form>
-          <p>
-            There was an error updating the campaign status. If you wanted a
-            receipt, please reach out to us directly at{" "}
-            <a
-              href={`https://twitter.com/
-            ${TWITTER_HANDLE}`}
-            >
-              twitter.com/ ${TWITTER_HANDLE}
-            </a>
-          </p>
-          <Button variant="primary" type="submit">
-            Retry
+          <Button variant="outline" onClick={wallet.methods.disconnect}>
+            Reconnect Wallet
           </Button>
         </Form>
       )}
+      {transactionStep == TRANSACTION_STEPS.ERROR_KYC &&
+        KYCData.receiptRequested && (
+          <Form>
+            <p>
+              There was an error sending KYC data. Please reach out to us with
+              your details.
+            </p>
+            <Button variant="primary" type="submit">
+              Retry
+            </Button>
+          </Form>
+        )}
       {transactionStep == TRANSACTION_STEPS.SUCCESS && (
         <Form>
           <p>Nice! We should be advancing you to the next screen.</p>

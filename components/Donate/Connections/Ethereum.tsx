@@ -70,10 +70,13 @@ const ConnectMetaMask = ({
     };
 
     return (
-      <li className="connection__item">
-        <button onClick={onClickConnect} className="rounded">
+      <li className="list-group-item">
+        <button
+          onClick={onClickConnect}
+          className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+        >
           <img width={32} height={32} src={MetaMaskLogo.src} />
-          <span className="connection__item__title">MetaMask</span>
+          <span className="ml-1rem">MetaMask</span>
         </button>
       </li>
     );
@@ -111,7 +114,9 @@ const ConnectWalletConnect = ({
             // connectedWallet.currentProvider.disconnect();
             onWalletDisconnect();
           },
-          toUnit: (amount) => Web3.utils.toWei(amount),
+          toUnit: (amount) => {
+            return Web3.utils.toWei(amount);
+          },
           fromUnit: (amount) => Web3.utils.fromWei(amount),
           donate: (amount) => {
             return new Promise((resolve, reject) => {
@@ -143,10 +148,13 @@ const ConnectWalletConnect = ({
   };
 
   return (
-    <li className="connection__item">
-      <button onClick={onClickConnect} className="rounded">
+    <li className="list-group-item">
+      <button
+        onClick={onClickConnect}
+        className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+      >
         <img width={32} height={32} src={WalletConnectLogo.src} />
-        <span className="connection__item__title">Wallet Connect</span>
+        <span className="ml-1rem">Wallet Connect</span>
       </button>
     </li>
   );
@@ -158,7 +166,7 @@ const EthereumConnections = ({
   onWalletDisconnect,
 }) => {
   return (
-    <ul className="connection__list">
+    <ul className="list-group">
       <ConnectWalletConnect
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}

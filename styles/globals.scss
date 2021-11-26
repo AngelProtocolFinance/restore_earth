@@ -17,68 +17,121 @@ a {
   box-sizing: border-box;
 }
 
-.donate__step {
-  border-bottom: 5px solid $color-grey;
-  color: $color-grey-dark;
-  cursor: pointer;
+.pl-1rem {
+  padding-left: 1rem !important;
 }
 
-.donate__step.donate__step__active {
-  border-bottom: 5px solid $primary;
-  color: $color-dark;
-  font-weight: bold;
+.pr-1rem {
+  padding-right: 1rem !important;
 }
 
-.donate__step span {
-  padding-left: 16px;
-  line-height: 32px;
+.ml-1rem {
+  margin-left: 1rem !important;
 }
 
-.connection__chain__list {
+.mr-1rem {
+  margin-right: 1rem !important;
 }
 
-.connection__chain__title {
-  padding: 16px;
-  font-size: 1rem;
-  margin: 32px 0px 16px 0px;
-  line-height: 32px;
+.mt-1rem {
+  margin-top: 1rem !important;
 }
 
-.connection__chain__title span {
-  margin-left: 16px;
-  line-height: 32px !important;
+.mt-2rem {
+  margin-top: 2rem !important;
 }
 
-.connection__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.mb-1rem {
+  margin-bottom: 1rem !important;
 }
 
-.connection__item {
+.mb-2rem {
+  margin-bottom: 2rem !important;
 }
 
-.connection__item img {
+.font-light {
+  font-weight: 200;
 }
 
-.connection__item button {
-  padding: 16px;
-  width: 100%;
-  text-align: left;
-  border: 0px;
-}
+// .donate__step {
+//   border-bottom: 5px solid $color-grey;
+//   color: $color-grey-dark;
+//   cursor: pointer;
+// }
 
-.connection__item__title {
-  margin-left: 24px;
-  line-height: 32px;
-}
+// .donate__step.donate__step__active {
+//   border-bottom: 5px solid $primary;
+//   color: $color-dark;
+//   font-weight: bold;
+// }
 
-.donate__form__amount__input {
-}
+// .donate__step span {
+//   padding-left: 16px;
+//   line-height: 32px;
+// }
 
+// .connection__chain__list {
+// }
+
+// .connection__chain__title {
+//   padding: 16px;
+//   font-size: 1rem;
+//   margin: 32px 0px 16px 0px;
+//   line-height: 32px;
+// }
+
+// .connection__chain__title span {
+//   margin-left: 16px;
+//   line-height: 32px !important;
+// }
+
+// .connection__list {
+//   list-style: none;
+//   margin: 0;
+//   padding: 0;
+// }
+
+// .connection__item {
+// }
+
+// .connection__item img {
+// }
+
+// .connection__item button {
+//   padding: 16px;
+//   width: 100%;
+//   text-align: left;
+//   border: 0px;
+// }
+
+// .connection__item__title {
+//   margin-left: 24px;
+//   line-height: 32px;
+// }
+
+// .donate__form__amount__input {
+// }
+
+.donate__form__amount__input,
 .donate__form__nft__input,
 .donate__form__kyc__input,
 .donate__form__tca__input {
-  background-color: $color-grey-light !important;
+  // background-color: $color-grey-light !important;
   padding: 8px 16px !important;
+
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #bbb !important;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #bbb !important;
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #bbb !important;
+  }
 }

@@ -6,7 +6,7 @@ import angelProtocolLogo from "public/images/angel-protocol.png";
 import terraLogo from "public/images/chains/terra.png";
 import { topCharityAlliance } from "../scripts/constants";
 
-const Header = ({}) => {
+const Header = ({ wallet = undefined }) => {
   return (
     <>
       <Scrollspy
