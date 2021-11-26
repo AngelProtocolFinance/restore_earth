@@ -134,23 +134,6 @@ const ConnectWalletConnect = ({
                   console.log("error sending transaction: ", error);
                   reject(error);
                 });
-              // connectedWallet.eth
-              //   .sendTransaction({
-              //     from: address,
-              //     to: ETH_WALLET_ADDRESS,
-              //     value: amount,
-              //   })
-              //   .then((receipt) => {
-              //     console.log(
-              //       "walletconnect send transaction for amount: ",
-              //       amount
-              //     );
-              //     resolve(receipt);
-              //   })
-              //   .catch((error) => {
-              //     console.log("error sending transaction: ", error);
-              //     reject(error);
-              //   });
             });
           },
         };

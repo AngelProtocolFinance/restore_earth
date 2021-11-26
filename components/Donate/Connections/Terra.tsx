@@ -26,19 +26,6 @@ import {
   KYCTransactionDataType,
 } from "components/Donate/AngelProtocol";
 
-// async createDepositTx(
-//   UST_amount: number | string,
-//   splitToLiquid: number
-// ): Promise<CreateTxOptions> {
-//   this.checkWallet();
-//   const pctLiquid = splitToLiquid / 100;
-//   const pctLocked = 1 - pctLiquid;
-//   const micro_UST_Amount = new Dec(UST_amount).mul(1e6).toNumber();
-//   // const fee = await this.estimateFee([depositMsg]);
-//   const fee = new StdFee(2500000, [new Coin(denoms.uusd, 1.5e6)]);
-//   return { msgs: [depositMsg], fee };
-// }
-
 const Terra = ({
   onConnectionSuccess,
   onConnectionError,
@@ -70,47 +57,35 @@ const Terra = ({
           return new Dec(amount).div(1e6).toString();
         },
         donate: (amount) => {
-          console.log("terra send transaction for amount: ", amount);
-
           return new Promise((resolve, reject) => {
-            if (connectedWallet.network.chainID.startsWith("columbus")) {
-              alert(`Please only execute this example on Testnet`);
-              reject({
-                message: `Please only execute this example on Testnet`,
-              });
-            }
-
-            const msgs = [
-              new MsgExecuteContract(
-                connectedWallet.walletAddress,
-                TERRA_CONTRACT_ADDRESS,
-                {
-                  deposit: {
-                    fund_id: APES_FUND_ID,
-                    split: "70",
-                  },
-                },
-                [new Coin("uusd", amount)]
-              ),
-            ];
             connectedWallet
               .post({
-                msgs: msgs,
+                msgs: [
+                  new MsgExecuteContract(
+                    connectedWallet.walletAddress,
+                    TERRA_CONTRACT_ADDRESS,
+                    {
+                      deposit: {
+                        fundId: APES_FUND_ID,
+                        // split: "70",
+                      },
+                    },
+                    [new Coin("uusd", amount)]
+                  ),
+                ],
                 gasAdjustment: 1.2,
                 gasPrices: [new Coin("uusd", 0.15)],
               })
-              .then((nextTxResult) => {
-                console.log("success!");
+              .then((txResult) => {
                 const transactionData: KYCTransactionDataType = {
-                  transactionId: nextTxResult.result.txhash,
-                  status: nextTxResult.success,
+                  transactionId: txResult.result.txhash,
+                  status: txResult.success,
                 };
                 resolve(transactionData);
               })
-              .catch((reason) => {
-                console.log("failed terra transaction");
-                console.log(reason);
-                reject(reason);
+              .catch((error) => {
+                console.log("error sending transaction: ", error);
+                reject(error);
               });
           });
         },
