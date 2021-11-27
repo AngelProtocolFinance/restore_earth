@@ -1,3 +1,5 @@
+import { Dropdown } from "react-bootstrap";
+
 declare enum WalletChains {
   TERRA = "TERRA",
   ETHEREUM = "ETHEREUM",
@@ -74,16 +76,22 @@ const NewWallet = ({
 };
 
 const WalletStatus = ({ wallet, onClickDisconnect }) => {
+  const address = wallet.methods.address();
+
+  const displayAddress =
+    address.substring(0, 4) + "...." + address.substring(address.length - 8);
   return (
-    <>
-      <p className="my-rem-4">
-        You're currently connected to {wallet.chainName} as{" "}
-        <span className="font-monospace">{wallet.methods.address()}</span>.{" "}
-        <a href="#" onClick={onClickDisconnect} className="link pe-auto">
-          Disconnect?
-        </a>
-      </p>
-    </>
+    <div className="d-flex justify-content-end">
+      <Dropdown>
+        <Dropdown.Toggle className="my-rem-4 rounded bg-grey-light">
+          <span className="font-monospace">{displayAddress}</span>
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu className="bg-grey-light" align="end">
+          <Dropdown.Item onClick={onClickDisconnect}>Disconnect</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </div>
   );
 };
 
