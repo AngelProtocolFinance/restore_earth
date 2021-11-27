@@ -14,7 +14,10 @@ import { KYCDataType } from "components/Donate/Data/KYCData";
 import useTCAData from "components/Donate/Data/TCAData";
 import { TCADataType } from "components/Donate/Data/TCAData";
 
-import { sendKYCData } from "components/Donate/AngelProtocol/index";
+import {
+  sendKYCData,
+  BTC_WALLET_ADDRESS,
+} from "components/Donate/AngelProtocol/index";
 
 const TWITTER_HANDLE = "example";
 const TOKENS = {
@@ -31,27 +34,59 @@ const SUGGESTED_DONATION_AMOUNTS = {
 
 const DonationAmountForm = ({
   wallet,
+  txHash,
+  setTxHash,
   amount,
   setAmount,
   selectedAmount,
   setSelectedAmount,
 }) => {
-  const token = TOKENS[wallet.chain];
-  const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
+  // const token = TOKENS[wallet.chain];
+  // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
+  const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
+  const placeHolder = bitcoinConnected
+    ? `How much ${wallet.glyph}${wallet.denomination} did you donate?`
+    : `How much ${wallet.glyph}${wallet.denomination} would you like to donate?`;
 
   return (
-    <div className="my-rem-8">
-      <Form.Control
-        type="text"
-        name="amount"
-        value={amount}
-        onChange={(e) => setAmount(e.currentTarget.value)}
-        className="donate__form__amount__input"
-        placeholder={`How much ${wallet.glyph}${wallet.denomination} would you like to donate?`}
-        pattern="^[0-9]*[.,]?[0-9]*$"
-        required
-      />
-    </div>
+    <>
+      {wallet.chain == WalletChains.BITCOIN && (
+        <>
+          <p>
+            To make a donation via Bitcoin, send your transaction to{" "}
+            <span className="font-monospace">{BTC_WALLET_ADDRESS}</span>
+          </p>
+          <p>
+            Once your transaction is successful, please add the details below
+            and we'll send you a receipt once we've confirmed the transaction
+            (usually within an hour)
+          </p>
+          <div className="my-rem-8">
+            <Form.Control
+              type="text"
+              name="txHash"
+              value={txHash}
+              onChange={(e) => setTxHash(e.currentTarget.value)}
+              className="donate__form__txhash__input"
+              placeholder="The transaction ID of the donation."
+              required
+            />
+          </div>
+        </>
+      )}
+      <div className="my-rem-8">
+        <Form.Control
+          type="text"
+          name="amount"
+          value={amount}
+          onChange={(e) => setAmount(e.currentTarget.value)}
+          className="donate__form__amount__input"
+          placeholder={placeHolder}
+          pattern="^[0-9]*[.,]?[0-9]*$"
+          required
+        />
+      </div>
+    </>
   );
 };
 
@@ -292,6 +327,9 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   const [amount, setAmount] = useState("");
   const [selectedAmount, setSelectedAmount] = useState("");
 
+  // BTC Special Case
+  const [txHash, setTxHash] = useState(undefined);
+
   const defaultNftAddress =
     wallet.chain == WalletChains.TERRA ? wallet.methods.address() : "";
   const [NFTData, setNFTData] = useNFTData({
@@ -356,8 +394,9 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     const formattedAmount = wallet.methods.toUnit(amount);
     setTransactionStep(TRANSACTION_STEPS.SENDING_TRANSACTION);
 
+    // BTC needs the user defined txHash
     wallet.methods
-      .donate(formattedAmount)
+      .donate({ amount: formattedAmount, txHash })
       .then((transactionData) => {
         onTransactionSuccess({
           amount,
@@ -387,6 +426,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
             setAmount={setAmount}
             selectedAmount={selectedAmount}
             setSelectedAmount={setSelectedAmount}
+            txHash={txHash}
+            setTxHash={setTxHash}
           />
           <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
           <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />

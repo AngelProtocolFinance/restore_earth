@@ -58,7 +58,7 @@ const Terra = ({
         fromUnit: (amount) => {
           return new Dec(amount).div(1e6).toString();
         },
-        donate: (amount) => {
+        donate: ({ amount }) => {
           return new Promise((resolve, reject) => {
             connectedWallet
               .post({

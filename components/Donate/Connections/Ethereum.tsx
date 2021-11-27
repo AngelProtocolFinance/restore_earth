@@ -42,7 +42,7 @@ const ConnectMetaMask = ({
             },
             toUnit: (amount) => Web3.utils.toWei(amount),
             fromUnit: (amount) => Web3.utils.fromWei(amount),
-            donate: (amount) => {
+            donate: ({ amount }) => {
               return new Promise((resolve, reject) => {
                 connectedWallet.eth
                   .sendTransaction({
@@ -116,7 +116,7 @@ const ConnectWalletConnect = ({
             return Web3.utils.toWei(amount);
           },
           fromUnit: (amount) => Web3.utils.fromWei(amount),
-          donate: (amount) => {
+          donate: ({ amount }) => {
             return new Promise((resolve, reject) => {
               connectedWallet.eth
                 .sendTransaction({

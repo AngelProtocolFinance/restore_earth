@@ -53,7 +53,7 @@ const buildKYCData = ({
     walletAddress: wallet.methods.address(),
     denomination: wallet.denomination,
     amount: amount,
-    nftRequested: NFTData.receiveNFT,
+    nftRequested: NFTData.nftRequested,
     nftAddress: NFTData.address,
     receiptRequested: KYCData.receiptRequested,
     fullName: KYCData.name,
