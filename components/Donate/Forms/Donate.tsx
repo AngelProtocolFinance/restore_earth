@@ -60,8 +60,8 @@ const DonationAmountForm = ({
           </p>
           <p>
             Once your transaction is successful, please add the details below
-            and we'll send you a receipt once we've confirmed the transaction
-            (usually within an hour)
+            and we&apos;ll send you a receipt once we&apos;ve confirmed the
+            transaction (usually within an hour)
           </p>
           <div className="my-rem-8">
             <Form.Control
@@ -323,8 +323,8 @@ const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
   return (
     <>
       <p className="mt-rem-8 mb-rem-4">
-        You'll donate {wallet.glyph} {amount} {wallet.denomination} to Restore
-        Earth. Press donate to continue.
+        You&apos;ll donate {wallet.glyph} {amount} {wallet.denomination} to
+        Restore Earth. Press donate to continue.
       </p>
     </>
   );
