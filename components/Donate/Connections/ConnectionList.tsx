@@ -35,7 +35,7 @@ const ConnectionItem = ({ onClick, title, logo }: ConnectionItemType) => {
     <li className="list-group-item">
       <button
         onClick={onClick}
-        className="w-100 btn btn-outline text-start px-rem-4"
+        className="w-100 btn btn-outline-dark text-start px-rem-4"
       >
         <img width={32} height={32} src={logo} alt={`${title} logo`} />
         <span className="ml-rem-4">{title}</span>
