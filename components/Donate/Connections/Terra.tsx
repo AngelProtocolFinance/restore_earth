@@ -80,6 +80,7 @@ const Terra = ({
               })
               .then((txResult) => {
                 const transactionData: KYCTransactionDataType = {
+                  senderAddress: connectedWallet.walletAddress,
                   transactionId: txResult.result.txhash,
                   status: txResult.success,
                 };

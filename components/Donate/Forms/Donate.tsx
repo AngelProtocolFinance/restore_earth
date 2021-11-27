@@ -19,18 +19,18 @@ import {
   BTC_WALLET_ADDRESS,
 } from "components/Donate/AngelProtocol/index";
 
-const TWITTER_HANDLE = "example";
-const TOKENS = {
-  BITCOIN: "BTC",
-  ETHEREUM: "ETH",
-  TERRA: "UST",
-};
+// const TWITTER_HANDLE = "example";
+// const TOKENS = {
+//   BITCOIN: "BTC",
+//   ETHEREUM: "ETH",
+//   TERRA: "UST",
+// };
 
-const SUGGESTED_DONATION_AMOUNTS = {
-  BITCOIN: ["0.0017", "0.0087", "0.017", "0.087", "0.44", "0.87", "1.74"],
-  ETHEREUM: ["0.024", "0.12", "0.24", "1.2", "6", "12", "24"],
-  TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
-};
+// const SUGGESTED_DONATION_AMOUNTS = {
+//   BITCOIN: ["0.0017", "0.0087", "0.017", "0.087", "0.44", "0.87", "1.74"],
+//   ETHEREUM: ["0.024", "0.12", "0.24", "1.2", "6", "12", "24"],
+//   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
+// };
 
 const DonationAmountForm = ({
   wallet,
@@ -40,6 +40,8 @@ const DonationAmountForm = ({
   setAmount,
   selectedAmount,
   setSelectedAmount,
+  manualWallet,
+  setManualWallet,
 }) => {
   // const token = TOKENS[wallet.chain];
   // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
@@ -61,6 +63,17 @@ const DonationAmountForm = ({
             and we'll send you a receipt once we've confirmed the transaction
             (usually within an hour)
           </p>
+          <div className="my-rem-8">
+            <Form.Control
+              type="text"
+              name="manualWallet"
+              value={manualWallet}
+              onChange={(e) => setManualWallet(e.currentTarget.value)}
+              className="donate__form__manual_wallet__input"
+              placeholder="Your BTC wallet's address."
+              required
+            />
+          </div>
           <div className="my-rem-8">
             <Form.Control
               type="text"
@@ -329,6 +342,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
   // BTC Special Case
   const [txHash, setTxHash] = useState(undefined);
+  const [manualWallet, setManualWallet] = useState(undefined);
 
   const defaultNftAddress =
     wallet.chain == WalletChains.TERRA ? wallet.methods.address() : "";
@@ -396,7 +410,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
     // BTC needs the user defined txHash
     wallet.methods
-      .donate({ amount: formattedAmount, txHash })
+      .donate({ amount: formattedAmount, txHash, manualWallet })
       .then((transactionData) => {
         onTransactionSuccess({
           amount,
@@ -428,6 +442,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
             setSelectedAmount={setSelectedAmount}
             txHash={txHash}
             setTxHash={setTxHash}
+            manualWallet={manualWallet}
+            setManualWallet={setManualWallet}
           />
           <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
           <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />

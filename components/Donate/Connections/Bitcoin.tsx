@@ -31,10 +31,11 @@ const ConnectBitcoin = ({
       fromUnit: (amount) => {
         return new Dec(amount).div(1e8).toString();
       },
-      donate: ({ amount, txHash }) => {
+      donate: ({ amount, txHash, manualWallet }) => {
         return new Promise((resolve, reject) => {
-          if (txHash && address) {
+          if (txHash && manualWallet) {
             const transactionData: KYCTransactionDataType = {
+              senderAddress: manualWallet,
               transactionId: txHash,
               status: true,
             };

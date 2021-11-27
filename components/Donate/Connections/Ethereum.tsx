@@ -52,6 +52,7 @@ const ConnectMetaMask = ({
                   })
                   .then((receipt) => {
                     const transactionData: KYCTransactionDataType = {
+                      senderAddress: address,
                       transactionId: receipt.transactionHash,
                       blockId: receipt.blockHash,
                       blockNumber: receipt.blockNumber,
@@ -126,6 +127,7 @@ const ConnectWalletConnect = ({
                 })
                 .then((receipt) => {
                   const transactionData: KYCTransactionDataType = {
+                    senderAddress: address,
                     transactionId: receipt.transactionHash,
                     blockId: receipt.blockHash,
                     blockNumber: receipt.blockNumber,

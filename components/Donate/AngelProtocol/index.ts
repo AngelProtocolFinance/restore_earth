@@ -35,6 +35,7 @@ interface KYCSendBodyType {
 }
 
 export interface KYCTransactionDataType {
+  senderAddress: string;
   transactionId: string;
   blockId?: string;
   blockNumber?: any;
@@ -50,7 +51,7 @@ const buildKYCData = ({
   TCAData,
 }: SendKYCDataProps): KYCSendBodyType => {
   const data: KYCSendBodyType = {
-    walletAddress: wallet.methods.address(),
+    walletAddress: transactionData.senderAddress,
     denomination: wallet.denomination,
     amount: amount,
     nftRequested: NFTData.nftRequested,
