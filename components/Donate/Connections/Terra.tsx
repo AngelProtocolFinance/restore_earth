@@ -105,10 +105,10 @@ const Terra = ({
           >
             <button
               onClick={() => connect(type, identifier)}
-              className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+              className="w-100 btn btn-outline-dark text-start px-rem-4"
             >
               <img src={icon} alt={name} width={32} height={32} />
-              <span className="ml-1rem">{name}</span>
+              <span className="ml-rem-4">{name}</span>
             </button>
           </li>
         ))}

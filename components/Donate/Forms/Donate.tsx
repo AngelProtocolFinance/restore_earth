@@ -29,13 +29,6 @@ const SUGGESTED_DONATION_AMOUNTS = {
   TERRA: ["100", "500", "1000", "5000", "25000", "50000", "100000"],
 };
 
-// const postKycData = ({ amount, NFTData, KYCData, TCAData }) => {
-//   return new Promise((resolve, reject) => {
-//     console.log("posting data: ", amount, NFTData, KYCData, TCAData);
-//     resolve(200);
-//   });
-// };
-
 const DonationAmountForm = ({
   wallet,
   amount,
@@ -47,65 +40,7 @@ const DonationAmountForm = ({
   const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
 
   return (
-    // <Form.Group className="mb-3" controlId="formAmount">
-    //   {suggestedDonationAmounts.map((suggestedAmount) => {
-    //     return (
-    //       <>
-    //         <span className="mr-1rem">
-    //           <input
-    //             type="radio"
-    //             className="btn-check"
-    //             name="formAmount"
-    //             id={`formAmount-${suggestedAmount}`}
-    //             autoComplete="off"
-    //             value={suggestedAmount}
-    //             checked={selectedAmount == suggestedAmount}
-    //             onChange={(e) => {
-    //               const selectedAmount = e.currentTarget.value;
-    //               setSelectedAmount(selectedAmount);
-    //               setAmount(selectedAmount);
-    //             }}
-    //           />
-    //           <label
-    //             className="btn btn-secondary"
-    //             htmlFor={`formAmount-${suggestedAmount}`}
-    //           >
-    //             {suggestedAmount} {token}
-    //           </label>
-    //         </span>
-    //       </>
-    //     );
-    //   })}
-    //   <span className="mr-1rem">
-    //     <input
-    //       type="radio"
-    //       className="btn-check"
-    //       name="formAmount"
-    //       id={`formAmount-custom`}
-    //       autoComplete="off"
-    //       value="custom"
-    //       checked={selectedAmount == "custom"}
-    //       onChange={(e) => {
-    //         setSelectedAmount("custom");
-    //       }}
-    //     />
-    //     <label className="btn btn-secondary" htmlFor="formAmount-custom">
-    //       Custom:
-    //       <Form.Control
-    //         type="text"
-    //         name="amount"
-    //         value={amount}
-    //         onFocus={(e) => {
-    //           setAmount(e.currentTarget.value);
-    //           document.getElementById("formAmount-custom").click();
-    //         }}
-    //         onChange={(e) => setAmount(e.currentTarget.value)}
-    //         className="donate__form__amount__input"
-    //       />
-    //     </label>
-    //   </span>
-    // </Form.Group>
-    <>
+    <div className="my-rem-8">
       <Form.Control
         type="text"
         name="amount"
@@ -113,9 +48,10 @@ const DonationAmountForm = ({
         onChange={(e) => setAmount(e.currentTarget.value)}
         className="donate__form__amount__input"
         placeholder={`How much ${wallet.glyph}${wallet.denomination} would you like to donate?`}
+        pattern="^[0-9]*[.,]?[0-9]*$"
         required
       />
-    </>
+    </div>
   );
 };
 
@@ -133,7 +69,7 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
           const nftRequested = !NFTData.nftRequested;
           setNFTData({ nftRequested });
         }}
-        className="mt-1rem mb-2rem"
+        className="mt-rem-4 mb-rem-8"
       />
       {nftRequested && (
         <>
@@ -142,8 +78,8 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
             <a href="https://station.terra.money/">create a wallet on Terra</a>{" "}
             and enter your address below.
           </p>
-          <Form.Group className="mb-2rem" controlId="walletAddress">
-            <Form.Label className="fs-6 ml-1rem">
+          <Form.Group className="mb-rem-2" controlId="walletAddress">
+            <Form.Label className="fs-6 ml-rem-4">
               Terra Wallet Address
             </Form.Label>
             <Form.Control
@@ -172,7 +108,7 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
         type="checkbox"
         id="formReceiveReceipt"
         checked={receiptRequested}
-        className="mt-1rem mb-1rem"
+        className="mt-rem-4 mb-rem-4"
         label={`Check this box if you'd like to be emailed a tax receipt`}
         onChange={() => {
           const receiptRequested = !KYCData.receiptRequested;
@@ -188,8 +124,8 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
             accountant or tax advisor to determine the eligibility of your
             donation for a tax relief in your country of residence.
           </p>
-          <Form.Group className="mb-2rem" controlId="formFullName">
-            <Form.Label className="fs-6 ml-1rem">Full Name</Form.Label>
+          <Form.Group className="mb-rem-2" controlId="formFullName">
+            <Form.Label className="fs-6 ml-rem-4">Full Name</Form.Label>
             <Form.Control
               type="text"
               name="formFullName"
@@ -203,8 +139,8 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
               required
             />
           </Form.Group>
-          <Form.Group className="mb-2rem" controlId="formEmail">
-            <Form.Label className="fs-6 ml-1rem">Email Address</Form.Label>
+          <Form.Group className="mb-rem-2" controlId="formEmail">
+            <Form.Label className="fs-6 ml-rem-4">Email Address</Form.Label>
             <Form.Control
               type="email"
               name="formEmail"
@@ -218,9 +154,9 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
               required
             />
           </Form.Group>
-          <Form.Group className="mb-2rem" controlId="formEmail">
-            <Form.Label className="fs-6 ml-1rem">Address</Form.Label>
-            <Row className="mt-1rem mb-1rem">
+          <Form.Group className="mb-rem-2" controlId="formEmail">
+            <Form.Label className="fs-6 ml-rem-4">Address</Form.Label>
+            <Row className="mt-rem-4 mb-rem-4">
               <Col>
                 <Form.Control
                   name="formStreetAddress"
@@ -235,7 +171,7 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                 />
               </Col>
             </Row>
-            <Row className="mt-1rem mb-1rem">
+            <Row className="mt-rem-4 mb-rem-4">
               <Col>
                 <Form.Control
                   name="formCity"
@@ -263,7 +199,7 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
                 />
               </Col>
             </Row>
-            <Row className="mt-1rem mb-1rem">
+            <Row className="mt-rem-4 mb-rem-4">
               <Col>
                 <Form.Control
                   name="formCountry"
@@ -338,7 +274,7 @@ const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
   }
   return (
     <>
-      <p className="mt-2rem mb-1rem">
+      <p className="mt-rem-8 mb-rem-4">
         You'll donate {wallet.glyph} {amount} {wallet.denomination} to Restore
         Earth. Press donate to continue.
       </p>

@@ -73,10 +73,10 @@ const ConnectMetaMask = ({
       <li className="list-group-item">
         <button
           onClick={onClickConnect}
-          className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+          className="w-100 btn btn-outline-dark text-start px-rem-4"
         >
           <img width={32} height={32} src={MetaMaskLogo.src} />
-          <span className="ml-1rem">MetaMask</span>
+          <span className="ml-rem-1">MetaMask</span>
         </button>
       </li>
     );
@@ -151,10 +151,10 @@ const ConnectWalletConnect = ({
     <li className="list-group-item">
       <button
         onClick={onClickConnect}
-        className="w-100 btn btn-outline-dark text-start pl-1rem pr-1rem"
+        className="w-100 btn btn-outline-dark text-start px-rem-1"
       >
         <img width={32} height={32} src={WalletConnectLogo.src} />
-        <span className="ml-1rem">Wallet Connect</span>
+        <span className="ml-rem-1">Wallet Connect</span>
       </button>
     </li>
   );

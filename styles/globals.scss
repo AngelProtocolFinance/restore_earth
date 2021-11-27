@@ -17,36 +17,58 @@ a {
   box-sizing: border-box;
 }
 
-.pl-1rem {
-  padding-left: 1rem !important;
+@for $i from 1 through 12 {
+  .p-rem-#{$i} {
+    padding: 0.25rem * $i !important;
+  }
+  .pl-rem-#{$i} {
+    padding-left: 0.25rem * $i !important;
+  }
+  .pr-rem-#{$i} {
+    padding-right: 0.25rem * $i !important;
+  }
+  .pt-rem-#{$i} {
+    padding-top: 0.25rem * $i !important;
+  }
+  .pb-rem-#{$i} {
+    padding-bottom: 0.25rem * $i !important;
+  }
+  .px-rem-#{$i} {
+    padding-left: 0.25rem * $i !important;
+    padding-right: 0.25rem * $i !important;
+  }
+  .py-rem-#{$i} {
+    padding-top: 0.25rem * $i !important;
+    padding-bottom: 0.25rem * $i !important;
+  }
+
+  .m-rem-#{$i} {
+    margin: 0.25rem * $i !important;
+  }
+  .ml-rem-#{$i} {
+    margin-left: 0.25rem * $i !important;
+  }
+  .mr-rem-#{$i} {
+    margin-right: 0.25rem * $i !important;
+  }
+  .mt-rem-#{$i} {
+    margin-top: 0.25rem * $i !important;
+  }
+  .mb-rem-#{$i} {
+    margin-bottom: 0.25rem * $i !important;
+  }
+  .mx-rem-#{$i} {
+    margin-left: 0.25rem * $i !important;
+    margin-right: 0.25rem * $i !important;
+  }
+  .my-rem-#{$i} {
+    margin-top: 0.25rem * $i !important;
+    margin-bottom: 0.25rem * $i !important;
+  }
 }
 
-.pr-1rem {
-  padding-right: 1rem !important;
-}
-
-.ml-1rem {
-  margin-left: 1rem !important;
-}
-
-.mr-1rem {
-  margin-right: 1rem !important;
-}
-
-.mt-1rem {
-  margin-top: 1rem !important;
-}
-
-.mt-2rem {
-  margin-top: 2rem !important;
-}
-
-.mb-1rem {
-  margin-bottom: 1rem !important;
-}
-
-.mb-2rem {
-  margin-bottom: 2rem !important;
+.bg-grey-light {
+  background-color: $color-grey-light !important;
 }
 
 .font-light {

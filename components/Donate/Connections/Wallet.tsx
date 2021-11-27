@@ -76,7 +76,7 @@ const NewWallet = ({
 const WalletStatus = ({ wallet, onClickDisconnect }) => {
   return (
     <>
-      <p className="mt-1rem mb-1rem">
+      <p className="my-rem-4">
         You're currently connected to {wallet.chainName} as{" "}
         <span className="font-monospace">{wallet.methods.address()}</span>.{" "}
         <a href="#" onClick={onClickDisconnect} className="link pe-auto">

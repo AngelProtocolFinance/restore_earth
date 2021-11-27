@@ -8,7 +8,7 @@ import BitcoinConnections from "components/Donate/Connections/Bitcoin";
 
 const ChainTitle = ({ logoSrc, title, imgClassName = "" }) => {
   return (
-    <h3 className="fs-6 pl-1rem text-start mt-2rem mb-1rem">
+    <h3 className="fs-6 px-rem-4 text-start mt-rem-8 mb-rem-4">
       <img
         width={32}
         height={32}
@@ -16,7 +16,7 @@ const ChainTitle = ({ logoSrc, title, imgClassName = "" }) => {
         src={logoSrc}
         alt={`${title} logo`}
       />
-      <span className="ml-1rem">{title}</span>
+      <span className="ml-rem-4">{title}</span>
     </h3>
   );
 };
