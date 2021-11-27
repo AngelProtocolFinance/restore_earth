@@ -8,7 +8,9 @@ import MetaMaskLogo from "public/images/chains/metamask_logo.svg";
 import WalletConnectLogo from "public/images/chains/walletconnect_logo.svg";
 import { KYCTransactionDataType, ETH_WALLET_ADDRESS } from "../AngelProtocol";
 
-const infuraId = "0475a33555e04d22a562b66af06d4b83";
+import { ConnectionItem, ConnectionList } from "./ConnectionList";
+
+const INFURA_ID = process.env.NEXT_PUBLIC_INFURA_PROJECT_ID;
 
 const ConnectMetaMask = ({
   onConnectionSuccess,
@@ -70,15 +72,11 @@ const ConnectMetaMask = ({
     };
 
     return (
-      <li className="list-group-item">
-        <button
-          onClick={onClickConnect}
-          className="w-100 btn btn-outline-dark text-start px-rem-4"
-        >
-          <img width={32} height={32} src={MetaMaskLogo.src} />
-          <span className="ml-rem-1">MetaMask</span>
-        </button>
-      </li>
+      <ConnectionItem
+        onClick={onClickConnect}
+        logo={MetaMaskLogo.src}
+        title="MetaMask"
+      />
     );
   }
 
@@ -91,7 +89,7 @@ const ConnectWalletConnect = ({
   onWalletDisconnect,
 }) => {
   const provider = new WalletConnectProvider({
-    infuraId: infuraId,
+    infuraId: INFURA_ID,
   });
 
   const onClickConnect = () => {
@@ -148,15 +146,11 @@ const ConnectWalletConnect = ({
   };
 
   return (
-    <li className="list-group-item">
-      <button
-        onClick={onClickConnect}
-        className="w-100 btn btn-outline-dark text-start px-rem-1"
-      >
-        <img width={32} height={32} src={WalletConnectLogo.src} />
-        <span className="ml-rem-1">Wallet Connect</span>
-      </button>
-    </li>
+    <ConnectionItem
+      onClick={onClickConnect}
+      logo={WalletConnectLogo.src}
+      title="Wallet Connect"
+    />
   );
 };
 
@@ -166,7 +160,7 @@ const EthereumConnections = ({
   onWalletDisconnect,
 }) => {
   return (
-    <ul className="list-group">
+    <ConnectionList>
       <ConnectWalletConnect
         onConnectionSuccess={onConnectionSuccess}
         onConnectionError={onConnectionError}
@@ -177,7 +171,7 @@ const EthereumConnections = ({
         onConnectionError={onConnectionError}
         onWalletDisconnect={onWalletDisconnect}
       />
-    </ul>
+    </ConnectionList>
   );
 };
 

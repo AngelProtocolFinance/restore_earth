@@ -43,7 +43,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.TERRA,
       glyph: WalletGlyphs.TERRA,
-      chainName: "Terra",
+      chainName: WalletChainNames.TERRA,
     };
   }
 
@@ -51,7 +51,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.ETHEREUM,
       glyph: WalletGlyphs.ETHEREUM,
-      chainName: "Ethereum",
+      chainName: WalletChainNames.ETHEREUM,
     };
   }
 
@@ -59,7 +59,7 @@ const getChainMeta = (chain: WalletChains) => {
     return {
       denomination: WalletDenominations.BITCOIN,
       glyph: WalletGlyphs.BITCOIN,
-      chainName: "Bitcoin",
+      chainName: WalletChainNames.BITCOIN,
     };
   }
 };
@@ -69,8 +69,8 @@ const NewWallet = ({
   connection,
   methods,
 }: NewWalletProps): WalletProps => {
-  const { denomination, glyph } = getChainMeta(chain);
-  return { chain, denomination, glyph, connection, name, methods };
+  const { chainName, denomination, glyph } = getChainMeta(chain);
+  return { chain, chainName, denomination, glyph, connection, methods };
 };
 
 const WalletStatus = ({ wallet, onClickDisconnect }) => {

@@ -26,6 +26,8 @@ import {
   KYCTransactionDataType,
 } from "components/Donate/AngelProtocol";
 
+import { ConnectionItem, ConnectionList } from "./ConnectionList";
+
 const Terra = ({
   onConnectionSuccess,
   onConnectionError,
@@ -99,18 +101,12 @@ const Terra = ({
       {availableConnections
         .filter(({ type }) => type != ConnectType.READONLY)
         .map(({ type, name, icon, identifier = "" }) => (
-          <li
-            key={"connection-" + type + identifier}
-            className="list-group-item"
-          >
-            <button
-              onClick={() => connect(type, identifier)}
-              className="w-100 btn btn-outline-dark text-start px-rem-4"
-            >
-              <img src={icon} alt={name} width={32} height={32} />
-              <span className="ml-rem-4">{name}</span>
-            </button>
-          </li>
+          <ConnectionItem
+            onClick={() => connect(type, identifier)}
+            logo={icon}
+            title={name}
+            key={type + name}
+          />
         ))}
     </>
   );

@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import bitcoinLogo from "public/images/chains/bitcoin_logo.svg";
 
+import { ConnectionItem } from "./ConnectionList";
+
 const ConnectBitcoin = ({
   onConnectionSuccess,
   onConnectionError,
@@ -15,15 +17,11 @@ const ConnectBitcoin = ({
   };
 
   return (
-    <li className="list-group-item">
-      <button
-        onClick={onClickConnect}
-        className="w-100 btn btn-outline-dark text-start px-rem-4"
-      >
-        <img width={32} height={32} src={bitcoinLogo.src} />
-        <span className="ml-rem-4">Donate manually</span>
-      </button>
-    </li>
+    <ConnectionItem
+      onClick={onClickConnect}
+      logo={bitcoinLogo.src}
+      title="Donate BTC directly"
+    />
   );
 };
 
