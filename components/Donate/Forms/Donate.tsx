@@ -1,5 +1,6 @@
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { useState } from "react";
+import Link from "next/link";
 
 import {
   WalletChains,
@@ -316,6 +317,33 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   );
 };
 
+const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
+  const termsLabel = (
+    <>
+      I&apos;ve read and agree with the{" "}
+      <Link href="/terms">
+        <a target="_blank">terms of service</a>
+      </Link>
+      .
+    </>
+  );
+
+  return (
+    <>
+      <Form.Check
+        type="checkbox"
+        id="formTermsAccepted"
+        checked={termsAccepted}
+        label={termsLabel}
+        onChange={() => {
+          setTermsAccepted(!termsAccepted);
+        }}
+        required
+      />
+    </>
+  );
+};
+
 const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
   if (!amount || amount == "") {
     return null;
@@ -343,6 +371,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   // BTC Special Case
   const [txHash, setTxHash] = useState(undefined);
   const [manualWallet, setManualWallet] = useState(undefined);
+
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const defaultNftAddress =
     wallet.chain == WalletChains.TERRA ? wallet.methods.address() : "";
@@ -448,6 +478,11 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
           <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
           <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
+
+          <TermsAcceptance
+            termsAccepted={termsAccepted}
+            setTermsAccepted={setTermsAccepted}
+          />
 
           <DonationSummary
             wallet={wallet}
