@@ -1,4 +1,4 @@
-import { Dropdown } from "react-bootstrap";
+import {Dropdown, Form} from "react-bootstrap";
 
 declare enum WalletChains {
   TERRA = "TERRA",
@@ -23,6 +23,7 @@ declare enum WalletGlyphs {
   ETHEREUM = "Ξ",
   BITCOIN = "₿",
 }
+
 export interface NewWalletProps {
   chain: WalletChains;
   connection: any;
@@ -38,7 +39,8 @@ export interface WalletProps {
   chainName: WalletChainNames;
 }
 
-export interface TransactionResult {}
+export interface TransactionResult {
+}
 
 const getChainMeta = (chain: WalletChains) => {
   if (chain == WalletChains.TERRA) {
@@ -67,15 +69,15 @@ const getChainMeta = (chain: WalletChains) => {
 };
 
 const NewWallet = ({
-  chain,
-  connection,
-  methods,
+ chain,
+ connection,
+ methods,
 }: NewWalletProps): WalletProps => {
-  const { chainName, denomination, glyph } = getChainMeta(chain);
-  return { chain, chainName, denomination, glyph, connection, methods };
+  const {chainName, denomination, glyph} = getChainMeta(chain);
+  return {chain, chainName, denomination, glyph, connection, methods};
 };
 
-const WalletStatus = ({ wallet, onClickDisconnect }) => {
+const WalletStatus = ({wallet, onClickDisconnect}) => {
   const address = wallet.methods.address();
 
   const displayAddress =
@@ -84,22 +86,22 @@ const WalletStatus = ({ wallet, onClickDisconnect }) => {
   return (
     <>
       {!bitcoinConnected && (
-        <div className="d-flex justify-content-end">
+        <Form.Group className="mb-rem-6" controlId="formWallet">
+          <Form.Label>Connected Wallet</Form.Label>
           <Dropdown>
-            <Dropdown.Toggle className="my-rem-4 rounded bg-grey-light">
+            <Dropdown.Toggle className="rounded bg-grey-light full">
               <span className="font-monospace">{displayAddress}</span>
             </Dropdown.Toggle>
-
             <Dropdown.Menu className="bg-grey-light" align="end">
               <Dropdown.Item onClick={onClickDisconnect}>
                 Disconnect
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        </div>
+        </Form.Group>
       )}
     </>
   );
 };
 
-export { NewWallet, WalletChains, WalletStatus };
+export {NewWallet, WalletChains, WalletStatus};

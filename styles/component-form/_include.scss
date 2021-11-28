@@ -1,8 +1,25 @@
-// Form Control
-@import "form-control";
+//// Form Control
+//@import "form-control";
+//
+//// Form Group
+//@import "form-group";
+//
+//// Checkbox Btn
+//@import "checkbox-btn";
 
-// Form Group
-@import "form-group";
+label {
+  font-weight: bold;
+}
 
-// Checkbox Btn
-@import "checkbox-btn";
+//.form-label-button {
+//  padding: 8px;
+//  border: 1px solid $color-border;
+//
+//  label {
+//
+//  }
+//
+//  .form-check-input {
+//    margin-left: 0;
+//  }
+//}

@@ -80,7 +80,7 @@ const DonatePage: NextPage = () => {
       <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent overflow-hidden">
         <div className="content-wrap">
           <div className="row justify-content-md-center">
-            <div className="col-12 col-md-6 col-lg-4 ">
+            <div className="col-12 col-md-6 col-lg-5">
               {step == STEPS.CONNECT && (
                 <ConnectForm
                   onConnectionSuccess={onConnectionSuccess}
