@@ -80,18 +80,25 @@ const WalletStatus = ({ wallet, onClickDisconnect }) => {
 
   const displayAddress =
     address.substring(0, 4) + "...." + address.substring(address.length - 8);
+  const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
   return (
-    <div className="d-flex justify-content-end">
-      <Dropdown>
-        <Dropdown.Toggle className="my-rem-4 rounded bg-grey-light">
-          <span className="font-monospace">{displayAddress}</span>
-        </Dropdown.Toggle>
+    <>
+      {!bitcoinConnected && (
+        <div className="d-flex justify-content-end">
+          <Dropdown>
+            <Dropdown.Toggle className="my-rem-4 rounded bg-grey-light">
+              <span className="font-monospace">{displayAddress}</span>
+            </Dropdown.Toggle>
 
-        <Dropdown.Menu className="bg-grey-light" align="end">
-          <Dropdown.Item onClick={onClickDisconnect}>Disconnect</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
+            <Dropdown.Menu className="bg-grey-light" align="end">
+              <Dropdown.Item onClick={onClickDisconnect}>
+                Disconnect
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+      )}
+    </>
   );
 };
 
