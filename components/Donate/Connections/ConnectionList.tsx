@@ -6,7 +6,7 @@ export interface ChainTitleType {
 
 const ChainTitle = ({ logoSrc, title, imgClassName }: ChainTitleType) => {
   return (
-    <h3 className="fs-6 px-rem-4 text-start mt-rem-8 mb-rem-4">
+    <li className="list-group-item px-rem-4 py-rem-3 border-bottom-0 bg-light text-start mt-rem-8">
       <img
         width={32}
         height={32}
@@ -15,7 +15,7 @@ const ChainTitle = ({ logoSrc, title, imgClassName }: ChainTitleType) => {
         alt={`${title} logo`}
       />
       <span className="ml-rem-4">{title}</span>
-    </h3>
+    </li>
   );
 };
 

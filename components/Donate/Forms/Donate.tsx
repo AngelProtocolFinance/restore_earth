@@ -1,24 +1,15 @@
-import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-import { useState } from "react";
+import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
+import {useState} from "react";
 import Link from "next/link";
 
-import {
-  WalletChains,
-  WalletStatus,
-} from "components/Donate/Connections/Wallet";
+import {WalletChains, WalletStatus,} from "components/Donate/Connections/Wallet";
 
-import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
+import {STEPS, TRANSACTION_STEPS} from "components/Donate/variables";
 import useNFTData from "components/Donate/Data/NFTData";
-import { NFTDataType } from "components/Donate/Data/NFTData";
 import useKYCData from "components/Donate/Data/KYCData";
-import { KYCDataType } from "components/Donate/Data/KYCData";
 import useTCAData from "components/Donate/Data/TCAData";
-import { TCADataType } from "components/Donate/Data/TCAData";
 
-import {
-  sendKYCData,
-  BTC_WALLET_ADDRESS,
-} from "components/Donate/AngelProtocol/index";
+import {BTC_WALLET_ADDRESS, sendKYCData,} from "components/Donate/AngelProtocol/index";
 
 // const TWITTER_HANDLE = "example";
 // const TOKENS = {
@@ -34,77 +25,92 @@ import {
 // };
 
 const DonationAmountForm = ({
-  wallet,
-  txHash,
-  setTxHash,
-  amount,
-  setAmount,
-  selectedAmount,
-  setSelectedAmount,
-  manualWallet,
-  setManualWallet,
-}) => {
+                              wallet,
+                              txHash,
+                              setTxHash,
+                              amount,
+                              setAmount,
+                              selectedAmount,
+                              setSelectedAmount,
+                              manualWallet,
+                              setManualWallet,
+                            }) => {
   // const token = TOKENS[wallet.chain];
   // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
   const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
   const placeHolder = bitcoinConnected
-    ? `How much ${wallet.glyph}${wallet.denomination} did you donate?`
-    : `How much ${wallet.glyph}${wallet.denomination} would you like to donate?`;
+    ? `How much ${wallet.glyph} (${wallet.denomination}) did you donate?`
+    : `How much ${wallet.glyph} (${wallet.denomination}) would you like to donate?`;
 
   return (
     <>
       {wallet.chain == WalletChains.BITCOIN && (
         <>
-          <p>
-            To make a donation via Bitcoin, send your transaction to{" "}
-            <span className="font-monospace">{BTC_WALLET_ADDRESS}</span>
+          <p className="mb-12">
+            To make a donation via Bitcoin, please send your donation transaction to the wallet address:<br/>
+            <span className="small fw-bold font-monospace ">{BTC_WALLET_ADDRESS}</span>
           </p>
           <p>
             Once your transaction is successful, please add the details below
             and we&apos;ll send you a receipt once we&apos;ve confirmed the
-            transaction (usually within an hour)
+            transaction (usually within an hour).
           </p>
-          <div className="my-rem-8">
+          <Form.Group className="my-rem-8" controlId="formBtcWalletAddress">
+            <Form.Label>BTC Wallet Address</Form.Label>
             <Form.Control
               type="text"
               name="manualWallet"
               value={manualWallet}
               onChange={(e) => setManualWallet(e.currentTarget.value)}
               className="donate__form__manual_wallet__input"
-              placeholder="Your BTC wallet's address."
+              placeholder="bc1qezneaj4976ev4kkqws40dk2dxgxwcjynggd8fq"
               required
             />
-          </div>
-          <div className="my-rem-8">
+            <Form.Text muted>
+              The Bitcoin wallet address used to send the donation transaction.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="my-rem-8" controlId="formBtcTransactionId">
+            <Form.Label>BTC Transaction ID</Form.Label>
             <Form.Control
               type="text"
               name="txHash"
               value={txHash}
               onChange={(e) => setTxHash(e.currentTarget.value)}
               className="donate__form__txhash__input"
-              placeholder="The transaction ID of the donation."
+              placeholder="f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16"
               required
             />
-          </div>
+            <Form.Text muted>
+              The Bitcoin transaction ID of the donation.
+            </Form.Text>
+          </Form.Group>
         </>
       )}
-      <div className="my-rem-8">
-        <Form.Control
-          type="text"
-          name="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.currentTarget.value)}
-          className="donate__form__amount__input"
-          placeholder={placeHolder}
-          pattern="^[0-9]*[.,]?[0-9]*$"
-          required
-        />
-      </div>
+      <Form.Group className="my-rem-8" controlId="formBtcTransactionAmount">
+        <Form.Label>{wallet.denomination} Amount</Form.Label>
+        <InputGroup>
+          <InputGroup.Text>{wallet.glyph}</InputGroup.Text>
+          <Form.Control
+            type="text"
+            name="amount"
+            value={amount}
+            onChange={(e) => setAmount(e.currentTarget.value)}
+            className="donate__form__amount__input"
+            placeholder="1"
+            pattern="^[0-9]*[.,]?[0-9]*$"
+            required
+          />
+        </InputGroup>
+        <Form.Text muted>
+          {placeHolder}
+        </Form.Text>
+      </Form.Group>
     </>
   );
 };
 
-const NFTForm = ({ wallet, NFTData, setNFTData }) => {
+const NFTForm = ({wallet, NFTData, setNFTData}) => {
   const nftRequested = NFTData.nftRequested;
 
   return (
@@ -113,22 +119,25 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
         type="checkbox"
         id="formReceiveNFT"
         checked={nftRequested}
-        label={`Check this box if you'd like to receive an NFT`}
+        label={`I want to receive an NFT for my donation`}
         onChange={() => {
           const nftRequested = !NFTData.nftRequested;
-          setNFTData({ nftRequested });
+          setNFTData({nftRequested});
         }}
-        className="mt-rem-4 mb-rem-8"
+        className="mt-rem-4 mb-rem-4"
       />
       {nftRequested && (
-        <>
-          <p>
-            To receive a Galactic Punk,{" "}
-            <a href="https://station.terra.money/">create a wallet on Terra</a>{" "}
-            and enter your address below.
+        <div className="mb-rem-12">
+          <p className="mb-6 small">
+            To receive a Galactic Punk, you must have a Terra wallet address. Don&apos;t have a wallet yet?
+            &nbsp;<a href="https://station.terra.money/" target="_blank" rel="noreferrer">Create a wallet on Terra</a>.
           </p>
-          <Form.Group className="mb-rem-2" controlId="walletAddress">
-            <Form.Label className="fs-6 ml-rem-4">
+          <p className="mb-20 small">
+            An NFT will be airdropped to the below address in the first half of 2022 after the campaign has ended. The final tier
+            value of the NFT will be determined by the USD value of the transaction.
+          </p>
+          <Form.Group className="mb-rem-6" controlId="walletAddress">
+            <Form.Label>
               Terra Wallet Address
             </Form.Label>
             <Form.Control
@@ -137,19 +146,19 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
               value={NFTData.address}
               onChange={(e) => {
                 const address = e.currentTarget.value;
-                setNFTData({ address });
+                setNFTData({address});
               }}
               className="donate__form__nft__input"
               placeholder="terra************************"
             />
           </Form.Group>
-        </>
+        </div>
       )}
     </>
   );
 };
 
-const KYCForm = ({ wallet, KYCData, setKYCData }) => {
+const KYCForm = ({wallet, KYCData, setKYCData}) => {
   const receiptRequested = KYCData.receiptRequested;
   return (
     <>
@@ -158,136 +167,136 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
         id="formReceiveReceipt"
         checked={receiptRequested}
         className="mt-rem-4 mb-rem-4"
-        label={`Check this box if you'd like to be emailed a tax receipt`}
+        label={`I want to receive a tax receipt for my donation`}
         onChange={() => {
           const receiptRequested = !KYCData.receiptRequested;
-          setKYCData({ receiptRequested });
+          setKYCData({receiptRequested});
         }}
       />
 
       {receiptRequested && (
-        <>
-          <p>
-            Please note that our tax receipts are issued by an US-based
+        <div className="mb-rem-12">
+          <p className="small mb-20">
+            Please note that our tax receipts are issued by a US-based
             501(c)(3) nonprofit. Please consult with your local lawyer,
             accountant or tax advisor to determine the eligibility of your
             donation for a tax relief in your country of residence.
           </p>
-          <Form.Group className="mb-rem-2" controlId="formFullName">
-            <Form.Label className="fs-6 ml-rem-4">Full Name</Form.Label>
+          <Form.Group className="mb-rem-6" controlId="formFullName">
+            <Form.Label>Full Name</Form.Label>
             <Form.Control
               type="text"
               name="formFullName"
               value={KYCData.name}
               onChange={(e) => {
                 const name = e.currentTarget.value;
-                setKYCData({ name });
+                setKYCData({name});
               }}
               className="donate__form__kyc__input"
               placeholder="Full name"
               required
             />
           </Form.Group>
-          <Form.Group className="mb-rem-2" controlId="formEmail">
-            <Form.Label className="fs-6 ml-rem-4">Email Address</Form.Label>
+          <Form.Group className="mb-rem-6" controlId="formEmail">
+            <Form.Label>Email Address</Form.Label>
             <Form.Control
               type="email"
               name="formEmail"
               value={KYCData.email}
               onChange={(e) => {
                 const email = e.currentTarget.value;
-                setKYCData({ email });
+                setKYCData({email});
               }}
               className="donate__form__kyc__input"
               placeholder="Email address"
               required
             />
           </Form.Group>
-          <Form.Group className="mb-rem-2" controlId="formEmail">
-            <Form.Label className="fs-6 ml-rem-4">Address</Form.Label>
-            <Row className="mt-rem-4 mb-rem-4">
-              <Col>
-                <Form.Control
-                  name="formStreetAddress"
-                  placeholder="Street address"
-                  value={KYCData.streetAddress}
-                  onChange={(e) => {
-                    const streetAddress = e.currentTarget.value;
-                    setKYCData({ streetAddress });
-                  }}
-                  className="donate__form__kyc__input"
-                  required
-                />
-              </Col>
-            </Row>
-            <Row className="mt-rem-4 mb-rem-4">
-              <Col>
-                <Form.Control
-                  name="formCity"
-                  placeholder="City"
-                  value={KYCData.city}
-                  onChange={(e) => {
-                    const city = e.currentTarget.value;
-                    setKYCData({ city });
-                  }}
-                  className="donate__form__kyc__input"
-                  required
-                />
-              </Col>
-              <Col>
-                <Form.Control
-                  name="formState"
-                  placeholder="State"
-                  value={KYCData.state}
-                  onChange={(e) => {
-                    const state = e.currentTarget.value;
-                    setKYCData({ state });
-                  }}
-                  className="donate__form__kyc__input"
-                  required
-                />
-              </Col>
-            </Row>
-            <Row className="mt-rem-4 mb-rem-4">
-              <Col>
-                <Form.Control
-                  name="formCountry"
-                  placeholder="Country"
-                  value={KYCData.country}
-                  onChange={(e) => {
-                    const country = e.currentTarget.value;
-                    setKYCData({ country });
-                  }}
-                  className="donate__form__kyc__input"
-                  required
-                />
-              </Col>
-              <Col>
-                <Form.Control
-                  name="formZipcode"
-                  placeholder="Zipcode"
-                  value={KYCData.zipcode}
-                  onChange={(e) => {
-                    const zipcode = e.currentTarget.value;
-                    setKYCData({ zipcode });
-                  }}
-                  className="donate__form__kyc__input"
-                  required
-                />
-              </Col>
-            </Row>
+          <Form.Group className="mb-rem-6" controlId="formStreet">
+            <Form.Label>Street Address</Form.Label>
+            <Form.Control
+              name="formStreetAddress"
+              placeholder="Street address"
+              value={KYCData.streetAddress}
+              onChange={(e) => {
+                const streetAddress = e.currentTarget.value;
+                setKYCData({streetAddress});
+              }}
+              className="donate__form__kyc__input"
+              required
+            />
           </Form.Group>
-        </>
+          <Row className="gh-1">
+            <Form.Group as={Col} className="mb-rem-6" controlId="formCity">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                name="formCity"
+                placeholder="City"
+                value={KYCData.city}
+                onChange={(e) => {
+                  const city = e.currentTarget.value;
+                  setKYCData({city});
+                }}
+                className="donate__form__kyc__input"
+                required
+              />
+            </Form.Group>
+            <Form.Group as={Col} className="mb-rem-6" controlId="formState">
+              <Form.Label>State</Form.Label>
+              <Form.Control
+                name="formState"
+                placeholder="State"
+                value={KYCData.state}
+                onChange={(e) => {
+                  const state = e.currentTarget.value;
+                  setKYCData({state});
+                }}
+                className="donate__form__kyc__input"
+                required
+              />
+            </Form.Group>
+          </Row>
+          <Row className="gh-1">
+            <Form.Group as={Col} className="mb-rem-6" controlId="formCountry">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                name="formCountry"
+                placeholder="Country"
+                value={KYCData.country}
+                onChange={(e) => {
+                  const country = e.currentTarget.value;
+                  setKYCData({country});
+                }}
+                className="donate__form__kyc__input"
+                required
+              />
+            </Form.Group>
+            <Form.Group as={Col} className="mb-rem-6" controlId="formZipcode">
+              <Form.Label>Zipcode</Form.Label>
+              <Form.Control
+                name="formZipcode"
+                placeholder="Zipcode"
+                value={KYCData.zipcode}
+                onChange={(e) => {
+                  const zipcode = e.currentTarget.value;
+                  setKYCData({zipcode});
+                }}
+                className="donate__form__kyc__input"
+                required
+              />
+            </Form.Group>
+          </Row>
+        </div>
       )}
     </>
   );
 };
 
-const TCAForm = ({ wallet, TCAData, setTCAData }) => {
+const TCAForm = ({wallet, TCAData, setTCAData}) => {
   const [showTCA, setShowTCA] = useState(false);
   return null;
   return (
-    <>
+    <div className="mb-rem-12">
       <Form.Check
         type="checkbox"
         id="formTerraCharityAlliance"
@@ -303,7 +312,7 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
           aria-label="Affiliated TCA Member"
           onChange={(e) => {
             const affiliateId = e.currentTarget.value;
-            setTCAData({ affiliateId });
+            setTCAData({affiliateId});
           }}
           className="donate__form__tca__input"
         >
@@ -313,19 +322,19 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
           <option value="3">Three</option>
         </Form.Select>
       )}
-    </>
+    </div>
   );
 };
 
-const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
+const TermsAcceptance = ({termsAccepted, setTermsAccepted}) => {
   const termsLabel = (
-    <>
-      I&apos;ve read and agree with the{" "}
+    <div className="mb-rem-12">
+      I have read and agree with the{" "}
       <Link href="/terms">
         <a target="_blank">terms of service</a>
       </Link>
       .
-    </>
+    </div>
   );
 
   return (
@@ -344,21 +353,23 @@ const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
   );
 };
 
-const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
+const DonationSummary = ({wallet, amount, NFTData, KYCData, TCAData}) => {
   if (!amount || amount == "") {
     return null;
   }
   return (
-    <>
-      <p className="mt-rem-8 mb-rem-4">
-        You&apos;ll donate {wallet.glyph} {amount} {wallet.denomination} to
-        Restore Earth. Press donate to continue.
-      </p>
-    </>
+    <div className="card bg-light border mb-rem-6">
+      <div className="card-body p-rem-2">
+        <p className="m-0 p-0 small">
+          You will donate {wallet.glyph} {amount} {wallet.denomination} to
+          Restore Earth. Press <strong>Donate Now</strong> to continue.
+        </p>
+      </div>
+    </div>
   );
 };
 
-const Donate = ({ setStep, wallet, onDonationSuccess }) => {
+const Donate = ({setStep, wallet, onDonationSuccess}) => {
   const [transactionStep, setTransactionStep] = useState(
     TRANSACTION_STEPS.FORM
   );
@@ -420,7 +431,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     })
       .then((result) => {
         setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-        onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+        onDonationSuccess({amount, NFTData, KYCData, TCAData});
       })
       .catch((error) => {
         if (KYCData.receiptRequested) {
@@ -428,7 +439,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           setErrorMessage(error);
         } else {
           setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-          onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+          onDonationSuccess({amount, NFTData, KYCData, TCAData});
         }
       });
   };
@@ -440,7 +451,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
     // BTC needs the user defined txHash
     wallet.methods
-      .donate({ amount: formattedAmount, txHash, manualWallet })
+      .donate({amount: formattedAmount, txHash, manualWallet})
       .then((transactionData) => {
         onTransactionSuccess({
           amount,
@@ -461,7 +472,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   return (
     <section>
       <h2 className="h3">Your Donation</h2>
-      <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect} />
+      <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect}/>
       {transactionStep == TRANSACTION_STEPS.FORM && (
         <Form onSubmit={onSubmit}>
           <DonationAmountForm
@@ -475,9 +486,9 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
             manualWallet={manualWallet}
             setManualWallet={setManualWallet}
           />
-          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
-          <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
-          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
+          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData}/>
+          <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData}/>
+          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData}/>
 
           <TermsAcceptance
             termsAccepted={termsAccepted}
@@ -524,17 +535,17 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
         </Form>
       )}
       {transactionStep == TRANSACTION_STEPS.ERROR_KYC &&
-        KYCData.receiptRequested && (
-          <Form>
-            <p>
-              There was an error sending KYC data. Please reach out to us with
-              your details.
-            </p>
-            <Button variant="primary" type="submit">
-              Retry
-            </Button>
-          </Form>
-        )}
+      KYCData.receiptRequested && (
+        <Form>
+          <p>
+            There was an error sending KYC data. Please reach out to us with
+            your details.
+          </p>
+          <Button variant="primary" type="submit">
+            Retry
+          </Button>
+        </Form>
+      )}
       {transactionStep == TRANSACTION_STEPS.SUCCESS && (
         <Form>
           <p>Nice! We should be advancing you to the next screen.</p>
