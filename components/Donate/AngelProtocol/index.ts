@@ -15,7 +15,7 @@ const kycClient = axios.create({
 });
 
 interface KYCSendBodyType {
-  amount: string;
+  amount: number;
   nftRequested: boolean;
   nftAddress?: string;
   receiptRequested: boolean;
@@ -53,7 +53,7 @@ const buildKYCData = ({
   const data: KYCSendBodyType = {
     walletAddress: transactionData.senderAddress,
     denomination: wallet.denomination,
-    amount: amount,
+    amount: parseInt(amount),
     nftRequested: NFTData.nftRequested,
     nftAddress: NFTData.address,
     receiptRequested: KYCData.receiptRequested,
