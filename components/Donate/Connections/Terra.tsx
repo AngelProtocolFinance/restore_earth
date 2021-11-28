@@ -68,7 +68,7 @@ const Terra = ({
                     TERRA_CONTRACT_ADDRESS,
                     {
                       deposit: {
-                        fundId: APES_FUND_ID,
+                        fundId: parseInt(APES_FUND_ID),
                         split: "0.0",
                       },
                     },
