@@ -32,6 +32,7 @@ import {
 } from "react-bootstrap";
 
 import CustomToggle from "components/CustomToggle";
+import Page from "../components/Page";
 
 const Terms = () => {
   return (
@@ -571,15 +572,17 @@ const TermsPage: NextPage = () => {
       </Head>
       <Header />
 
-      <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent overflow-hidden">
-        <div className="content-wrap">
-          <div className="row justify-content-md-center">
-            <div className="col-12 col-md-6 col-lg-4 ">
-              <Terms />
+      <Page>
+        <div className="pt-rem-12 padding-spacer-bottom">
+          <div className="container-fluid px-rem-4">
+            <div className="row justify-content-md-center">
+              <div className="col-12 col-sm-8 col-md-6">
+                <Terms />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Page>
       <Footer />
     </>
   );

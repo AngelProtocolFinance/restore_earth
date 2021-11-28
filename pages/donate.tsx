@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import Page from "components/Page";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
@@ -77,31 +78,33 @@ const DonatePage: NextPage = () => {
       </Head>
       <Header />
 
-      <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent overflow-hidden">
-        <div className="content-wrap">
-          <div className="row justify-content-md-center">
-            <div className="col-12 col-md-6 col-lg-5">
-              {step == STEPS.CONNECT && (
-                <ConnectForm
-                  onConnectionSuccess={onConnectionSuccess}
-                  onConnectionError={onConnectionError}
-                  onWalletDisconnect={onWalletDisconnect}
-                />
-              )}
-              {step == STEPS.DONATE && (
-                <DonateForm
-                  setStep={setStep}
-                  wallet={wallet}
-                  onDonationSuccess={onDonationSuccess}
-                />
-              )}
-              {step == STEPS.THANKYOU && (
-                <ThankYou KYCData={data.KYCData} NFTData={data.NFTData} />
-              )}
+      <Page>
+        <div className="pt-rem-12 padding-spacer-bottom">
+          <div className="container-fluid px-rem-4">
+            <div className="row gh-1 justify-content-center">
+              <div className="col-12 col-sm-10 col-md-6 col-lg-5">
+                {step == STEPS.CONNECT && (
+                  <ConnectForm
+                    onConnectionSuccess={onConnectionSuccess}
+                    onConnectionError={onConnectionError}
+                    onWalletDisconnect={onWalletDisconnect}
+                  />
+                )}
+                {step == STEPS.DONATE && (
+                  <DonateForm
+                    setStep={setStep}
+                    wallet={wallet}
+                    onDonationSuccess={onDonationSuccess}
+                  />
+                )}
+                {step == STEPS.THANKYOU && (
+                  <ThankYou KYCData={data.KYCData} NFTData={data.NFTData} />
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Page>
       <Footer />
     </>
   );
