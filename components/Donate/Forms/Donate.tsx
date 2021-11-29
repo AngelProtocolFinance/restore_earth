@@ -1,15 +1,21 @@
-import {Button, Col, Form, InputGroup, Row} from "react-bootstrap";
-import {useState} from "react";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { useState } from "react";
 import Link from "next/link";
 
-import {WalletChains, WalletStatus,} from "components/Donate/Connections/Wallet";
+import {
+  WalletChains,
+  WalletStatus,
+} from "components/Donate/Connections/Wallet";
 
-import {STEPS, TRANSACTION_STEPS} from "components/Donate/variables";
+import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
 import useNFTData from "components/Donate/Data/NFTData";
 import useKYCData from "components/Donate/Data/KYCData";
 import useTCAData from "components/Donate/Data/TCAData";
 
-import {BTC_WALLET_ADDRESS, sendKYCData,} from "components/Donate/AngelProtocol/index";
+import {
+  BTC_WALLET_ADDRESS,
+  sendKYCData,
+} from "components/Donate/AngelProtocol/index";
 
 // const TWITTER_HANDLE = "example";
 // const TOKENS = {
@@ -25,16 +31,16 @@ import {BTC_WALLET_ADDRESS, sendKYCData,} from "components/Donate/AngelProtocol/
 // };
 
 const DonationAmountForm = ({
-                              wallet,
-                              txHash,
-                              setTxHash,
-                              amount,
-                              setAmount,
-                              selectedAmount,
-                              setSelectedAmount,
-                              manualWallet,
-                              setManualWallet,
-                            }) => {
+  wallet,
+  txHash,
+  setTxHash,
+  amount,
+  setAmount,
+  selectedAmount,
+  setSelectedAmount,
+  manualWallet,
+  setManualWallet,
+}) => {
   // const token = TOKENS[wallet.chain];
   // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
   const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
@@ -47,8 +53,12 @@ const DonationAmountForm = ({
       {wallet.chain == WalletChains.BITCOIN && (
         <>
           <p className="mb-12">
-            To make a donation via Bitcoin, please send your donation transaction to the wallet address:<br/>
-            <span className="small fw-bold font-monospace ">{BTC_WALLET_ADDRESS}</span>
+            To make a donation via Bitcoin, please send your donation
+            transaction to the wallet address:
+            <br />
+            <span className="small fw-bold font-monospace ">
+              {BTC_WALLET_ADDRESS}
+            </span>
           </p>
           <p>
             Once your transaction is successful, please add the details below
@@ -102,15 +112,13 @@ const DonationAmountForm = ({
             required
           />
         </InputGroup>
-        <Form.Text muted>
-          {placeHolder}
-        </Form.Text>
+        <Form.Text muted>{placeHolder}</Form.Text>
       </Form.Group>
     </>
   );
 };
 
-const NFTForm = ({wallet, NFTData, setNFTData}) => {
+const NFTForm = ({ wallet, NFTData, setNFTData }) => {
   const nftRequested = NFTData.nftRequested;
 
   return (
@@ -122,31 +130,38 @@ const NFTForm = ({wallet, NFTData, setNFTData}) => {
         label={`I want to receive an NFT for my donation`}
         onChange={() => {
           const nftRequested = !NFTData.nftRequested;
-          setNFTData({nftRequested});
+          setNFTData({ nftRequested });
         }}
         className="mt-rem-4 mb-rem-4"
       />
       {nftRequested && (
         <div className="mb-rem-12">
           <p className="mb-6 small">
-            To receive a Galactic Punk, you must have a Terra wallet address. Don&apos;t have a wallet yet?
-            &nbsp;<a href="https://station.terra.money/" target="_blank" rel="noreferrer">Create a wallet on Terra</a>.
+            To receive a Galactic Punk, you must have a Terra wallet address.
+            Don&apos;t have a wallet yet? &nbsp;
+            <a
+              href="https://station.terra.money/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Create a wallet on Terra
+            </a>
+            .
           </p>
           <p className="mb-20 small">
-            An NFT will be airdropped to the below address in the first half of 2022 after the campaign has ended. The final tier
-            value of the NFT will be determined by the USD value of the transaction.
+            An NFT will be airdropped to the below address in the first half of
+            2022 after the campaign has ended. The final tier value of the NFT
+            will be determined by the USD value of the transaction.
           </p>
           <Form.Group className="mb-rem-6" controlId="walletAddress">
-            <Form.Label>
-              Terra Wallet Address
-            </Form.Label>
+            <Form.Label>Terra Wallet Address</Form.Label>
             <Form.Control
               type="text"
               name="walletAddress"
               value={NFTData.address}
               onChange={(e) => {
                 const address = e.currentTarget.value;
-                setNFTData({address});
+                setNFTData({ address });
               }}
               className="donate__form__nft__input"
               placeholder="terra************************"
@@ -158,7 +173,7 @@ const NFTForm = ({wallet, NFTData, setNFTData}) => {
   );
 };
 
-const KYCForm = ({wallet, KYCData, setKYCData}) => {
+const KYCForm = ({ wallet, KYCData, setKYCData }) => {
   const receiptRequested = KYCData.receiptRequested;
   return (
     <>
@@ -170,17 +185,17 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
         label={`I want to receive a tax receipt for my donation`}
         onChange={() => {
           const receiptRequested = !KYCData.receiptRequested;
-          setKYCData({receiptRequested});
+          setKYCData({ receiptRequested });
         }}
       />
 
       {receiptRequested && (
         <div className="mb-rem-12">
           <p className="small mb-20">
-            Please note that our tax receipts are issued by a US-based
-            501(c)(3) nonprofit. Please consult with your local lawyer,
-            accountant or tax advisor to determine the eligibility of your
-            donation for a tax relief in your country of residence.
+            Please note that our tax receipts are issued by a US-based 501(c)(3)
+            nonprofit. Please consult with your local lawyer, accountant or tax
+            advisor to determine the eligibility of your donation for a tax
+            relief in your country of residence.
           </p>
           <Form.Group className="mb-rem-6" controlId="formFullName">
             <Form.Label>Full Name</Form.Label>
@@ -190,7 +205,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
               value={KYCData.name}
               onChange={(e) => {
                 const name = e.currentTarget.value;
-                setKYCData({name});
+                setKYCData({ name });
               }}
               className="donate__form__kyc__input"
               placeholder="Full name"
@@ -205,7 +220,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
               value={KYCData.email}
               onChange={(e) => {
                 const email = e.currentTarget.value;
-                setKYCData({email});
+                setKYCData({ email });
               }}
               className="donate__form__kyc__input"
               placeholder="Email address"
@@ -220,7 +235,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
               value={KYCData.streetAddress}
               onChange={(e) => {
                 const streetAddress = e.currentTarget.value;
-                setKYCData({streetAddress});
+                setKYCData({ streetAddress });
               }}
               className="donate__form__kyc__input"
               required
@@ -235,7 +250,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
                 value={KYCData.city}
                 onChange={(e) => {
                   const city = e.currentTarget.value;
-                  setKYCData({city});
+                  setKYCData({ city });
                 }}
                 className="donate__form__kyc__input"
                 required
@@ -249,7 +264,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
                 value={KYCData.state}
                 onChange={(e) => {
                   const state = e.currentTarget.value;
-                  setKYCData({state});
+                  setKYCData({ state });
                 }}
                 className="donate__form__kyc__input"
                 required
@@ -265,7 +280,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
                 value={KYCData.country}
                 onChange={(e) => {
                   const country = e.currentTarget.value;
-                  setKYCData({country});
+                  setKYCData({ country });
                 }}
                 className="donate__form__kyc__input"
                 required
@@ -279,7 +294,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
                 value={KYCData.zipcode}
                 onChange={(e) => {
                   const zipcode = e.currentTarget.value;
-                  setKYCData({zipcode});
+                  setKYCData({ zipcode });
                 }}
                 className="donate__form__kyc__input"
                 required
@@ -292,7 +307,7 @@ const KYCForm = ({wallet, KYCData, setKYCData}) => {
   );
 };
 
-const TCAForm = ({wallet, TCAData, setTCAData}) => {
+const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   const [showTCA, setShowTCA] = useState(false);
   return null;
   return (
@@ -312,7 +327,7 @@ const TCAForm = ({wallet, TCAData, setTCAData}) => {
           aria-label="Affiliated TCA Member"
           onChange={(e) => {
             const affiliateId = e.currentTarget.value;
-            setTCAData({affiliateId});
+            setTCAData({ affiliateId });
           }}
           className="donate__form__tca__input"
         >
@@ -326,7 +341,7 @@ const TCAForm = ({wallet, TCAData, setTCAData}) => {
   );
 };
 
-const TermsAcceptance = ({termsAccepted, setTermsAccepted}) => {
+const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
   const termsLabel = (
     <div className="mb-rem-12">
       I have read and agree with the{" "}
@@ -353,7 +368,7 @@ const TermsAcceptance = ({termsAccepted, setTermsAccepted}) => {
   );
 };
 
-const DonationSummary = ({wallet, amount, NFTData, KYCData, TCAData}) => {
+const DonationSummary = ({ wallet, amount, NFTData, KYCData, TCAData }) => {
   if (!amount || amount == "") {
     return null;
   }
@@ -369,7 +384,7 @@ const DonationSummary = ({wallet, amount, NFTData, KYCData, TCAData}) => {
   );
 };
 
-const Donate = ({setStep, wallet, onDonationSuccess}) => {
+const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   const [transactionStep, setTransactionStep] = useState(
     TRANSACTION_STEPS.FORM
   );
@@ -431,7 +446,7 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
     })
       .then((result) => {
         setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-        onDonationSuccess({amount, NFTData, KYCData, TCAData});
+        onDonationSuccess({ amount, NFTData, KYCData, TCAData });
       })
       .catch((error) => {
         if (KYCData.receiptRequested) {
@@ -439,7 +454,7 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
           setErrorMessage(error);
         } else {
           setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-          onDonationSuccess({amount, NFTData, KYCData, TCAData});
+          onDonationSuccess({ amount, NFTData, KYCData, TCAData });
         }
       });
   };
@@ -451,7 +466,7 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
 
     // BTC needs the user defined txHash
     wallet.methods
-      .donate({amount: formattedAmount, txHash, manualWallet})
+      .donate({ amount: formattedAmount, txHash, manualWallet })
       .then((transactionData) => {
         onTransactionSuccess({
           amount,
@@ -472,7 +487,7 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
   return (
     <section>
       <h2 className="h3">Your Donation</h2>
-      <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect}/>
+      <WalletStatus wallet={wallet} onClickDisconnect={onClickDisconnect} />
       {transactionStep == TRANSACTION_STEPS.FORM && (
         <Form onSubmit={onSubmit}>
           <DonationAmountForm
@@ -486,9 +501,9 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
             manualWallet={manualWallet}
             setManualWallet={setManualWallet}
           />
-          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData}/>
-          <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData}/>
-          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData}/>
+          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
+          <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
+          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
 
           <TermsAcceptance
             termsAccepted={termsAccepted}
@@ -524,8 +539,17 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
       )}
       {transactionStep == TRANSACTION_STEPS.ERROR_TRANSACTION && (
         <Form onSubmit={onSubmit}>
-          <p>The transaction failed, try again or reconnect your wallet?</p>
-          <p>{errorMessage}</p>
+          <p className="pt-rem-12 mb-rem-4">
+            <strong>The transaction failed</strong>, try again or reconnect your
+            wallet?
+          </p>
+          <p className="p-rem-4 bg-grey-light border-solid">{errorMessage}</p>
+          <p>
+            If this transaction keeps failing, please let us know at{" "}
+            <Link href="mailto:hi@angelprotocol.com&subject=RestoreEarth">
+              <a className="link">hi@angelprotocol.io</a>
+            </Link>
+          </p>
           <Button variant="primary" type="submit">
             Retry
           </Button>
@@ -535,17 +559,17 @@ const Donate = ({setStep, wallet, onDonationSuccess}) => {
         </Form>
       )}
       {transactionStep == TRANSACTION_STEPS.ERROR_KYC &&
-      KYCData.receiptRequested && (
-        <Form>
-          <p>
-            There was an error sending KYC data. Please reach out to us with
-            your details.
-          </p>
-          <Button variant="primary" type="submit">
-            Retry
-          </Button>
-        </Form>
-      )}
+        KYCData.receiptRequested && (
+          <Form>
+            <p>
+              There was an error sending KYC data. Please reach out to us with
+              your details.
+            </p>
+            <Button variant="primary" type="submit">
+              Retry
+            </Button>
+          </Form>
+        )}
       {transactionStep == TRANSACTION_STEPS.SUCCESS && (
         <Form>
           <p>Nice! We should be advancing you to the next screen.</p>
