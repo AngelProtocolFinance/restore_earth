@@ -33,6 +33,8 @@ import {
 } from "react-bootstrap";
 
 import CustomToggle from "components/CustomToggle";
+import { KYCDataType } from "components/Donate/Data/KYCData";
+import { NFTDataType } from "components/Donate/Data/NFTData";
 
 const DEFAULT_DATA_STATE = {
   amount: undefined,
@@ -98,7 +100,10 @@ const DonatePage: NextPage = () => {
                   />
                 )}
                 {step == STEPS.THANKYOU && (
-                  <ThankYou KYCData={data.KYCData} NFTData={data.NFTData} />
+                  <ThankYou
+                    KYCData={data.KYCData as KYCDataType}
+                    NFTData={data.NFTData as NFTDataType}
+                  />
                 )}
               </div>
             </div>
