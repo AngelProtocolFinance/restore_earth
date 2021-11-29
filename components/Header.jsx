@@ -42,18 +42,11 @@ const Header = ({ wallet = undefined }) => {
               </div>
               <ul className="nav m-0 text-white">
                 <li className="nav-item navbar-dropdown">
-                  <span
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert("Please check back tomorrow 🌎");
-                    }}
-                  >
-                    <Link href="/donate">
-                      <a target="_blank" className="nav-link">
-                        <span className="nav-link-name">Donate now</span>
-                      </a>
-                    </Link>
-                  </span>
+                  <Link href="/donate">
+                    <a className="nav-link">
+                      <span className="nav-link-name">Donate now</span>
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </div>
