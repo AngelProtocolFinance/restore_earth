@@ -58,25 +58,40 @@ const Terra = ({
         fromUnit: (amount) => {
           return new Dec(amount).div(1e6).toString();
         },
-        donate: ({ amount }) => {
+        donate: ({ amount, terraDenom }) => {
+          // prices from https://fcd.terra.dev/v1/txs/gas_prices
+          const lunaAddr = process.env.NEXT_PUBLIC_TERRA_LUNA_ADDRESS;
+          const gasPrice = terraDenom === "uluna" ? 0.01133 : 0.15;
+          const destinationAddr =
+            terraDenom === "uluna" ? lunaAddr : TERRA_CONTRACT_ADDRESS;
+
+          const coinToSend = new Coin(terraDenom, amount);
+          let message: MsgExecuteContract | MsgSend;
+          if (terraDenom === "uluna") {
+            message = new MsgSend(
+              connectedWallet.walletAddress,
+              destinationAddr,
+              [coinToSend]
+            );
+          } else {
+            message = new MsgExecuteContract(
+              connectedWallet.walletAddress,
+              destinationAddr,
+              {
+                deposit: {
+                  fund_id: 6,
+                  split: "0.0",
+                },
+              },
+              [coinToSend]
+            );
+          }
           return new Promise((resolve, reject) => {
             connectedWallet
               .post({
-                msgs: [
-                  new MsgExecuteContract(
-                    connectedWallet.walletAddress,
-                    TERRA_CONTRACT_ADDRESS,
-                    {
-                      deposit: {
-                        fund_id: 6,
-                        split: "0.0",
-                      },
-                    },
-                    [new Coin("uusd", amount)]
-                  ),
-                ],
+                msgs: [message],
                 gasAdjustment: 1.2,
-                gasPrices: [new Coin("uusd", 0.15)],
+                gasPrices: [new Coin(terraDenom, gasPrice)],
               })
               .then((txResult) => {
                 const transactionData: KYCTransactionDataType = {
@@ -87,7 +102,7 @@ const Terra = ({
                 resolve(transactionData);
               })
               .catch((error) => {
-                console.log("error sending transaction: ", error);
+                console.error("error sending transaction: ", error);
                 reject(error);
               });
           });
