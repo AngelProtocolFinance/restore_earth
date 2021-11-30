@@ -147,21 +147,11 @@ const Index: NextPage = () => {
                   Top Donor: {topCharityAlliance}
                 </span>
                 <div className="flex flex-row justify-content-center align-items-center">
-                  <span
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert("Please check back tomorrow 🌎");
-                    }}
-                  >
-                    <Link href="/donate">
-                      <a
-                        target="_blank"
-                        className="btn btn-primary me-12 Button__gradient"
-                      >
-                        Donate now
-                      </a>
-                    </Link>
-                  </span>
+                  <Link href="/donate">
+                    <a className="btn btn-primary me-12 Button__gradient">
+                      Donate now
+                    </a>
+                  </Link>
                   <a href="#nft" className="btn btn-outline-light">
                     Earn NFTs
                   </a>
@@ -400,7 +390,7 @@ const Index: NextPage = () => {
                     </Nav.Item>
                     <Nav.Item as="li" className="nav-item">
                       <Nav.Link as="button" eventKey="three">
-                        Earn a Galactic Punk <span className="badge">03</span>
+                        Earn a Galactic Angel <span className="badge">03</span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item as="li" className="nav-item">
@@ -579,44 +569,34 @@ const Index: NextPage = () => {
                   based on individual donation level and cumulative campaign
                   donations.
                 </p>
-                <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("Please check back tomorrow 🌎");
-                  }}
-                >
-                  <Link href="/donate">
-                    <a
-                      target="_blank"
-                      className="btn btn-primary Button__gradient mt-30"
+                <Link href="/donate">
+                  <a className="btn btn-primary Button__gradient mt-30">
+                    Donate now
+                    <svg
+                      className="icon-arrow icon-arrow-right"
+                      width="25"
+                      height="10"
+                      viewBox="0 0 25 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      Donate now
-                      <svg
-                        className="icon-arrow icon-arrow-right"
-                        width="25"
-                        height="10"
-                        viewBox="0 0 25 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M20 1L24 5L20 9"
-                          stroke="currentColor"
-                          strokeWidth="1.3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M7 5L24 5"
-                          stroke="currentColor"
-                          strokeWidth="1.3"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </a>
-                  </Link>
-                </span>
+                      <path
+                        d="M20 1L24 5L20 9"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7 5L24 5"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </Link>
               </div>
               <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">

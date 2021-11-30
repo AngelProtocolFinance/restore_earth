@@ -2,560 +2,310 @@ import { useState } from "react";
 
 import type { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
 import Header from "components/Header";
 import Footer from "components/Footer";
 
-import { STEPS } from "components/Donate/variables";
-import DonateHeader from "components/Donate/Header";
-import DonateForm from "components/Donate/Forms/Donate";
-import ConnectForm from "components/Donate/Forms/Connect";
-import ThankYou from "components/Donate/ThankYou";
-
-import punk1 from "../public/images/punks/punk1.png";
-import punk2 from "../public/images/punks/punk2.png";
-import punk3 from "../public/images/punks/punk3.png";
-import punk4 from "../public/images/punks/punk4.png";
-import punk5 from "../public/images/punks/punk5.png";
-import punk6 from "../public/images/punks/punk6.png";
-import punk7 from "../public/images/punks/punk7.png";
-
-import {
-  Accordion,
-  AccordionContext,
-  Nav,
-  OverlayTrigger,
-  Tab,
-  Tooltip,
-  useAccordionButton,
-} from "react-bootstrap";
-
-import CustomToggle from "components/CustomToggle";
 import Page from "../components/Page";
 
 const Terms = () => {
   return (
     <>
-      <h1>Privacy Policy</h1>
-      <p>Last modified: November 1, 2021</p>
-      <h2>Introduction</h2>
+      <h1>Terms</h1>
       <p>
-        Angel Protocol Foundation (&quot;Company&quot;, &quot;We&quot; or “Our”)
-        respects your privacy and is committed to protecting it through our
-        compliance with this policy.
+        Welcome to the Restore Earth fundraising platform (the “Platform”),
+        powered by Angel Protocol Foundation (“Angel Protocol,” “we,” “us,” or
+        “our”). Angel Protocol connects donors (“Donors”, “you” or “your”) with
+        charities through our platform and enables donors with a tool to donate
+        cryptocurrencies to qualified participating nonprofit organizations
+        (“Participating Organizations”) whose missions advance the important
+        fight against climate change. The Platform allows holders of certain
+        digital assets to donate their assets to Participating Organizations’
+        smart contracts on the Terra blockchain. The Platform allows Donors to
+        contribute these assets to yield-accruing endowment accounts held by
+        Participating Organizations. These Terms of Use (the “Terms” or
+        “Agreement”) are a binding contract between you and Angel Protocol and
+        explains our commitments to you and our requirements of you as a Donor.
+        Please read this Agreement carefully.
       </p>
       <p>
-        This policy applies to the website{" "}
-        <Link href="https://www.angelprotocol.io">
-          <a>angelprotocol.io</a>
-        </Link>
-        , as well as applications, products and services (collectively our
-        &quot;Site&quot;) on or in which it is posted, linked or referenced.
-        This policy provides information about our practices for collecting,
-        using, maintaining, protecting, and disclosing your information.{" "}
+        By using our Platform, you acknowledge and represent that you (i) agree
+        that these Terms are supported by reasonable, valuable and sufficient
+        consideration, (ii) acknowledge the receipt of such consideration, and
+        (iii) state that you have read and understand, and agree to be bound by
+        these Terms. If you do not agree to these Terms you are not permitted to
+        use the Platform. You further represent that your access and use of the
+        Platform will fully comply with all applicable laws and regulations, and
+        that you will not access or use the Platform to conduct, execute,
+        promote, or otherwise engage in any prohibited activity as described in
+        Section 4.
       </p>
       <p>
-        This policy applies to information we collect:
+        The headings and subheadings are for reference only and do not limit the
+        terms or application of the applicable section. Your trust is very
+        important to us. If you have questions about this Agreement, please
+        contact contact@altruisticpartners.org.
+      </p>
+      <h3 className="h5">1. Our Relationship with You</h3>
+      <p>
         <ul>
-          <li>On this Site.</li>
           <li>
-            In email, text, and other electronic messages between you and this
-            Site.
+            a. We register qualified Participating Organizations and provide
+            information about them to users of our Platform that are interested
+            in making donations. We take steps to confirm that each
+            Participating Organization is registered as a public charity under
+            Section 501(c)(3) of the Internal Revenue Code. However, each Donor
+            must make their own determination that a Participating Organization
+            is suitable to make a donation. Angel Protocol is not and will not
+            be responsible for ensuring that the information provided by
+            Participating Organizations is accurate or up to date. We do not and
+            cannot control the actions of any Participating Organization or
+            Donor.
           </li>
           <li>
-            Through mobile and desktop applications you download from this Site,
-            which provide dedicated non-browser-based interaction between you
-            and this Site.
+            b. Through the Platform, we equip Participating Organizations with a
+            tool that allows for the processing and conversion of donations of
+            cryptocurrencies made from Donors to the Participating
+            Organization(s) selected by the Donor. We also facilitate the
+            issuance of tax receipts to Donors for each donation they make to
+            allow Donors to deduct their donations as permitted by applicable
+            tax law.
           </li>
           <li>
-            When you interact with our advertising and applications on
-            third-party Sites and services, if those applications or advertising
-            include links to this policy.
+            c. Angel Protocol does not offer or accept any donations. You hereby
+            acknowledge that (i) Angel Protocol does not supervise, direct,
+            control, or monitor the donations and (ii) Angel Protocol expressly
+            disclaim any responsibility and liability for any donation made
+            through the Platform, including but not limited to any warranty or
+            condition of quality or fitness for a particular purpose, or
+            compliance with any law, regulation, or code. Angel Protocol is only
+            responsible for connecting Donors and Participating Organizations
+            and is not, and will not, be responsible for the use of any
+            donations
           </li>
         </ul>
       </p>
+      <h3 className="h5">2. Privacy</h3>
       <p>
-        It does not apply to information collected by:
+        Your personally identifiable information (“PII”), including your name,
+        email address and physical address will be handled in accordance with
+        our Privacy Policy, and unless you have elected to donate anonymously,
+        may be shared with the Participating Organizations. We use commercially
+        reasonable safeguards to preserve the integrity and security of your
+        PII. However, we cannot guarantee that unauthorized third parties will
+        never be able to obtain or use your PII or aggregate data for improper
+        purposes. You acknowledge that you provide your PII and aggregate data
+        at your own risk. By accessing and using the Platform, you understand
+        and consent to our collection, use, and disclosure of your PII and
+        aggregate data.
+      </p>
+      <h3 className="h5">3. Fees</h3>
+      <p>
+        We do not charge you a fee for using the Platform, however when making a
+        donation to Participating Organization(s) you may incur processing
+        and/or transaction fees.
+      </p>
+      <h3 className="h5">4. Prohibited Activity</h3>
+      <p>
+        You agree not to engage in, or attempt to engage in, any of the
+        following categories of prohibited activity in relation to your access
+        and use of the Platform,
         <ul>
           <li>
-            Us offline or through any other means, including on any other Site
-            operated by Company or any third party; or
+            a. Intellectual Property Infringement. Activity that infringes on or
+            violates any copyright, trademark, service mark, patent, right of
+            publicity, right of privacy, or other proprietary or intellectual
+            property rights under the law.
           </li>
           <li>
-            Any third party, including through any application or content
-            (including advertising) that may link to or be accessible from or on
-            the Site.
+            b. Cyberattack. Activity that seeks to interfere with or compromise
+            the integrity, security, or proper functioning of any computer,
+            server, network, personal device, or other information technology
+            system, including (but not limited to) the deployment of viruses and
+            denial of service attacks.
+          </li>
+          <li>
+            c. Fraud and Misrepresentation. Activity that seeks to defraud us or
+            any other person or entity, including (but not limited to) providing
+            any false, inaccurate, or misleading information in order to
+            unlawfully obtain the property of another.
+          </li>
+          <li>
+            d. Money Laundering. Activity that violates any applicable law,
+            rule, or regulation concerning the laundering of money. You
+            understand and acknowledges that Angel Protocol is, or may in the
+            future become, subject to money laundering statutes, regulations and
+            conventions of the United States or other international
+            jurisdictions, and you agree to execute instruments, provide
+            information, or perform any other acts as may reasonably be
+            requested by Angel Protocol for the purpose of carrying out due
+            diligence as may be required by Applicable Law. You agree that you
+            will provide Angel Protocol with such information as we reasonably
+            require to comply with applicable anti-money laundering laws or
+            regulations. You understand, acknowledge and agree that to the
+            extent permitted by Applicable Law, Angel Protocol may provide
+            information, including confidential information, to the Financial
+            Crimes Enforcement Network, a bureau of the U.S. Department of the
+            Treasury, or any other agency or instrumentality of the U.S.
+            Government, or as otherwise required by Applicable Law, in
+            connection with a request for information on behalf of a U.S.
+            federal law enforcement agency investigating terrorist activity or
+            money laundering.
+          </li>
+          <li>
+            e. Any Other Unlawful Conduct. Activity that violates any applicable
+            law, rule, or regulation of the United States or another relevant
+            jurisdiction, including (but not limited to) the restrictions and
+            regulatory requirements imposed by U.S. law.
           </li>
         </ul>
       </p>
+      <h3 className="h5">5. Indemnity, Warranties and Disclaimers. </h3>
       <p>
-        Please read this policy carefully to understand our policies and
-        practices regarding your information and how we will treat it. If you do
-        not agree with our policies and practices, your choice is not to use our
-        Site. By accessing or using this Site, you agree to this privacy policy.
-        This policy may change from time to time. Your continued use of our Site
-        after we make changes is deemed to be acceptance of those changes, so
-        please check the policy periodically for updates.
-      </p>
-      <h3 className="h5">Children Under the Age of 13</h3>
-      <p>
-        Our Site is not intended for children under 13 years of age. No one
-        under age 13 may provide any information to or on the Site. We do not
-        knowingly collect personal information from children under 13. If you
-        are under 13, do not use or provide any information on this Site or on
-        or through any of its features. If we learn we have collected or
-        received personal information from a child under 13 without verification
-        of parental consent, we will delete that information. If you believe we
-        might have any information from or about a child under 13, please
-        contact us at:{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
-      </p>
-      <h3 className="h5">
-        Information We Collect About You and How We Collect It
-      </h3>
-      <p>
-        We collect several types of information from and about users of our
-        Site, including information:
         <ul>
           <li>
-            By which you may be personally identified, such as name, postal
-            address, e-mail address, telephone number, or any other identifier
-            by which you may be contacted online or offline (&quot;personal
-            information&quot;);
+            a. You agree to indemnify, hold harmless, and, defend Angel Protocol
+            and its affiliates and each of its and their officers, directors,
+            employees, licensees, agents and vendors from and against all
+            claims, costs, losses, damages, expenses (including attorneys’ fees
+            and court costs) and liabilities arising from (i) your use of, or
+            activities in connection with the Platform; or (ii) your violations
+            of these Terms. Angel Protocol reserves the right to assume the
+            exclusive defense and control of any matter otherwise subject to
+            indemnification by you and, in such case, you agree to cooperate
+            with Angel Protocol’ defense of such claim.
           </li>
           <li>
-            That is about you but individually does not identify you; and/or
+            b. WE MAKE AVAILABLE THE PLATFORM FOR CHARITABLE PURPOSES, AND NOT
+            FOR COMMERCIAL, FOR-PROFIT PURPOSES. YOU ACKNOWLEDGE THAT THE
+            PLATFORM AND OUR PERFORMANCE HEREUNDER ARE PROVIDED ON AN “AS IS”
+            BASIS, AND WE DISCLAIM ALL REPRESENTATIONS AND WARRANTIES UNDER THIS
+            AGREEMENT, WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, WITHOUT
+            LIMITATION, ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+            PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, QUIET ENJOYMENT, DATA
+            ACCURACY OR SYSTEM INTEGRATION. NO WARRANTY IS MADE BY US ON THE
+            BASIS OF TRADE USAGE, COURSE OF DEALING, OR COURSE OF PERFORMANCE.
+            YOU ACKNOWLEDGE THAT WE MAKE NO REPRESENTATIONS OR WARRANTIES
+            REGARDING THE PERFORMANCE, EFFICIENCY OR AVAILABILITY (INCLUDING
+            “UPTIME”) OF THE PLATFORM. NO REPRESENTATION OR WARRANTY IS MADE
+            THAT OPERATION OF THE PLATFORM WILL BE UNINTERRUPTED OR ERROR-FREE,
+            OR THAT THE PLATFORM WILL OPERATE AS EXPECTED OR WILL MEET YOUR
+            PARTICULAR NEEDS OR PURPOSES. YOU ACKNOWLEDGE THAT WE MAKE NO
+            REPRESENTATIONS OR WARRANTIES REGARDING ANY LEGAL REQUIREMENTS TO
+            WHICH YOU MAY BE SUBJECT; NOR DO WE MAKE ANY REPRESENTATIONS OR
+            WARRANTIES REGARDING THE APPLICABILITY OF TAX LAWS TO ANY DONOR,
+            SUCH AS, BY WAY OF EXAMPLE, ANY DONOR’S ABILITY TO OBTAIN TAX
+            DEDUCTIONS OR OTHER TAX BENEFITS IN CONNECTION WITH DONATIONS MADE
+            THROUGH THE PLATFORM FOR CHARITY.
           </li>
           <li>
-            About your internet connection, the equipment you use to access our
-            Site, and usage details.
+            c. IN NO EVENT SHALL WE OR ANY OF OUR OFFICERS, DIRECTORS,
+            EMPLOYEES, CONTRACTORS OR AFFILIATES BE LIABLE TO YOU FOR ANY
+            INCIDENTAL, INDIRECT, SPECIAL, CONSEQUENTIAL OR PUNITIVE DAMAGES,
+            REGARDLESS OF THE NATURE OF THE CLAIM, INCLUDING, WITHOUT
+            LIMITATION, LOST REVENUES, COSTS OF DELAY, ANY FAILURE OF DELIVERY,
+            BUSINESS INTERRUPTION, COSTS OF LOST OR DAMAGED DATA OR
+            DOCUMENTATION OR LIABILITIES TO THIRD PARTIES ARISING FROM ANY
+            SOURCE, NOR WILL WE BE RESPONSIBLE FOR ANY DAMAGE, LOSS, OR INJURY
+            RESULTING FROM HACKING, TAMPERING, OR OTHER UNAUTHORIZED ACCESS OR
+            USE OF THE PLATFORM OR THE INFORMATION CONTAINED WITHIN IT. EVEN IF
+            WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. OUR
+            CUMULATIVE LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATING
+            TO THIS AGREEMENT, INCLUDING, WITHOUT LIMITATION, ANY CAUSE OF
+            ACTION SOUNDING IN CONTRACT, TORT OR STRICT LIABILITY, SHALL NOT
+            EXCEED THE AMOUNT YOU PAID TO US TO USE THE PLATFORM, OR $100,
+            WHICHEVER IS GREATER. THE FOREGOING LIMITATIONS AND EXCLUSIONS OF
+            LIABILITY ARE INTENDED TO APPLY WITHOUT REGARD TO WHETHER OTHER
+            PROVISIONS OF THIS AGREEMENT HAVE BEEN BREACHED OR HAVE PROVEN
+            INEFFECTIVE. YOU ACKNOWLEDGE THAT THE PROVISIONS OF THIS PARAGRAPH
+            AND THE PRECEDING PARAGRAPH FORM AN ESSENTIAL BASIS OF THE
+            ARRANGEMENT BETWEEN YOU AND US, AND ABSENT THE DISCLAIMERS,
+            LIMITATIONS AND EXCLUSIONS OF OUR LIABILITY SET FORTH ABOVE, THE
+            TERMS OF THIS AGREEMENT WOULD BE SUBSTANTIALLY DIFFERENT.
           </li>
         </ul>
       </p>
+      <h3 className="h5">6. No Professional Advice</h3>
       <p>
-        We collect this information:
+        All information provided by the Platform is for informational purposes
+        only and should not be construed as professional advice. You should not
+        take, or refrain from taking, any action based on any information
+        contained on the Platform. Before you make any financial, legal, or
+        other decisions involving the Platform, including whether to use the
+        Platform, you should seek independent professional advice from an
+        individual who is licensed and qualified in the area for which such
+        advice would be appropriate. We do not offer any tax or legal advice.
+        Please consider working with a CPA or attorney to address any questions
+        you may have concerning the impact of using the Platform to make
+        donations.
+      </p>
+      <h3 className="h5">7. Assumption of Risk</h3>
+      <p>
+        By accessing and using the Platform you represent and warrant that you
+        understand the inherent risks associated with using cryptographic and
+        blockchain based systems, and that you have a working knowledge of the
+        usage and intricacies of digital assets such as bitcoin (BTC), ether
+        (ETH), luna (LUNA), Terra stablecoin (UST) and other digital tokens such
+        as those following the Ethereum Standard Token (ERC-20). You further
+        understand that the markets for these digital assets are highly volatile
+        due to factors, including but not limited to, adoption, speculation,
+        technology, security, and regulation. You acknowledge that the cost and
+        speed of transacting with cryptographic and blockchain based systems
+        such as Ethereum and LUNA are variable and may increase dramatically
+        over time. You further acknowledge that we are not responsible for any
+        of these variables or risks, do not own or control these blockchain
+        based systems, and cannot be held liable for any resulting losses that
+        you experience while accessing or using the Platform. Accordingly you
+        understand and agree to assume full responsibility for all of the risks
+        of accessing and using the Platform.
+      </p>
+      <h3 className="h5">8. Miscellaneous Terms and Conditions</h3>
+      <p>
         <ul>
-          <li>Directly from you when you provide it to us.</li>
           <li>
-            Automatically as you navigate through the site. Information
-            collected automatically may include usage details, IP addresses, and
-            information collected through cookies, and web beacons.
+            a. Should any provision of this Agreement be held by a court or
+            other tribunal of competent jurisdiction to be void, illegal,
+            invalid, inoperative, or unenforceable, the remaining provisions of
+            this Agreement shall not be affected and shall continue in effect,
+            and the invalid provision shall be deemed modified to the least
+            degree necessary to remedy such invalidity.
+          </li>
+          <li>
+            b. Our failure to partially or fully exercise any right will not be
+            considered a waiver of that right unless we so state in writing to
+            you. The waiver of any breach, shall not prevent a subsequent
+            exercise of such right or be deemed a waiver of any subsequent
+            breach of the same or any other term of this Agreement. Any remedies
+            made available to us by the terms of this Agreement are cumulative
+            and are without prejudice to any other remedies that may be
+            available to us in law or equity.
+          </li>
+          <li>
+            c. Any dispute between you and Angel Protocol which cannot be
+            resolved by negotiation shall be submitted to mediation, and if
+            mediation fails, arbitration, under the rules of the American
+            Arbitration Association, or any comparable entity that you and we
+            may subsequently agree upon in writing. Any arbitration award issued
+            by the arbitrator shall be final, binding, and enforceable in any
+            court of competent jurisdiction. Notwithstanding the foregoing, you
+            acknowledge that unauthorized use of our proprietary materials,
+            information or technology may cause irreparable harm to Angel
+            Protocol for which monetary damages would be an inadequate remedy.
+            Accordingly, we have the right, without the necessity of posting
+            bond, to seek injunctive or other equitable relief from any court of
+            competent jurisdiction to protect our rights in intellectual
+            property or confidential information.
+          </li>
+          <li>
+            d. This Agreement shall be governed and interpreted in accordance
+            with the laws of Delaware without regard to its principles of
+            conflict of laws. Venue for mediation, arbitration, or litigation of
+            any dispute, controversy, or claim arising out of, in connection
+            with, or in relation to this Agreement, or the breach thereof, shall
+            be proper only within a mediation or arbitration process or in a
+            tribunal of competent jurisdiction within Delaware.
           </li>
         </ul>
       </p>
-      <h3 className="h5">Information You Provide to Us. </h3>
-      <p>
-        The information we collect on or through our Site may include:
-        <ul>
-          <li>
-            Information that you provide by filling in forms on our Site. This
-            includes information provided at the time of registering to use our
-            Site, subscribing to our service, posting material, or requesting
-            further services. We may also ask you for information when you
-            report a problem with our Site.
-          </li>
-          <li>
-            Records and copies of correspondence between you and us (including
-            email addresses), if you contact us.
-          </li>
-          <li>
-            Your responses to surveys that we might ask you to complete for
-            research purposes.
-          </li>
-          <li>
-            Payment information and details of transactions you carry out
-            through our Site and of the fulfillment and processing of your
-            charitable contributions. This payment information may include but
-            is not limited to cryptocurrency type, cryptocurrency amounts,
-            billing address, and digital currency transaction identifiers.
-          </li>
-          <li>Your search queries on the Site.</li>
-        </ul>
-      </p>
-      <p>
-        You also may provide information to be published or displayed
-        (hereinafter, &quot;posted&quot;) on public areas of the Site, or
-        transmitted to other users of the Site or third parties (collectively,
-        &quot;User Contributions&quot;). Your User Contributions are posted on
-        and transmitted to others at your own risk. Although we limit access to
-        certain pages, please be aware that no security measures are perfect or
-        impenetrable. Additionally, we cannot control the actions of other users
-        of the Site with whom you may choose to share your User Contributions.
-        Therefore, we cannot and do not guarantee that your User Contributions
-        will not be viewed by unauthorized persons.
-      </p>
-      <h3 className="h5">
-        Information We Collect Through Automatic Data Collection Technologies.
-      </h3>
-      <p>
-        As you navigate through and interact with our Site, we may use automatic
-        data collection technologies to collect certain information about your
-        equipment, browsing actions, and patterns, including:
-        <ul>
-          <li>
-            Details of your visits to our Site, including traffic data, location
-            data, logs, and other communication data and the resources that you
-            access and use on the Site.
-          </li>
-          <li>
-            Information about your computer and internet connection, including
-            your IP address, operating system, and browser type.
-          </li>
-        </ul>
-      </p>
-      <p>
-        The information we collect automatically may include personal
-        information, or we may maintain it or associate it with personal
-        information we collect in other ways or receive from third parties. It
-        helps us to improve our Site and to deliver a better and more
-        personalized service, including by enabling us to:
-        <ul>
-          <li>Estimate our audience size and usage patterns.</li>
-          <li>
-            Store information about your preferences, allowing us to customize
-            our Site according to your individual interests.
-          </li>
-          <li>Speed up your searches.</li>
-          <li>Recognize you when you return to our Site.</li>
-        </ul>
-      </p>
-      <p>
-        The technologies we use for this automatic data collection may include:
-        <ul>
-          <li>
-            Cookies (or browser cookies). A cookie is a small file placed on the
-            hard drive of your computer. You may refuse to accept browser
-            cookies by activating the appropriate setting on your browser.
-            However, if you select this setting you may be unable to access
-            certain parts of our Site. Unless you have adjusted your browser
-            setting so that it will refuse cookies, our system will issue
-            cookies when you direct your browser to our Site.
-          </li>
-          <li>
-            Flash Cookies. Certain features of our Site may use local stored
-            objects (or Flash cookies) to collect and store information about
-            your preferences and navigation to, from, and on our Site. Flash
-            cookies are not managed by the same browser settings as are used for
-            browser cookies. For information about managing your privacy and
-            security settings for Flash cookies, see Choices About How We Use
-            and Disclose Your Information.
-          </li>
-          <li>
-            Web Beacons. Pages of our Site and our emails may contain small
-            electronic files known as web beacons (also referred to as clear
-            gifs, pixel tags, and single-pixel gifs) that permit the Company,
-            for example, to count users who have visited those pages or opened
-            an email and for other related Site statistics (for example,
-            recording the popularity of certain Site content and verifying
-            system and server integrity).
-          </li>
-        </ul>
-      </p>
-      <h3 className="h5">How We Use Your Information</h3>
-      <p>
-        We use information that we collect about you or that you provide to us,
-        including any personal information:
-        <ul>
-          <li>To present our Site and its contents to you.</li>
-          <li>
-            To provide you with information, products, or services that you
-            request from us.
-          </li>
-          <li>To fulfill any other purpose for which you provide it.</li>
-          <li>
-            To provide you with notices about your account, including expiration
-            and renewal notices.
-          </li>
-          <li>
-            To carry out our obligations and enforce our rights arising from any
-            contracts entered into between you and us, including for billing and
-            collection.
-          </li>
-          <li>
-            To notify you about changes to our Site or any products or services
-            we offer or provide through it.
-          </li>
-          <li>
-            To allow you to participate in interactive features on our Site.
-          </li>
-          <li>
-            In any other way we may describe when you provide the information.
-          </li>
-          <li>For any other purpose with your consent.</li>
-        </ul>
-      </p>
-      <p>
-        We may also use your information to contact you about our own and
-        third-parties&apos; goods and services that may be of interest to you.
-        If you do not want us to use your information in this way, please check
-        the relevant box located on the form on which we collect your data (the
-        registration form). For more information, see Choices About How We Use
-        and Disclose Your Information.
-      </p>
-      <p>
-        We may use the information we have collected from you to enable us to
-        display advertisements to our advertisers&apos; target audiences. Even
-        though we do not disclose your personal information for these purposes
-        without your consent, if you click on or otherwise interact with an
-        advertisement, the advertiser may assume that you meet its target
-        criteria.
-      </p>
-      <h3 className="h5">Disclosure of Your Information</h3>
-      <p>
-        We may disclose aggregated information about our users without
-        restriction.
-      </p>
-      <p>
-        We may disclose personal information that we collect or you provide as
-        described in this privacy policy:
-        <ul>
-          <li>
-            To contractors, service providers, and other third parties we use to
-            support our business and who are bound by contractual obligations to
-            keep personal information confidential and use it only for the
-            purposes for which we disclose it to them.
-          </li>
-          <li>
-            To a buyer or other successor in the event of a merger, divestiture,
-            restructuring, reorganization, dissolution, or other sale or
-            transfer of some or all of the Company’s assets, whether as a going
-            concern or as part of bankruptcy, liquidation, or similar
-            proceeding, in which personal information held by the Company about
-            our Site users is among the assets transferred.
-          </li>
-          <li>
-            To third parties to market their products or services to you if you
-            have consented to these disclosures. We contractually require these
-            third parties to keep personal information confidential and use it
-            only for the purposes for which we disclose it to them. For more
-            information, see Choices About How We Use and Disclose Your
-            Information.
-          </li>
-          <li>To fulfill the purpose for which you provide it.</li>
-          <li>
-            For any other purpose disclosed by us when you provide the
-            information.
-          </li>
-          <li>With your consent.</li>
-        </ul>
-      </p>
-      <p>
-        We may also disclose your personal information:
-        <ul>
-          <li>
-            To comply with any court order, law, or legal process (including KYC
-            and AML requirements), including to respond to any government or
-            regulatory request.
-          </li>
-          <li>
-            If we believe disclosure is necessary or appropriate to protect the
-            rights, property, or safety of the Company, our customers, or
-            others. This includes exchanging information with other companies
-            and organizations for the purposes of fraud protection and credit
-            risk reduction.
-          </li>
-        </ul>
-      </p>
-      <h3 className="h5">
-        Choices About How We Use and Disclose Your Information
-      </h3>
-      <p>
-        We strive to provide you with choices regarding the personal information
-        you provide to us. We have created mechanisms to provide you with the
-        following control over your information:
-        <ul>
-          <li>
-            Tracking Technologies and Advertising. You can set your browser to
-            refuse all or some browser cookies, or to alert you when cookies are
-            being sent. If you disable or refuse cookies, please note that some
-            parts of this site may then be inaccessible or not function
-            properly.
-          </li>
-          <li>
-            Disclosure of Your Information for Third-Party Advertising. If you
-            do not want us to share your personal information with unaffiliated
-            or non-agent third parties for promotional purposes, you can opt out
-            by checking the relevant box located on the form on which we collect
-            your data (the registration form). You can also always opt out by
-            checking or unchecking the relevant boxes or by sending us an email
-            stating your request to{" "}
-            <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.{" "}
-          </li>
-          <li>
-            Promotional Offers from the Company. If you do not wish to have your
-            contact information used by the Company to promote our own or third
-            parties&apos; products or services, you can opt out by checking the
-            relevant box located on the form on which we collect your data (the
-            registration form) or at any other time by sending us an email
-            stating your request to{" "}
-            <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
-            If we have sent you a promotional email, you may send us a return
-            email asking to be omitted from future email distributions.
-          </li>
-          <li>
-            We do not control third parties&apos; collection or use of your
-            information to serve interest-based advertising. However these third
-            parties may provide you with ways to choose not to have your
-            information collected or used in this way. You can opt out of
-            receiving targeted ads from members of the Network Advertising
-            Initiative (&quot;NAI&quot;) on the NAI&apos;s Site.
-          </li>
-        </ul>
-      </p>
-      <h3 className="h5">Lawful Basis for Processing</h3>
-      <p>
-        We only use your personal information as permitted by law. We are
-        required to inform you of the lawful bases of our processing of your
-        personal information, which are described below. If you have questions
-        about the legal bases under which we are processing your information,
-        please contact us at{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>. The
-        legal bases under which We may process your personal information
-        include:
-        <ul>
-          <li>To provide our services to you.</li>
-          <li>
-            To comply with applicable laws and legal obligations, including
-            anti-money laundering laws (AML) and know-your-customer (KYC)
-            requirements.
-          </li>
-          <li>
-            To improve our existing services and products and to develop new
-            services and products.
-          </li>
-          <li>To optimize our platform.</li>
-          <li>
-            To notify you of new services, products and events that may be of
-            interest.
-          </li>
-          <li>To protect the vital interests of the public.</li>
-          <li>To personalize our services.</li>
-          <li>For any other purpose with your explicit consent.</li>
-        </ul>
-      </p>
-      <h3 className="h5">
-        Your Rights under the General Data Protection Regulation (“GDPR”)
-      </h3>
-      <p>
-        Under the GDPR you have certain rights regarding your personal
-        information. You may email{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link> to
-        request the following actions:
-        <ul>
-          <li>
-            To access personal data about you that we possess. This includes
-            information on the ways in which we use your personal data,
-            categories of personal data concerned, recipients or categories of
-            recipients to whom your data has been or will be disclosed, the
-            right to lodge a complaint with a supervisory authority, the source
-            of your personal data, and our use of automated decision-making in
-            processing your data.
-          </li>
-          <li>To correct and update your personal data.</li>
-          <li>
-            To erase personal data, if that data is no longer necessary for the
-            purpose it was collected or otherwise processed, if you object to
-            the use of that data and a fundamental right is at stake, or if your
-            personal data has been unlawfully processed. Where your data was
-            made public, our responsibility to erase it is limited to deleting
-            data in our possession, and taking reasonable steps to inform other
-            data controllers of your request. In no event shall we have any
-            obligation to erase your data where doing so would prevent exercise
-            of the right of freedom of expression and information, would
-            interfere with a legal obligation, would interfere with the
-            processing of health data, would interfere with legitimate
-            archiving, or would impede the establishment, exercise, or defense
-            of legal claims.
-          </li>
-          <li>
-            To restrict processing of your personal data, except for storage and
-            other uses with your consent. We are not obligated to restrict
-            processing of your personal data unless you contest the accuracy of
-            that data for a period of time reasonably allowing us to verify
-            accuracy, the processing is unlawful and you request that processing
-            be restricted instead of erasing the data, your data is no longer
-            necessary for processing but you require it for the establishment,
-            exercise, or defense of a legal claim, or pending a determination
-            after you object to data processing.{" "}
-          </li>
-          <li>
-            To stop sending you direct marketing communications which you have
-            previously consented to receive. We may continue to send you
-            service-related and other non-marketing communications.
-          </li>
-          <li>To object to any given form of data processing. </li>
-        </ul>
-      </p>
-      <p>
-        We will notify you of any action taken regarding your request. You may
-        lodge a complaint with a supervisory authority for failure to provide
-        you with a response within a period of one month.
-      </p>
-      <p>
-        For requests that are manifestly unfounded or excessive, we may charge a
-        fee based on administrative costs or refuse to respond. If we refuse to
-        respond, you will be informed of the reason for refusal, and of
-        available recourse.
-      </p>
-      <h3 className="h5">Your Privacy Rights Under California Law</h3>
-      <p>
-        Under California Civil Code Section 1798.83, California users are
-        entitled to the following consumer rights notice: California residents
-        may reach the Complaint Assistance Unit of the Division of Consumer
-        Services of the California Department of Consumer Affairs by mail at
-        1625 North Market Blvd., Sacramento, CA 95834 or by phone at946-445-1254
-        or 800-952-5210. This section provides additional details about the
-        personal information we collect about California consumers and the
-        rights afforded to them under the California Consumer Privacy Act
-        (“CCPA”). Subject to certain limitations, the CCPA provides California
-        consumers the right to request to know more details about the categories
-        of personal information we collect (including how we use and disclose
-        this information), to delete their personal information, to opt out of
-        any “sales” that may be occurring, and to not be discriminated against
-        for exercising these rights. California consumers may make a request
-        pursuant to their rights under the CCPA by contacting us at
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
-      </p>
-      <h3 className="h5">Data Security</h3>
-      <p>
-        We have implemented industry-standard security measures designed to
-        secure your personal information from accidental loss and from
-        unauthorized access, use, alteration, and disclosure.
-      </p>
-      <p>
-        The safety and security of your information also depends on you. Where
-        we have given you (or where you have chosen) a password for access to
-        certain parts of our Site, you are responsible for keeping this password
-        confidential. We ask you not to share your password with anyone.{" "}
-      </p>
-      <p>
-        Unfortunately, the transmission of information via the internet is not
-        completely secure. Although we do our best to protect your personal
-        information, we cannot guarantee the security of your personal
-        information transmitted to our Site. Any transmission of personal
-        information is at your own risk. We are not responsible for
-        circumvention of any privacy settings or security measures contained on
-        the Site.
-      </p>
-      <h3 className="h5">Changes to Our Privacy Policy</h3>
-      <p>
-        It is our policy to post any changes we make to our privacy policy on
-        this page. If we make material changes to how we treat our users&apos;
-        personal information, we will notify you. The date the privacy policy
-        was last revised is identified at the top of the page. You are
-        responsible for ensuring we have an up-to-date active and deliverable
-        email address for you, and for periodically visiting our Site and this
-        privacy policy to check for any changes. In all cases, your continued
-        use of the Site after the posting of any modified privacy policy
-        indicates your acceptance of the terms of the modified privacy policy.
-      </p>
-      <h3 className="h5">Contact Information</h3>
-      <p>
-        To ask questions or comment about this privacy policy and our privacy
-        practices, contact us at{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
-      </p>{" "}
     </>
   );
 };

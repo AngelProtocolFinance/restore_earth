@@ -164,7 +164,7 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
       {nftRequested && (
         <div className="mb-rem-12">
           <p className="mb-6 small">
-            To receive a Galactic Punk, you must have a Terra wallet address.
+            To receive a Galactic Angel, you must have a Terra wallet address.
             Don&apos;t have a wallet yet? &nbsp;
             <a
               href="https://station.terra.money/"
@@ -371,9 +371,9 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
 const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
   const termsLabel = (
     <div className="mb-rem-12">
-      I have read and agree with the{" "}
+      I have read and agree to the{" "}
       <Link href="/terms">
-        <a target="_blank">terms of service</a>
+        <a target="_blank">terms of use</a>
       </Link>
       .
     </div>
@@ -588,8 +588,17 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
       )}
       {transactionStep == TRANSACTION_STEPS.ERROR_TRANSACTION && (
         <Form onSubmit={onSubmit}>
-          <p>The transaction failed, try again or reconnect your wallet?</p>
-          <p>{errorMessage}</p>
+          <p className="pt-rem-12 mb-rem-4">
+            <strong>The transaction failed</strong>, try again or reconnect your
+            wallet?
+          </p>
+          <p className="p-rem-4 bg-grey-light border-solid">{errorMessage}</p>
+          <p>
+            If this transaction keeps failing, please let us know at{" "}
+            <Link href="mailto:hi@angelprotocol.com&subject=RestoreEarth">
+              <a className="link">hi@angelprotocol.io</a>
+            </Link>
+          </p>
           <Button variant="primary" type="submit">
             Retry
           </Button>
