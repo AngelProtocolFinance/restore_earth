@@ -13,6 +13,11 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Mulish:wght@200;300;400;500;600;700;800;900&display=swap"
             rel="stylesheet"
           />
+          <script
+            defer
+            data-domain="restore-earth.angelprotocol.io"
+            src="https://plausible.io/js/plausible.js"
+          ></script>
         </Head>
         <body>
           <Main />
