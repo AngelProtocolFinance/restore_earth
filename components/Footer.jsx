@@ -1,5 +1,6 @@
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import angelProtocolLogo from "public/images/angel-protocol.png";
 
@@ -27,6 +28,13 @@ const Footer = () => {
                   height={56}
                 />
               </div>
+            </div>
+            <div className="col-12 pt-rem-8">
+              <Link href="/privacy">
+                <a target="_blank" className="text-white link">
+                  <span className="font-xs">Privacy Policy</span>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
