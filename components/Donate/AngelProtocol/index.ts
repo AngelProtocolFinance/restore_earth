@@ -9,6 +9,7 @@ const TERRA_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_TERRA_CONTRACT_ADDRESS;
 const ETH_WALLET_ADDRESS = process.env.NEXT_PUBLIC_ETH_WALLET_ADDRESS;
 const BTC_WALLET_ADDRESS = process.env.NEXT_PUBLIC_BTC_WALLET_ADDRESS;
 const APES_FUND_ID = process.env.NEXT_PUBLIC_APES_FUND_ID;
+const PROGRESS_API = process.env.NEXT_PUBLIC_PROGRESS_API;
 
 const kycClient = axios.create({
   baseURL: KYC_ENDPOINT,
@@ -114,12 +115,12 @@ const createAuthToken = () => {
   return jwt.sign(payload, secret, { expiresIn: expiry });
 };
 
-const getDonationData = () => {
+const getCampaignProgress = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get("https://angelprotocol.io/re-donations")
+      .get(PROGRESS_API)
       .then((response) => {
-        resolve(response);
+        resolve(response.data);
       })
       .catch((error) => {
         reject(error);
@@ -129,7 +130,7 @@ const getDonationData = () => {
 
 export {
   sendKYCData,
-  getDonationData,
+  getCampaignProgress,
   ETH_WALLET_ADDRESS,
   BTC_WALLET_ADDRESS,
   TERRA_CONTRACT_ADDRESS,
