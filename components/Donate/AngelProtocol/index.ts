@@ -52,7 +52,7 @@ const buildKYCData = ({
 }: SendKYCDataProps): KYCSendBodyType => {
   const data: KYCSendBodyType = {
     walletAddress: transactionData.senderAddress,
-    denomination: wallet.microDenomination,
+    denomination: wallet.denomination,
     amount: wallet.methods.toUnit(amount),
     nftRequested: NFTData.nftRequested,
     nftAddress: NFTData.address,
