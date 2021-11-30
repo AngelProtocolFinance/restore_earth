@@ -390,7 +390,7 @@ const Index: NextPage = () => {
                     </Nav.Item>
                     <Nav.Item as="li" className="nav-item">
                       <Nav.Link as="button" eventKey="three">
-                        Earn a Galactic Punk <span className="badge">03</span>
+                        Earn a Galactic Angel <span className="badge">03</span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item as="li" className="nav-item">

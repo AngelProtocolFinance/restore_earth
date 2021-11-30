@@ -137,7 +137,7 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
       {nftRequested && (
         <div className="mb-rem-12">
           <p className="mb-6 small">
-            To receive a Galactic Punk, you must have a Terra wallet address.
+            To receive a Galactic Angel, you must have a Terra wallet address.
             Don&apos;t have a wallet yet? &nbsp;
             <a
               href="https://station.terra.money/"
