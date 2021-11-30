@@ -344,9 +344,9 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
 const TermsAcceptance = ({ termsAccepted, setTermsAccepted }) => {
   const termsLabel = (
     <div className="mb-rem-12">
-      I have read and agree with the{" "}
+      I have read and agree to the{" "}
       <Link href="/terms">
-        <a target="_blank">terms of service</a>
+        <a target="_blank">terms of use</a>
       </Link>
       .
     </div>
