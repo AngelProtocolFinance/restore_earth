@@ -15,6 +15,7 @@ import {
   WalletStatus,
   WalletDenominations,
   WalletGlyphs,
+  WalletMicroDenominations,
 } from "components/Donate/Connections/Wallet";
 
 import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
@@ -439,6 +440,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
   const walletWithLuna = {
     ...wallet,
     denomination: WalletDenominations.TERRA_LUNA,
+    microDenomination: WalletMicroDenominations.TERRA_LUNA,
     glyph: WalletGlyphs.TERRA_LUNA,
   };
 
@@ -621,7 +623,10 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
         )}
       {transactionStep == TRANSACTION_STEPS.SUCCESS && (
         <Form>
-          <p>Nice! We should be advancing you to the next screen.</p>
+          <p>
+            Thank you for your donation! We should be advancing you to the next
+            screen.
+          </p>
         </Form>
       )}
     </section>

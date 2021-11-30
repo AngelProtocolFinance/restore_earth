@@ -53,7 +53,7 @@ const buildKYCData = ({
   const data: KYCSendBodyType = {
     walletAddress: transactionData.senderAddress,
     denomination: wallet.denomination,
-    amount: parseInt(amount),
+    amount: amount,
     nftRequested: NFTData.nftRequested,
     nftAddress: NFTData.address,
     receiptRequested: KYCData.receiptRequested,
@@ -114,8 +114,22 @@ const createAuthToken = () => {
   return jwt.sign(payload, secret, { expiresIn: expiry });
 };
 
+const getDonationData = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get("https://angelprotocol.io/re-donations")
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 export {
   sendKYCData,
+  getDonationData,
   ETH_WALLET_ADDRESS,
   BTC_WALLET_ADDRESS,
   TERRA_CONTRACT_ADDRESS,

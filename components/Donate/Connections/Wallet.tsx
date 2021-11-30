@@ -19,6 +19,13 @@ export enum WalletDenominations {
   BITCOIN = "BTC",
 }
 
+export enum WalletMicroDenominations {
+  TERRA = "uUST",
+  TERRA_LUNA = "uLUNA",
+  ETHEREUM = "wei",
+  BITCOIN = "satoshi",
+}
+
 export enum WalletGlyphs {
   TERRA = "$",
   TERRA_LUNA = "🌕",
@@ -35,6 +42,7 @@ export interface NewWalletProps {
 export interface WalletProps {
   chain: WalletChains;
   denomination: WalletDenominations;
+  microDenomination: WalletMicroDenominations;
   glyph: WalletGlyphs;
   connection: any;
   methods: any;
@@ -47,6 +55,7 @@ const getChainMeta = (chain: WalletChains) => {
   if (chain == WalletChains.TERRA) {
     return {
       denomination: WalletDenominations.TERRA,
+      microDenomination: WalletMicroDenominations.TERRA,
       glyph: WalletGlyphs.TERRA,
       chainName: WalletChainNames.TERRA,
     };
@@ -55,6 +64,7 @@ const getChainMeta = (chain: WalletChains) => {
   if (chain == WalletChains.ETHEREUM) {
     return {
       denomination: WalletDenominations.ETHEREUM,
+      microDenomination: WalletMicroDenominations.ETHEREUM,
       glyph: WalletGlyphs.ETHEREUM,
       chainName: WalletChainNames.ETHEREUM,
     };
@@ -63,6 +73,7 @@ const getChainMeta = (chain: WalletChains) => {
   if (chain == WalletChains.BITCOIN) {
     return {
       denomination: WalletDenominations.BITCOIN,
+      microDenomination: WalletMicroDenominations.BITCOIN,
       glyph: WalletGlyphs.BITCOIN,
       chainName: WalletChainNames.BITCOIN,
     };
@@ -74,8 +85,17 @@ const NewWallet = ({
   connection,
   methods,
 }: NewWalletProps): WalletProps => {
-  const { chainName, denomination, glyph } = getChainMeta(chain);
-  return { chain, chainName, denomination, glyph, connection, methods };
+  const { chainName, denomination, glyph, microDenomination } =
+    getChainMeta(chain);
+  return {
+    chain,
+    chainName,
+    denomination,
+    microDenomination,
+    glyph,
+    connection,
+    methods,
+  };
 };
 
 const WalletStatus = ({ wallet, onClickDisconnect }) => {
