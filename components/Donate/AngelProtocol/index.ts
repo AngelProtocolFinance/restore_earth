@@ -66,11 +66,7 @@ const buildKYCData = ({
     country: KYCData.country,
     fundId: 6,
     transactionId: transactionData.transactionId,
-    transactionDate: new Date().toLocaleString([], {
-      dateStyle: "long",
-      timeStyle: "short",
-      hour12: false,
-    }),
+    transactionDate: new Date().toISOString(),
   };
 
   return data;
