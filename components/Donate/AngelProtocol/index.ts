@@ -23,7 +23,7 @@ interface KYCSendBodyType {
   fullName?: string;
   email?: string;
   streetAddress?: string;
-  addressComplement?: string | "";
+  addressComplement?: string;
   city?: string;
   zipCode?: string;
   stateAddress?: string;
@@ -62,7 +62,7 @@ const buildKYCData = ({
     fullName: KYCData.name,
     email: KYCData.email,
     streetAddress: KYCData.streetAddress,
-    addressComplement: "",
+    addressComplement: " ",
     city: KYCData.city,
     zipCode: KYCData.zipcode,
     stateAddress: KYCData.state,
