@@ -11,7 +11,7 @@ const Privacy = () => {
     <>
       <h1>Privacy Policy</h1>
       <p>Last modified: November 1, 2021</p>
-      <h2>Introduction</h2>
+      <h3 className="h5">Introduction</h3>
       <p>
         Angel Protocol Foundation (&quot;Company&quot;, &quot;We&quot; or “Our”)
         respects your privacy and is committed to protecting it through our
