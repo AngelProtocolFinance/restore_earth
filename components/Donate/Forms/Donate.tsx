@@ -54,14 +54,14 @@ const DonationAmountForm = ({
   manualWallet,
   setManualWallet,
 }) => {
-  const glyp = isLuna ? WalletGlyphs.TERRA_LUNA : wallet.glyph;
+  const glyph = isLuna ? WalletGlyphs.TERRA_LUNA : wallet.glyph;
   const denom = isLuna ? WalletDenominations.TERRA_LUNA : wallet.denomination;
   // const token = TOKENS[wallet.chain];
   // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
   const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
   const placeHolder = bitcoinConnected
-    ? `How much ${wallet.glyph} (${wallet.denomination}) did you donate?`
-    : `How much ${wallet.glyph} (${wallet.denomination}) would you like to donate?`;
+    ? `How much ${glyph} (${denom}) did you donate?`
+    : `How much ${glyph} (${denom}) would you like to donate?`;
 
   return (
     <>
@@ -119,7 +119,7 @@ const DonationAmountForm = ({
           {(wallet.chain === WalletChains.TERRA && (
             <DropdownButton
               variant="light"
-              title={glyp + " "}
+              title={glyph + " "}
               id="input-group-dropdown-1"
             >
               <Dropdown.Item onClick={() => setIsLuna(true)}>
@@ -127,7 +127,7 @@ const DonationAmountForm = ({
               </Dropdown.Item>
               <Dropdown.Item onClick={() => setIsLuna(false)}>$</Dropdown.Item>
             </DropdownButton>
-          )) || <InputGroup.Text>{wallet.glyph}</InputGroup.Text>}
+          )) || <InputGroup.Text>{glyph}</InputGroup.Text>}
 
           <Form.Control
             type="text"
