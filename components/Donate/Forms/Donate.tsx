@@ -1,10 +1,20 @@
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Form,
+  InputGroup,
+  Row,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 import { useState } from "react";
 import Link from "next/link";
 
 import {
   WalletChains,
   WalletStatus,
+  WalletDenominations,
+  WalletGlyphs,
 } from "components/Donate/Connections/Wallet";
 
 import { STEPS, TRANSACTION_STEPS } from "components/Donate/variables";
@@ -36,11 +46,15 @@ const DonationAmountForm = ({
   setTxHash,
   amount,
   setAmount,
+  isLuna,
+  setIsLuna,
   selectedAmount,
   setSelectedAmount,
   manualWallet,
   setManualWallet,
 }) => {
+  const glyp = isLuna ? WalletGlyphs.TERRA_LUNA : wallet.glyph;
+  const denom = isLuna ? WalletDenominations.TERRA_LUNA : wallet.denomination;
   // const token = TOKENS[wallet.chain];
   // const suggestedDonationAmounts = SUGGESTED_DONATION_AMOUNTS[wallet.chain];
   const bitcoinConnected = wallet.chain == WalletChains.BITCOIN;
@@ -97,10 +111,23 @@ const DonationAmountForm = ({
           </Form.Group>
         </>
       )}
+
       <Form.Group className="my-rem-8" controlId="formBtcTransactionAmount">
-        <Form.Label>{wallet.denomination} Amount</Form.Label>
+        <Form.Label>{denom} Amount</Form.Label>
         <InputGroup>
-          <InputGroup.Text>{wallet.glyph}</InputGroup.Text>
+          {(wallet.chain === WalletChains.TERRA && (
+            <DropdownButton
+              variant="light"
+              title={glyp + " "}
+              id="input-group-dropdown-1"
+            >
+              <Dropdown.Item onClick={() => setIsLuna(true)}>
+                Luna 🌕
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setIsLuna(false)}>$</Dropdown.Item>
+            </DropdownButton>
+          )) || <InputGroup.Text>{wallet.glyph}</InputGroup.Text>}
+
           <Form.Control
             type="text"
             name="amount"
@@ -392,6 +419,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
   // TODO: make amount adjustment simpler
   const [amount, setAmount] = useState("");
+  const [isLuna, setIsLuna] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState("");
 
   // BTC Special Case
@@ -406,6 +434,14 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
     nftRequested: false,
     address: defaultNftAddress,
   });
+
+  const terraDenom = isLuna ? "uluna" : "uusd";
+  const walletWithLuna = {
+    ...wallet,
+    denomination: WalletDenominations.TERRA_LUNA,
+    glyph: WalletGlyphs.TERRA_LUNA,
+  };
+
   const [KYCData, setKYCData] = useKYCData();
   const [TCAData, setTCAData] = useTCAData();
 
@@ -454,7 +490,12 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           setErrorMessage(error);
         } else {
           setTransactionStep(TRANSACTION_STEPS.SUCCESS);
-          onDonationSuccess({ amount, NFTData, KYCData, TCAData });
+          onDonationSuccess({
+            amount,
+            NFTData,
+            KYCData,
+            TCAData,
+          });
         }
       });
   };
@@ -466,11 +507,16 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
 
     // BTC needs the user defined txHash
     wallet.methods
-      .donate({ amount: formattedAmount, txHash, manualWallet })
+      .donate({
+        amount: formattedAmount,
+        txHash,
+        manualWallet,
+        terraDenom,
+      })
       .then((transactionData) => {
         onTransactionSuccess({
           amount,
-          wallet,
+          wallet: isLuna ? walletWithLuna : wallet,
           transactionData,
           NFTData,
           KYCData,
@@ -479,6 +525,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
         setTransactionStep(TRANSACTION_STEPS.SENDING_KYC);
       })
       .catch((error) => {
+        console.error(error);
         setTransactionStep(TRANSACTION_STEPS.ERROR_TRANSACTION);
         setErrorMessage(error.message);
       });
@@ -494,6 +541,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
             wallet={wallet}
             amount={amount}
             setAmount={setAmount}
+            isLuna={isLuna}
+            setIsLuna={setIsLuna}
             selectedAmount={selectedAmount}
             setSelectedAmount={setSelectedAmount}
             txHash={txHash}
@@ -511,7 +560,7 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           />
 
           <DonationSummary
-            wallet={wallet}
+            wallet={isLuna ? walletWithLuna : wallet}
             amount={amount}
             NFTData={NFTData}
             KYCData={KYCData}

@@ -1,25 +1,27 @@
-import {Dropdown, Form} from "react-bootstrap";
+import { Dropdown, Form } from "react-bootstrap";
 
-declare enum WalletChains {
+enum WalletChains {
   TERRA = "TERRA",
   ETHEREUM = "ETHEREUM",
   BITCOIN = "BITCOIN",
 }
 
-declare enum WalletChainNames {
+enum WalletChainNames {
   TERRA = "Terra",
   ETHEREUM = "Ethereum",
   BITCOIN = "Bitcoin",
 }
 
-declare enum WalletDenominations {
+export enum WalletDenominations {
   TERRA = "UST",
+  TERRA_LUNA = "LUNA",
   ETHEREUM = "ETH",
   BITCOIN = "BTC",
 }
 
-declare enum WalletGlyphs {
+export enum WalletGlyphs {
   TERRA = "$",
+  TERRA_LUNA = "🌕",
   ETHEREUM = "Ξ",
   BITCOIN = "₿",
 }
@@ -39,8 +41,7 @@ export interface WalletProps {
   chainName: WalletChainNames;
 }
 
-export interface TransactionResult {
-}
+export interface TransactionResult {}
 
 const getChainMeta = (chain: WalletChains) => {
   if (chain == WalletChains.TERRA) {
@@ -69,15 +70,15 @@ const getChainMeta = (chain: WalletChains) => {
 };
 
 const NewWallet = ({
- chain,
- connection,
- methods,
+  chain,
+  connection,
+  methods,
 }: NewWalletProps): WalletProps => {
-  const {chainName, denomination, glyph} = getChainMeta(chain);
-  return {chain, chainName, denomination, glyph, connection, methods};
+  const { chainName, denomination, glyph } = getChainMeta(chain);
+  return { chain, chainName, denomination, glyph, connection, methods };
 };
 
-const WalletStatus = ({wallet, onClickDisconnect}) => {
+const WalletStatus = ({ wallet, onClickDisconnect }) => {
   const address = wallet.methods.address();
 
   const displayAddress =
@@ -104,4 +105,4 @@ const WalletStatus = ({wallet, onClickDisconnect}) => {
   );
 };
 
-export {NewWallet, WalletChains, WalletStatus};
+export { NewWallet, WalletChains, WalletStatus };

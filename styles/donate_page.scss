@@ -1,0 +1,12 @@
+.dropdown-toggle {
+  padding-inline: 10px;
+  border: 1px solid rgba(gray, 0.3);
+}
+
+.dropdown-menu {
+  box-shadow: 0.4rem 0.4rem 0.8rem rgba(black, 0.1);
+  padding: 1rem;
+  & > a {
+    padding: 0.4rem;
+  }
+}

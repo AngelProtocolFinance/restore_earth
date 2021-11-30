@@ -61,7 +61,7 @@ const ConnectMetaMask = ({
                     resolve(transactionData);
                   })
                   .catch((error) => {
-                    console.log("error sending transaction: ", error);
+                    console.error("error sending transaction: ", error);
                     reject(error);
                   });
               });
