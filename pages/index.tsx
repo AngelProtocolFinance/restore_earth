@@ -697,7 +697,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#9873</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -719,7 +719,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#2003</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -741,7 +741,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#5132</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -763,7 +763,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#4498</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -785,7 +785,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#9211</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -807,7 +807,7 @@ const Index: NextPage = () => {
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="fs-5">#1014</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
