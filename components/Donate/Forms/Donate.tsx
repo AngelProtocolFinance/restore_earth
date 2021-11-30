@@ -193,6 +193,7 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
               }}
               className="donate__form__nft__input"
               placeholder="terra************************"
+              autoComplete="wallet_address"
             />
           </Form.Group>
         </div>
