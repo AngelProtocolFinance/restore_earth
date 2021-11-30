@@ -39,16 +39,69 @@ import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
-import {
-  topCharityAlliance,
-  totalDonations,
-  totalDonationsGoals,
-  totalDonationsImpact,
-} from "../scripts/constants.js";
+import { topCharityAlliance } from "../scripts/constants.js";
+
+import { getCampaignProgress } from "components/Donate/AngelProtocol";
 
 const humanize = require("humanize-plus");
 
+const donationGoal = (amount) => {
+  if (amount < 10000) {
+    return 100000;
+  }
+
+  if (amount < 20000) {
+    return 200000;
+  }
+
+  if (amount < 30000) {
+    return 300000;
+  }
+
+  if (amount < 40000) {
+    return 400000;
+  }
+
+  if (amount < 60000) {
+    return 600000;
+  }
+
+  if (amount < 70000) {
+    return 700000;
+  }
+
+  if (amount < 80000) {
+    return 800000;
+  }
+
+  if (amount < 90000) {
+    return 900000;
+  }
+
+  if (amount < 1000000) {
+    return 1000000;
+  }
+
+  return 10000000;
+};
+
 const Index: NextPage = () => {
+  const [totalDonations, setTotalDonations] = React.useState(275000);
+  const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(1000000);
+  const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
+
+  getCampaignProgress()
+    .then((data: any) => {
+      if (data.totalUsd) {
+        const donations = parseInt(data.totalUsd);
+        setTotalDonations(donations);
+        setTotalDonationsGoals(donationGoal(donations));
+      }
+    })
+    .catch((error) => {
+      // Don't need to do anything
+      return null;
+    });
   return (
     <>
       <Head>
