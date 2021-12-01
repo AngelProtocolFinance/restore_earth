@@ -30,9 +30,10 @@ import earth3 from "../public/images/earths/earth3.png";
 import earth4 from "../public/images/earths/earth4.png";
 import earth5 from "../public/images/earths/earth5.png";
 import punk1 from "../public/images/punks/punk1.png";
-import punk2 from "../public/images/punks/punk2.png";
-import punk3 from "../public/images/punks/punk3.png";
-import punk4 from "../public/images/punks/punk4.png";
+import angel2 from "../public/images/angels/angel_2.png";
+import angel3 from "../public/images/angels/angel_3.png";
+import angel4 from "../public/images/angels/angel_4.png";
+import angelUnrevealed from "../public/images/angels/angel_unrevealed.png";
 import punk5 from "../public/images/punks/punk5.png";
 import punk6 from "../public/images/punks/punk6.png";
 import punk7 from "../public/images/punks/punk7.png";
@@ -658,7 +659,7 @@ const Index: NextPage = () => {
               <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">
                 <Accordion
-                  defaultActiveKey="1"
+                  defaultActiveKey="2"
                   className="bg-dark border-bottom border"
                 >
                   <CustomToggle eventKey="1">
@@ -674,7 +675,7 @@ const Index: NextPage = () => {
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
@@ -692,11 +693,11 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="2">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk2.src}
+                        src={angel2.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
@@ -714,11 +715,11 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="3">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk3.src}
+                        src={angel3.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
@@ -736,11 +737,11 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="4">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk4.src}
+                        src={angel4.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
@@ -758,16 +759,16 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="5">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk5.src}
+                        src={angelUnrevealed.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="an unrevealed galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#4498</div>
+                        <div className="fs-5">Unrevealed</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -780,16 +781,16 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="6">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk6.src}
+                        src={angelUnrevealed.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#9211</div>
+                        <div className="fs-5">Unrevealed</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -802,16 +803,16 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="7">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk7.src}
+                        src={angelUnrevealed.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
-                        alt="a galactic punk"
+                        alt="a galactic angel"
                       />
                       <div className="ms-20">
                         <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#1014</div>
+                        <div className="fs-5">Unrevealed</div>
                       </div>
                     </div>
                   </Accordion.Collapse>
