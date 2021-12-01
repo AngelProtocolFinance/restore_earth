@@ -90,7 +90,7 @@ const donationGoal = (amount) => {
 };
 
 const Index: NextPage = () => {
-  const [totalDonations, setTotalDonations] = React.useState(34000);
+  const [totalDonations, setTotalDonations] = React.useState(32368);
   const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(320000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
