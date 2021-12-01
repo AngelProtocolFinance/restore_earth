@@ -11,6 +11,6 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   res
-    .status(500)
+    .status(200)
     .json({ totalUsd: "40000.42", lastUpdated: "2021-11-29 22:44:04" });
 }
