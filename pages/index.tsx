@@ -47,35 +47,39 @@ const humanize = require("humanize-plus");
 
 const donationGoal = (amount) => {
   if (amount < 10000) {
-    return 100000;
+    return 80000;
   }
 
   if (amount < 20000) {
-    return 200000;
+    return 160000;
   }
 
   if (amount < 30000) {
-    return 300000;
+    return 240000;
   }
 
   if (amount < 40000) {
+    return 320000;
+  }
+
+  if (amount < 50000) {
     return 400000;
   }
 
   if (amount < 60000) {
-    return 600000;
+    return 480000;
   }
 
   if (amount < 70000) {
-    return 700000;
+    return 560000;
   }
 
   if (amount < 80000) {
-    return 800000;
+    return 640000;
   }
 
   if (amount < 90000) {
-    return 900000;
+    return 720000;
   }
 
   if (amount < 1000000) {
@@ -86,8 +90,8 @@ const donationGoal = (amount) => {
 };
 
 const Index: NextPage = () => {
-  const [totalDonations, setTotalDonations] = React.useState(23967.67);
-  const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(300000);
+  const [totalDonations, setTotalDonations] = React.useState(34000);
+  const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(320000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
   getCampaignProgress()
