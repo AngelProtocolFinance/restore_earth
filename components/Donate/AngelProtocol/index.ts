@@ -34,6 +34,7 @@ interface KYCSendBodyType {
   transactionId: any;
   transactionDate: any;
   restoreEarthNFTAddress?: string;
+  tcaAssociation?: string;
 }
 
 export interface KYCTransactionDataType {
@@ -70,6 +71,7 @@ const buildKYCData = ({
     fundId: 6,
     transactionId: transactionData.transactionId,
     transactionDate: new Date().toISOString(),
+    tcaAssociation: TCAData.tcaAssociation,
   };
 
   return data;
@@ -130,6 +132,72 @@ const getCampaignProgress = () => {
   });
 };
 
+const TCAList = [
+  "ApolloDAO",
+  "Alice",
+  "Kado ",
+  "Kujira",
+  "Talis",
+  "Kash",
+  "Loop",
+  "Spaar",
+  "BetTerra",
+  "Pylon Money",
+  "Luart.io",
+  "StarTerra",
+  "White Whale",
+  "Terra Casino",
+  "Kinetic Money",
+  "crypto11",
+  "Spaar",
+  "TIX",
+  "Edge",
+  "OnePlanet",
+  "Neptune",
+  "Tiiik",
+  "Flipside Crypto",
+  "Orion Money",
+  "Tsunami Protocol",
+  "Astral",
+  "Plutos Pot / Lunaverse",
+  "Loterra",
+  "SmartStake",
+  "Marte Cloud",
+  "TerraBites",
+  "LunaOrbit",
+  "Astronorcs NFT",
+  "BullRun GFs NFT",
+  "Deviants NFT ",
+  "EraLuna NFT",
+  "F**k the SEC NFT",
+  "Galactic Punks NFT",
+  "Grumpy Koi NFT",
+  "HERO NFT",
+  "Luna Portrait NFT",
+  "LunaBulls NFT",
+  "LunaDoctors NFT",
+  "LunArt NFT",
+  "NIP Terra NFT",
+  "Planet of LunApes NFT",
+  "Tales of Terra NFT",
+  "TerraBots NFT",
+  "TerraFloki NFT",
+  "Terrans NFT",
+  "TerraPins NFT",
+  "Unstables on Terra NFT",
+  "Woof of LUNA NFT",
+  "TerraFits NFT",
+  "Terra Turtles NFT",
+  "Gavert NFT",
+  "Astroverse NFT",
+  "Terrapins NFT",
+  "AstroCHADS NFT",
+  "ChristTerra Columbus NFT",
+  "Terra Unicorns ",
+  "West Coast Wonder",
+  "Exo Terra NFT",
+];
+
 export {
   sendKYCData,
   getCampaignProgress,
@@ -137,4 +205,5 @@ export {
   BTC_WALLET_ADDRESS,
   TERRA_CONTRACT_ADDRESS,
   APES_FUND_ID,
+  TCAList,
 };

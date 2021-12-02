@@ -26,6 +26,7 @@ import useTCAData from "components/Donate/Data/TCAData";
 import {
   BTC_WALLET_ADDRESS,
   sendKYCData,
+  TCAList,
 } from "components/Donate/AngelProtocol/index";
 
 // const TWITTER_HANDLE = "example";
@@ -338,35 +339,43 @@ const KYCForm = ({ wallet, KYCData, setKYCData }) => {
 
 const TCAForm = ({ wallet, TCAData, setTCAData }) => {
   const [showTCA, setShowTCA] = useState(false);
-  return null;
   return (
-    <div className="mb-rem-12">
+    <>
       <Form.Check
         type="checkbox"
         id="formTerraCharityAlliance"
         checked={showTCA}
-        label={`Check this box if you're a member of Terra's Charity Alliance`}
+        label={`Are you a member of the Terra Charity Alliance?`}
         onChange={() => {
           setShowTCA(!showTCA);
         }}
+        className="my-rem-4"
       />
-
       {showTCA && (
-        <Form.Select
-          aria-label="Affiliated TCA Member"
-          onChange={(e) => {
-            const affiliateId = e.currentTarget.value;
-            setTCAData({ affiliateId });
-          }}
-          className="donate__form__tca__input"
-        >
-          <option>Open this select menu</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </Form.Select>
+        <div className="mb-rem-12">
+          <Form.Group className="mb-rem-6" controlId="formFullName">
+            <Form.Select
+              aria-label="TCA Member"
+              onChange={(e) => {
+                const tcaAssociation = e.currentTarget.value;
+                setTCAData({ tcaAssociation });
+              }}
+              className="donate__form__tca__input"
+              required
+            >
+              <option value="">
+                Which TCA member are you affiliated with?
+              </option>
+              {TCAList.map((title) => (
+                <option value={title} key={title}>
+                  {title}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
