@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 export interface TCADataType {
-  affiliateId: string;
+  tcaAssociation: string;
 }
 
 const useTCAData = (): [TCADataType, (newData: any) => void] => {
   const [TCAData, updateTCAData]: [TCADataType, (newData: any) => void] =
     useState({
-      affiliateId: "",
+      tcaAssociation: "",
     });
 
   const setTCAData = (newData: any) => {
