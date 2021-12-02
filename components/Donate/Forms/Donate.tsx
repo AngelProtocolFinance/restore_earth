@@ -614,8 +614,10 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
         KYCData.receiptRequested && (
           <Form>
             <p>
-              There was an error sending KYC data. Please reach out to us with
-              your details.
+              There was an error sending KYC data, please let us know at{" "}
+              <Link href="mailto:hi@angelprotocol.com&subject=RestoreEarth">
+                <a className="link">hi@angelprotocol.io</a>
+              </Link>
             </p>
             <Button variant="primary" type="submit">
               Retry
