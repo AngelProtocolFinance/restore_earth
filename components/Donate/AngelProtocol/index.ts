@@ -140,7 +140,6 @@ const TCAList = [
   "Talis",
   "Kash",
   "Loop",
-  "Spaar",
   "BetTerra",
   "Pylon Money",
   "Luart.io",
