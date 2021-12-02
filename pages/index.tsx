@@ -294,7 +294,7 @@ const Index: NextPage = () => {
                   }}
                 >
                   <OverlayTrigger
-                    key={"key"}
+                    key={"key1"}
                     placement={"top"}
                     overlay={<Tooltip id={`tooltip-top`}>Donations</Tooltip>}
                   >
@@ -317,7 +317,7 @@ const Index: NextPage = () => {
                     </div>
                   </OverlayTrigger>
                   <OverlayTrigger
-                    key={"key"}
+                    key={"key2"}
                     placement={"top"}
                     overlay={<Tooltip id={`tooltip-top`}>AP Impact</Tooltip>}
                   >
