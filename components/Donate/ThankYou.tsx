@@ -23,8 +23,8 @@ const ThankYou = ({ NFTData, KYCData }: ThankYouProps) => {
       </p>
       {NFTData.nftRequested && (
         <p>
-          When your Galactic Angel NFT is ready in the new year, we&apos;ll
-          airdrop it to the Terra address you supplied:{" "}
+          Angels will be airdropped after the campaign ends to the Terra address
+          you supplied:{" "}
           <span className="font-monospace">{NFTData.address}</span>.
         </p>
       )}

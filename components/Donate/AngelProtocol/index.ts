@@ -135,6 +135,7 @@ const getCampaignProgress = () => {
 const TCAList = [
   "ApolloDAO",
   "Alice",
+  "Ceres/Terrafirma",
   "Kado ",
   "Kujira",
   "Talis",

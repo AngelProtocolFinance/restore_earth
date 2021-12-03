@@ -178,9 +178,9 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
             .
           </p>
           <p className="mb-20 small">
-            An NFT will be airdropped to the below address in the first half of
-            2022 after the campaign has ended. The final tier value of the NFT
-            will be determined by the USD value of the transaction.
+            Angels will be airdropped after the campaign ends. The final tier
+            value of the NFT will be determined by the USD value of the
+            transaction.
           </p>
           <Form.Group className="mb-rem-6" controlId="walletAddress">
             <Form.Label>Terra Wallet Address</Form.Label>
@@ -345,7 +345,7 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
         type="checkbox"
         id="formTerraCharityAlliance"
         checked={showTCA}
-        label={`Are you a member of the Terra Charity Alliance?`}
+        label={`Are you a member of the Angel Alliance?`}
         onChange={() => {
           setShowTCA(!showTCA);
         }}
@@ -364,7 +364,8 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
               required
             >
               <option value="">
-                Which TCA member are you affiliated with?
+                Do you want to attribute your donation to an Angel Alliance
+                team?
               </option>
               {TCAList.map((title) => (
                 <option value={title} key={title}>
