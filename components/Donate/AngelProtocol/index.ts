@@ -136,6 +136,7 @@ const TCAList = [
   "ApolloDAO",
   "Alice",
   "Ceres/Terrafirma",
+  "La Femme Collective",
   "Kado ",
   "Kujira",
   "Talis",
