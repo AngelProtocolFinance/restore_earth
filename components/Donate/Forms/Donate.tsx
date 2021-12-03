@@ -147,7 +147,7 @@ const DonationAmountForm = ({
   );
 };
 
-const NFTForm = ({ wallet, NFTData, setNFTData }) => {
+const NFTForm = ({ wallet, NFTData, setNFTData, TCAData, setTCAData }) => {
   const nftRequested = NFTData.nftRequested;
 
   return (
@@ -196,6 +196,24 @@ const NFTForm = ({ wallet, NFTData, setNFTData }) => {
               placeholder="terra************************"
               autoComplete="wallet_address"
             />
+            <Form.Select
+              aria-label="Angel Alliance Member"
+              onChange={(e) => {
+                const tcaAssociation = e.currentTarget.value;
+                setTCAData({ tcaAssociation });
+              }}
+              className="donate__form__tca__input mt-rem-4"
+            >
+              <option value="">
+                Do you want to attribute your donation to an Angel Alliance
+                team?
+              </option>
+              {TCAList.map((title) => (
+                <option value={title} key={title}>
+                  {title}
+                </option>
+              ))}
+            </Form.Select>
           </Form.Group>
         </div>
       )}
@@ -563,9 +581,14 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
             manualWallet={manualWallet}
             setManualWallet={setManualWallet}
           />
-          <NFTForm wallet={wallet} NFTData={NFTData} setNFTData={setNFTData} />
+          <NFTForm
+            wallet={wallet}
+            NFTData={NFTData}
+            setNFTData={setNFTData}
+            TCAData={TCAData}
+            setTCAData={setTCAData}
+          />
           <KYCForm wallet={wallet} KYCData={KYCData} setKYCData={setKYCData} />
-          <TCAForm wallet={wallet} TCAData={TCAData} setTCAData={setTCAData} />
 
           <TermsAcceptance
             termsAccepted={termsAccepted}
