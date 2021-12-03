@@ -345,7 +345,7 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
         type="checkbox"
         id="formTerraCharityAlliance"
         checked={showTCA}
-        label={`Are you a member of the Terra Charity Alliance?`}
+        label={`Are you a member of the Angel Alliance?`}
         onChange={() => {
           setShowTCA(!showTCA);
         }}
@@ -364,7 +364,8 @@ const TCAForm = ({ wallet, TCAData, setTCAData }) => {
               required
             >
               <option value="">
-                Which TCA member are you affiliated with?
+                Do you want to attribute your donation to an Angel Alliance
+                team?
               </option>
               {TCAList.map((title) => (
                 <option value={title} key={title}>
