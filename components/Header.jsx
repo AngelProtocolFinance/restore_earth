@@ -35,7 +35,7 @@ const Header = ({ wallet = undefined }) => {
               </a>
             </Link>
             <div className="justify-content-center align-items-center d-flex flex-row">
-              {topCharityAlliance && (
+              {topCharityAlliance && topCharityAlliance != "" && (
                 <div className="d-none d-sm-flex">
                   <span className="badge rounded-pill border-light text-light border border-2">
                     Top Donor: <strong>{topCharityAlliance}</strong>
