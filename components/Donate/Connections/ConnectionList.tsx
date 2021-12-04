@@ -6,7 +6,7 @@ export interface ChainTitleType {
 
 const ChainTitle = ({ logoSrc, title, imgClassName }: ChainTitleType) => {
   return (
-    <li className="list-group-item px-rem-4 py-rem-3 border-bottom-0 bg-light text-start mt-rem-8">
+    <li className="list-group-item px-rem-4 py-rem-4 border-bottom-0 bg-light text-start">
       <img
         width={32}
         height={32}
@@ -20,7 +20,7 @@ const ChainTitle = ({ logoSrc, title, imgClassName }: ChainTitleType) => {
 };
 
 const ConnectionList = ({ children }) => {
-  return <ul className="list-group">{children}</ul>;
+  return <ul className="list-group  mb-rem-8">{children}</ul>;
 };
 
 export interface ConnectionItemType {

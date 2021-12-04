@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import terraLogo from "public/images/chains/terra_blue_logo.svg";
 import ethereumLogo from "public/images/chains/ethereum_logo.png";
 import bitcoinLogo from "public/images/chains/bitcoin_logo.svg";
@@ -20,6 +22,14 @@ const Connect = ({
   return (
     <>
       <h2 className="h3">Connect your wallet</h2>
+      <p className="small">
+        Want to support the campaign but don&apos;t have any of the accepted
+        cryptocurrencies?{" "}
+        <Link href="/donate-card">
+          <a className="link">Click here</a>
+        </Link>{" "}
+        to donate with a credit card.
+      </p>
       <div className="list-group">
         <ChainTitle logoSrc={terraLogo.src} title={"Terra"} />
         <TerraConnections

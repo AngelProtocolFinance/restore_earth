@@ -151,7 +151,7 @@ const TerraConnections = ({
     }
   }, [onConnectionSuccess, onConnectionError, onWalletDisconnect]);
 
-  return <ul id="terra-wallet-connect" className="list-group"></ul>;
+  return <ul id="terra-wallet-connect" className="list-group mb-rem-8"></ul>;
 };
 
 export default TerraConnections;

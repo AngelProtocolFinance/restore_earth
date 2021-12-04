@@ -16,33 +16,54 @@ import { ETH_WALLET_ADDRESS } from "components/Donate/AngelProtocol";
 const DonateCard = () => {
   return (
     <>
-      <h3>How to donate with your credit card</h3>
+      <h3>Donate with your credit card</h3>
       <p>
-        Want to donate to Restore Earth, but don&apos;t want to donate via
-        crypto? Here&apos;s how!
+        Want to support the campaign but don&apos;t have any of the accepted
+        cryptocurrencies? Here&apos;s how to donate with a credit card.
       </p>
       <p className="small">
-        Note: We unfortunately cannot provide instant tax receipt emails for
-        donations via credit card, however the amount will still be treated as a
-        501c3 donation. You will just need to record the donation yourself.
+        Note: We highly suggest donating the available cryptocurrencies if you
+        are able to, as the Transak process can take longer to complete.
+      </p>
+      <p className="small">
+        Additionally, we cannot provide instant tax receipts for donations made
+        via credit card.
       </p>
       <p>
-        <ol>
-          <li className="my-rem-4">
+        <ol style={{ marginLeft: "-2.5rem" }}>
+          <li className="my-rem-4 pl-rem-2">
             <Link href="https://beta.transak.com">
-              <a className="link">Visit Transak</a>
+              <a className="link" target="_blank">
+                Visit Transak
+              </a>
             </Link>
           </li>
-          <li className="my-rem-4">
+          <li className="my-rem-4  pl-rem-2">
             Enter your donation amount, and click &quot;Buy Now&quot;
           </li>
-          <li className="my-rem-4">
-            Enter <span className="monospace">{ETH_WALLET_ADDRESS}</span> as the{" "}
-            <span className="monospace">ETH Wallet Address</span> and continue
-            through Transak
+          <li className="my-rem-4  pl-rem-2">
+            Add receiptient wallet:{" "}
+            <strong>
+              <span className="monospace">{ETH_WALLET_ADDRESS}</span>
+            </strong>{" "}
+            - the official ETH Wallet Address for the Restore Earth campaign.
           </li>
-          <li className="my-rem-4">Done!</li>
+          <li className="my-rem-4  pl-rem-2">
+            Continue through the Transak flow. They may require KYC elements,
+            including proof of identity and proof of address depending on your
+            location.
+          </li>
+          <li className="my-rem-4  pl-rem-2">
+            Once the transaction is complete, ETH will be deposited into the
+            Restore Earth account. You will not receive a donation confirmation
+            from Transak, however the amount may be treated as a charitable
+            donation made to each of our three partner charities.
+          </li>
         </ol>
+      </p>
+      <p className="my-rem-4">
+        We recommend contacting a tax professional before using a credit card if
+        you intend to report your donation to receive a tax deduction.
       </p>
     </>
   );
