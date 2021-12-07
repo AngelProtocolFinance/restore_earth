@@ -181,7 +181,7 @@ const Index: NextPage = () => {
                     <p className="mb-0 mt-6">
                       <strong>Plant Trees</strong>
                     </p>
-                    <p>Global Brigade</p>
+                    <p>Global Brigades</p>
                   </div>
                   <div className="text-center font-size-10">
                     <img
