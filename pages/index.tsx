@@ -91,8 +91,8 @@ const donationGoal = (amount) => {
 };
 
 export async function getStaticProps() {
-  let donations = undefined;
-  let goal = undefined;
+  let donations = null;
+  let goal = null;
 
   try {
     const data: any = await getCampaignProgress();
