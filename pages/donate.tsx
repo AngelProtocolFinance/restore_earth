@@ -54,7 +54,7 @@ const DonatePage: NextPage = () => {
   };
 
   const onConnectionError = (error) => {
-    console.log("could not connect: ", error);
+    console.error("could not connect: ", error);
     onWalletDisconnect();
   };
 
