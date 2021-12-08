@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,7 +7,6 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import * as React from "react";
 import CustomToggle from "components/CustomToggle";
 
 import RellaxWrapper from "react-rellax-wrapper";
@@ -40,9 +40,11 @@ import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
-import { topCharityAlliance } from "../scripts/constants.js";
 
-import { getCampaignProgress } from "components/Donate/AngelProtocol";
+import {
+  getCampaignProgress,
+  getTopDonors,
+} from "components/Donate/AngelProtocol";
 
 const humanize = require("humanize-plus");
 
@@ -91,8 +93,8 @@ const donationGoal = (amount) => {
 };
 
 const Index: NextPage = () => {
-  const [totalDonations, setTotalDonations] = React.useState(32368);
-  const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(320000);
+  const [totalDonations, setTotalDonations] = useState(32368);
+  const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
   getCampaignProgress()
@@ -107,6 +109,16 @@ const Index: NextPage = () => {
       // Don't need to do anything
       return null;
     });
+
+  const [topDonors, setTopDonors] = useState([]);
+  getTopDonors()
+    .then((data: any[]) => {
+      setTopDonors(data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   return (
     <>
       <Head>
@@ -201,9 +213,6 @@ const Index: NextPage = () => {
                   Amplify your impact this holiday season by giving through
                   Angel Protocol.
                 </p>
-                <span className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
-                  Top Donor: {topCharityAlliance}
-                </span>
                 <div className="flex flex-row justify-content-center align-items-center">
                   <Link href="/donate">
                     <a className="btn btn-primary me-12 Button__gradient">
@@ -817,6 +826,89 @@ const Index: NextPage = () => {
                     </div>
                   </Accordion.Collapse>
                 </Accordion>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent bg-dark overflow-hidden text-white">
+          <div className="container" id="nft">
+            <div className="row justify-content-xl-center gh-1 gv-5 mb-n7">
+              <div className="col-12 col-lg-4 me-lg-auto me-xl-0">
+                <h2 className="h3 text-white">Angel Alliance Leaderboard</h2>
+                <p>
+                  Where do you stack up against the best of the Angel Alliance?
+                </p>
+                <Link href="/donate">
+                  <a className="btn btn-primary Button__gradient mt-30">
+                    Donate now
+                    <svg
+                      className="icon-arrow icon-arrow-right"
+                      width="25"
+                      height="10"
+                      viewBox="0 0 25 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M20 1L24 5L20 9"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M7 5L24 5"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </Link>
+              </div>
+              <div className="d-none d-xl-block col-1" />
+              <div className="col-12 col-lg-6 col-xl-5">
+                {topDonors.slice(0, 5).map((donor, index) => {
+                  return (
+                    <div
+                      className="progress mb-40"
+                      style={{
+                        height: "30px",
+                      }}
+                      key={`${donor.allianceMember}-${donor.totalDonation}`}
+                    >
+                      <OverlayTrigger
+                        placement={"top"}
+                        overlay={
+                          <Tooltip id={`tooltip-top`}>Donations</Tooltip>
+                        }
+                      >
+                        <div
+                          className="progress-bar text-dark"
+                          role="progressbar"
+                          style={{
+                            width: `${
+                              (donor.totalDonation /
+                                topDonors[0].totalDonation) *
+                              100
+                            }%`,
+                          }}
+                          aria-valuenow={donor.totalDonation}
+                          aria-valuemin={0}
+                          aria-valuemax={topDonors[0].totalDonation}
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Donations"
+                        >
+                          {donor.allianceMember}: $
+                          {humanize.compactInteger(donor.totalDonation, 1)}
+                        </div>
+                      </OverlayTrigger>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
