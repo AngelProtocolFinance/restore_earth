@@ -10,6 +10,7 @@ const ETH_WALLET_ADDRESS = process.env.NEXT_PUBLIC_ETH_WALLET_ADDRESS;
 const BTC_WALLET_ADDRESS = process.env.NEXT_PUBLIC_BTC_WALLET_ADDRESS;
 const APES_FUND_ID = process.env.NEXT_PUBLIC_APES_FUND_ID;
 const PROGRESS_API = process.env.NEXT_PUBLIC_PROGRESS_API;
+const NEXT_PUBLIC_TOP_DONOR_API = process.env.NEXT_PUBLIC_TOP_DONOR_API;
 
 const kycClient = axios.create({
   baseURL: KYC_ENDPOINT,
@@ -132,6 +133,22 @@ const getCampaignProgress = () => {
   });
 };
 
+const getTopDonors = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(NEXT_PUBLIC_TOP_DONOR_API)
+      .then((response) => {
+        const allianceMembers = response.data.Items;
+        resolve(
+          allianceMembers.sort((a, b) => b.totalDonation - a.totalDonation)
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
 const TCAList = [
   "ApolloDAO",
   "Alice",
@@ -202,6 +219,7 @@ const TCAList = [
 export {
   sendKYCData,
   getCampaignProgress,
+  getTopDonors,
   ETH_WALLET_ADDRESS,
   BTC_WALLET_ADDRESS,
   TERRA_CONTRACT_ADDRESS,

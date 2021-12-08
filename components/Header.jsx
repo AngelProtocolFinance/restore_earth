@@ -1,12 +1,23 @@
-import * as React from "react";
+import { useState } from "react";
 import Scrollspy from "react-scrollspy";
 import Link from "next/link";
 
 import angelProtocolLogo from "public/images/angel-protocol.png";
 import terraLogo from "public/images/chains/terra.png";
-import { topCharityAlliance } from "../scripts/constants";
+import { getTopDonors } from "components/Donate/AngelProtocol";
 
 const Header = ({ wallet = undefined }) => {
+  const [topCharityAlliance, setTopCharityAlliance] = useState("");
+
+  getTopDonors()
+    .then((data) => {
+      const topDonor = data[0];
+      setTopCharityAlliance(topDonor.allianceMember);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   return (
     <>
       <Scrollspy
