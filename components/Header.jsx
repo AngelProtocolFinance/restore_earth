@@ -7,16 +7,19 @@ import terraLogo from "public/images/chains/terra.png";
 import { getTopDonors } from "components/Donate/AngelProtocol";
 
 const Header = ({ wallet = undefined }) => {
-  const [topCharityAlliance, setTopCharityAlliance] = useState("");
+  const [requesting, setRequesting] = useState(false);
+  const [topDonor, setTopCharityAlliance] = useState("");
 
-  getTopDonors()
-    .then((data) => {
-      const topDonor = data[0];
-      setTopCharityAlliance(topDonor.allianceMember);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  if (!requesting) {
+    getTopDonors()
+      .then((data) => {
+        setTopCharityAlliance(data[0]?.allianceMember);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    setRequesting(true);
+  }
 
   return (
     <>
@@ -46,10 +49,10 @@ const Header = ({ wallet = undefined }) => {
               </a>
             </Link>
             <div className="justify-content-center align-items-center d-flex flex-row">
-              {topCharityAlliance && topCharityAlliance != "" && (
+              {topDonor && topDonor != "" && (
                 <div className="d-none d-sm-flex">
                   <span className="badge rounded-pill border-light text-light border border-2">
-                    Top Donor: <strong>{topCharityAlliance}</strong>
+                    Top Donor: <strong>{topDonor}</strong>
                   </span>
                 </div>
               )}

@@ -90,23 +90,33 @@ const donationGoal = (amount) => {
   return 10000000;
 };
 
-const Index: NextPage = () => {
-  const [totalDonations, setTotalDonations] = React.useState(32368);
-  const [totalDonationsGoals, setTotalDonationsGoals] = React.useState(320000);
+export async function getStaticProps() {
+  let donations = null;
+  let goal = null;
+
+  try {
+    const data: any = await getCampaignProgress();
+
+    donations = parseInt(data.totalUsd);
+    goal = donationGoal(donations);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return {
+    props: {
+      donations,
+      goal,
+    },
+    revalidate: 30,
+  };
+}
+
+const Index = ({ donations, goal }) => {
+  const totalDonations = donations ? donations : 32368;
+  const totalDonationsGoals = goal ? goal : 320000;
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
-  getCampaignProgress()
-    .then((data: any) => {
-      if (data.totalUsd) {
-        const donations = parseInt(data.totalUsd);
-        setTotalDonations(donations);
-        setTotalDonationsGoals(donationGoal(donations));
-      }
-    })
-    .catch((error) => {
-      // Don't need to do anything
-      return null;
-    });
   return (
     <>
       <Head>
