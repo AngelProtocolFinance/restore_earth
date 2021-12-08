@@ -200,6 +200,7 @@ const TCAList = [
   "Tales of Terra NFT",
   "TerraBots NFT",
   "TerraFloki NFT",
+  "Terrain NFT",
   "Terrans NFT",
   "TerraPins NFT",
   "Unstables on Terra NFT",
