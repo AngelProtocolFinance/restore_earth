@@ -112,7 +112,7 @@ export async function getStaticProps() {
   };
 }
 
-const Index: NextPage = ({ donations, goal }) => {
+const Index = ({ donations, goal }) => {
   const totalDonations = donations ? donations : 32368;
   const totalDonationsGoals = goal ? goal : 320000;
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
