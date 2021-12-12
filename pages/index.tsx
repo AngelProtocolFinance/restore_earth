@@ -6,7 +6,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 import CustomToggle from "components/CustomToggle";
 
 import RellaxWrapper from "react-rellax-wrapper";
@@ -90,32 +90,24 @@ const donationGoal = (amount) => {
   return 10000000;
 };
 
-export async function getStaticProps() {
-  let donations = null;
-  let goal = null;
-
-  try {
-    const data: any = await getCampaignProgress();
-
-    donations = parseInt(data.totalUsd);
-    goal = donationGoal(donations);
-  } catch (error) {
-    console.log(error);
-  }
-
-  return {
-    props: {
-      donations,
-      goal,
-    },
-    revalidate: 30,
-  };
-}
-
 const Index = ({ donations, goal }) => {
-  const totalDonations = donations ? donations : 32368;
-  const totalDonationsGoals = goal ? goal : 320000;
+  const [totalDonations, setTotalDonations] = useState(32368);
+  const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
+
+  useEffect(() => {
+    getCampaignProgress()
+      .then((data: any) => {
+        const donations = parseInt(data.totalUsd);
+        setTotalDonations(donations);
+
+        const goal = donationGoal(donations);
+        setTotalDonationsGoals(goal);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>

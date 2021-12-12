@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Scrollspy from "react-scrollspy";
 import Link from "next/link";
 
@@ -7,10 +7,9 @@ import terraLogo from "public/images/chains/terra.png";
 import { getTopDonors } from "components/Donate/AngelProtocol";
 
 const Header = ({ wallet = undefined }) => {
-  const [requesting, setRequesting] = useState(false);
   const [topDonor, setTopCharityAlliance] = useState("");
 
-  if (!requesting) {
+  useEffect(() => {
     getTopDonors()
       .then((data) => {
         setTopCharityAlliance(data[0]?.allianceMember);
@@ -18,8 +17,7 @@ const Header = ({ wallet = undefined }) => {
       .catch((error) => {
         console.error(error);
       });
-    setRequesting(true);
-  }
+  }, []);
 
   return (
     <>
