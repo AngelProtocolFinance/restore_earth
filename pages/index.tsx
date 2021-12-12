@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -6,7 +6,6 @@ import Image from "next/image";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
 import CustomToggle from "components/CustomToggle";
 
 import RellaxWrapper from "react-rellax-wrapper";
@@ -95,29 +94,29 @@ const donationGoal = (amount) => {
 const Index: NextPage = () => {
   const [totalDonations, setTotalDonations] = useState(32368);
   const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
+  const [topDonors, setTopDonors] = useState([]);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
-  getCampaignProgress()
-    .then((data: any) => {
-      if (data.totalUsd) {
+  useEffect(() => {
+    getCampaignProgress()
+      .then((data: any) => {
         const donations = parseInt(data.totalUsd);
         setTotalDonations(donations);
-        setTotalDonationsGoals(donationGoal(donations));
-      }
-    })
-    .catch((error) => {
-      // Don't need to do anything
-      return null;
-    });
-
-  const [topDonors, setTopDonors] = useState([]);
-  getTopDonors()
-    .then((data: any[]) => {
-      setTopDonors(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+        const goal = donationGoal(donations);
+        setTotalDonationsGoals(goal);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    
+    getTopDonors()
+      .then((data: any[]) => {
+        setTopDonors(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <>
