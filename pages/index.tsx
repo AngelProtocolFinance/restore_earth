@@ -91,18 +91,20 @@ const donationGoal = (amount) => {
 };
 
 const Index = ({ donations, goal }) => {
-  const [totalDonations, setTotalDonations] = useState(32368);
-  const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
+  const [totalDonations, setTotalDonations] = useState(238000);
+  const [totalDonationsGoals, setTotalDonationsGoals] = useState(1000000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
   useEffect(() => {
     getCampaignProgress()
       .then((data: any) => {
         const donations = parseInt(data.totalUsd);
-        setTotalDonations(donations);
+        if (donations < 1000000) {
+          setTotalDonations(donations);
 
-        const goal = donationGoal(donations);
-        setTotalDonationsGoals(goal);
+          const goal = donationGoal(donations);
+          setTotalDonationsGoals(goal);
+        }
       })
       .catch((error) => {
         console.error(error);
