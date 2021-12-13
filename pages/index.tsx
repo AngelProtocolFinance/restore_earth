@@ -92,19 +92,21 @@ const donationGoal = (amount) => {
 };
 
 const Index: NextPage = () => {
-  const [totalDonations, setTotalDonations] = useState(32368);
-  const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
-  const [topDonors, setTopDonors] = useState([]);
-  const [topDonor, setTopDonor] = useState(undefined);
+  const [totalDonations, setTotalDonations] = useState(291000);
+  const [totalDonationsGoals, setTotalDonationsGoals] = useState(1000000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
+  const [topDonor, setTopDonor] = useState(undefined);
 
   useEffect(() => {
     getCampaignProgress()
       .then((data: any) => {
         const donations = parseInt(data.totalUsd);
-        setTotalDonations(donations);
-        const goal = donationGoal(donations);
-        setTotalDonationsGoals(goal);
+        if (donations < 1000000) {
+          setTotalDonations(donations);
+
+          const goal = donationGoal(donations);
+          setTotalDonationsGoals(goal);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -113,7 +115,6 @@ const Index: NextPage = () => {
     getTopDonors()
       .then((data: any[]) => {
         setTopDonor(data[0]?.allianceMember);
-        setTopDonors(data);
       })
       .catch((error) => {
         console.error(error);
