@@ -158,7 +158,10 @@ const Leaderboard = () => {
               <p className="my-rem-4">
                 See where your team stacks up against other Alliance members.
               </p>
-              <p className="small my-rem-4">
+              <p
+                className="my-rem-4"
+                style={{ fontSize: "0.8rem", opacity: 0.7 }}
+              >
                 Note: Only donations that had a protocol or project selected for
                 attribution in the donation process will be reflected here.
               </p>
