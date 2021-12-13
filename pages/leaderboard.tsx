@@ -52,15 +52,35 @@ const humanize = require("humanize-plus");
 const indexToPlace = (index) => {
   switch (index) {
     case 0:
-      return "1st";
+      return (
+        <>
+          1<sup>st</sup>
+        </>
+      );
     case 1:
-      return "2nd";
+      return (
+        <>
+          2<sup>nd</sup>
+        </>
+      );
     case 2:
-      return "3rd";
+      return (
+        <>
+          3<sup>rd</sup>
+        </>
+      );
     case 3:
-      return "4th";
+      return (
+        <>
+          4<sup>th</sup>
+        </>
+      );
     case 4:
-      return "5th";
+      return (
+        <>
+          5<sup>th</sup>
+        </>
+      );
     default:
       console.error("invalid index: ", index);
   }
