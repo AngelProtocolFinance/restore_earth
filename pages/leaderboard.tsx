@@ -123,6 +123,42 @@ const indexToPlace = (index) => {
           43<sup>rd</sup>
         </>
       );
+    case 50:
+      return (
+        <>
+          51<sup>st</sup>
+        </>
+      );
+    case 51:
+      return (
+        <>
+          52<sup>nd</sup>
+        </>
+      );
+    case 52:
+      return (
+        <>
+          53<sup>rd</sup>
+        </>
+      );
+    case 60:
+      return (
+        <>
+          61<sup>st</sup>
+        </>
+      );
+    case 61:
+      return (
+        <>
+          62<sup>nd</sup>
+        </>
+      );
+    case 62:
+      return (
+        <>
+          63<sup>rd</sup>
+        </>
+      );
     default:
       return (
         <>
