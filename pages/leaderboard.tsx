@@ -69,25 +69,74 @@ const indexToPlace = (index) => {
           3<sup>rd</sup>
         </>
       );
-    case 3:
+    case 20:
       return (
         <>
-          4<sup>th</sup>
+          21<sup>st</sup>
         </>
       );
-    case 4:
+    case 21:
       return (
         <>
-          5<sup>th</sup>
+          22<sup>nd</sup>
+        </>
+      );
+    case 22:
+      return (
+        <>
+          23<sup>rd</sup>
+        </>
+      );
+    case 30:
+      return (
+        <>
+          31<sup>st</sup>
+        </>
+      );
+    case 31:
+      return (
+        <>
+          32<sup>nd</sup>
+        </>
+      );
+    case 32:
+      return (
+        <>
+          33<sup>rd</sup>
+        </>
+      );
+    case 40:
+      return (
+        <>
+          41<sup>st</sup>
+        </>
+      );
+    case 41:
+      return (
+        <>
+          42<sup>nd</sup>
+        </>
+      );
+    case 42:
+      return (
+        <>
+          43<sup>rd</sup>
         </>
       );
     default:
-      console.error("invalid index: ", index);
+      return (
+        <>
+          {index + 1}
+          <sup>th</sup>
+        </>
+      );
   }
 };
 
 const Leaderboard = () => {
   const [topDonors, setTopDonors] = useState([]);
+  const DEFAULT_MEMBERS_LENGTH = 5;
+  const [membersLength, setMembersLength] = useState(DEFAULT_MEMBERS_LENGTH);
 
   useEffect(() => {
     getTopDonors()
@@ -144,7 +193,7 @@ const Leaderboard = () => {
             </div>
             <div className="d-none d-xl-block col-1" />
             <div className="col-12 col-lg-6 col-xl-5">
-              {topDonors.slice(0, 5).map((donor, index) => {
+              {topDonors.slice(0, membersLength).map((donor, index) => {
                 return (
                   <div
                     key={`${donor.allianceMember}-${donor.totalDonation}`}
@@ -208,6 +257,16 @@ const Leaderboard = () => {
                   </div>
                 );
               })}
+              {membersLength == DEFAULT_MEMBERS_LENGTH && (
+                <div style={{ textAlign: "right" }}>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => setMembersLength(topDonors.length)}
+                  >
+                    View the rest
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
