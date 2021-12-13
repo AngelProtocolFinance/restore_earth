@@ -48,11 +48,13 @@ const Header = ({ wallet = undefined }) => {
             </Link>
             <div className="justify-content-center align-items-center d-flex flex-row">
               {topDonor && topDonor != "" && (
-                <div className="d-none d-sm-flex">
-                  <span className="badge rounded-pill border-light text-light border border-2">
-                    Top Donor: <strong>{topDonor}</strong>
-                  </span>
-                </div>
+                <Link href="/leaderboard">
+                  <a className="d-none d-sm-flex">
+                    <span className="badge rounded-pill border-light text-light border border-2">
+                      Top Donor: <strong>{topDonor}</strong>
+                    </span>
+                  </a>
+                </Link>
               )}
               <ul className="nav m-0 text-white">
                 <li className="nav-item navbar-dropdown">

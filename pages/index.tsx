@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -5,8 +6,6 @@ import Image from "next/image";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-
-import { useState, useEffect } from "react";
 import CustomToggle from "components/CustomToggle";
 
 import RellaxWrapper from "react-rellax-wrapper";
@@ -40,9 +39,11 @@ import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
-import { topCharityAlliance } from "../scripts/constants.js";
 
-import { getCampaignProgress } from "components/Donate/AngelProtocol";
+import {
+  getCampaignProgress,
+  getTopDonors,
+} from "components/Donate/AngelProtocol";
 
 const humanize = require("humanize-plus");
 
@@ -90,10 +91,11 @@ const donationGoal = (amount) => {
   return 10000000;
 };
 
-const Index = ({ donations, goal }) => {
+const Index: NextPage = () => {
   const [totalDonations, setTotalDonations] = useState(291000);
   const [totalDonationsGoals, setTotalDonationsGoals] = useState(1000000);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
+  const [topDonor, setTopDonor] = useState(undefined);
 
   useEffect(() => {
     getCampaignProgress()
@@ -105,6 +107,14 @@ const Index = ({ donations, goal }) => {
           const goal = donationGoal(donations);
           setTotalDonationsGoals(goal);
         }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    getTopDonors()
+      .then((data: any[]) => {
+        setTopDonor(data[0]?.allianceMember);
       })
       .catch((error) => {
         console.error(error);
@@ -205,9 +215,16 @@ const Index = ({ donations, goal }) => {
                   Amplify your impact this holiday season by giving through
                   Angel Protocol.
                 </p>
-                <span className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
-                  Top Donor: {topCharityAlliance}
-                </span>
+                {topDonor && topDonor != "" && (
+                  <Link href="/leaderboard">
+                    <a
+                      className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Top Donor: {topDonor}
+                    </a>
+                  </Link>
+                )}
                 <div className="flex flex-row justify-content-center align-items-center">
                   <Link href="/donate">
                     <a className="btn btn-primary me-12 Button__gradient">
