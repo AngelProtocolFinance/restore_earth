@@ -28,14 +28,10 @@ import earth2 from "../public/images/earths/earth2.png";
 import earth3 from "../public/images/earths/earth3.png";
 import earth4 from "../public/images/earths/earth4.png";
 import earth5 from "../public/images/earths/earth5.png";
-import punk1 from "../public/images/punks/punk1.png";
-import angel2 from "../public/images/angels/angel_2.png";
-import angel3 from "../public/images/angels/angel_3.png";
-import angel4 from "../public/images/angels/angel_4.png";
+import angel1 from "../public/images/angels/angel_2.png";
+import angel2 from "../public/images/angels/angel_3.png";
+import angel3 from "../public/images/angels/angel_4.png";
 import angelUnrevealed from "../public/images/angels/angel_unrevealed.png";
-import punk5 from "../public/images/punks/punk5.png";
-import punk6 from "../public/images/punks/punk6.png";
-import punk7 from "../public/images/punks/punk7.png";
 import charity5gyresColor from "../public/images/charities/5gyres-color.png";
 import charityGlobalColor from "../public/images/charities/global-color.png";
 import charitySelfColor from "../public/images/charities/self-color.png";
@@ -680,7 +676,7 @@ const Index: NextPage = () => {
               <div className="d-none d-xl-block col-1" />
               <div className="col-12 col-lg-6 col-xl-5">
                 <Accordion
-                  defaultActiveKey="2"
+                  defaultActiveKey="1"
                   className="bg-dark border-bottom border"
                 >
                   <CustomToggle eventKey="1">
@@ -692,16 +688,17 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="1">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={punk1.src}
+                        src={angel1.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#8346</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Example only — Angels may vary
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -721,9 +718,10 @@ const Index: NextPage = () => {
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#9873</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Example only — Angels may vary
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -743,9 +741,10 @@ const Index: NextPage = () => {
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#2003</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Example only — Angels may vary
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -758,16 +757,17 @@ const Index: NextPage = () => {
                   <Accordion.Collapse eventKey="4">
                     <div className="d-flex flex-row border-top border-secondary ps-12 align-items-center bg-opacity">
                       <img
-                        src={angel4.src}
+                        src={angelUnrevealed.src}
                         className="img-thumbnail p-2 my-12"
                         width={100}
                         height={100}
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">#5132</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Unrevealed
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -787,9 +787,10 @@ const Index: NextPage = () => {
                         alt="an unrevealed galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">Unrevealed</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Unrevealed
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -809,9 +810,10 @@ const Index: NextPage = () => {
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">Unrevealed</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Unrevealed
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
@@ -831,9 +833,10 @@ const Index: NextPage = () => {
                         alt="a galactic angel"
                       />
                       <div className="ms-20">
-                        <div className="small muted">Galactic Angels</div>
                         <div className="fw-bolder fs-6">Galactic Angels</div>
-                        <div className="fs-5">Unrevealed</div>
+                        <div className="small muted" style={{ opacity: 0.5 }}>
+                          Unrevealed
+                        </div>
                       </div>
                     </div>
                   </Accordion.Collapse>
