@@ -95,6 +95,7 @@ const Index: NextPage = () => {
   const [totalDonations, setTotalDonations] = useState(32368);
   const [totalDonationsGoals, setTotalDonationsGoals] = useState(320000);
   const [topDonors, setTopDonors] = useState([]);
+  const [topDonor, setTopDonor] = useState(undefined);
   const totalDonationsImpact = totalDonations * (10 * 0.15); // 10 years * 15% yield
 
   useEffect(() => {
@@ -108,9 +109,10 @@ const Index: NextPage = () => {
       .catch((error) => {
         console.error(error);
       });
-    
+
     getTopDonors()
       .then((data: any[]) => {
+        setTopDonor(data[0]?.allianceMember);
         setTopDonors(data);
       })
       .catch((error) => {
@@ -212,6 +214,11 @@ const Index: NextPage = () => {
                   Amplify your impact this holiday season by giving through
                   Angel Protocol.
                 </p>
+                {topDonor && topDonor != "" && (
+                  <span className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
+                    Top Donor: {topDonor}
+                  </span>
+                )}
                 <div className="flex flex-row justify-content-center align-items-center">
                   <Link href="/donate">
                     <a className="btn btn-primary me-12 Button__gradient">
