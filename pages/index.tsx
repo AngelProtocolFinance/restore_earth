@@ -215,9 +215,14 @@ const Index: NextPage = () => {
                   Angel Protocol.
                 </p>
                 {topDonor && topDonor != "" && (
-                  <span className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none">
-                    Top Donor: {topDonor}
-                  </span>
+                  <Link href="/leaderboard">
+                    <a
+                      className="badge rounded-pill border-light text-light border border-2 mb-12 d-inline-block d-sm-none"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Top Donor: {topDonor}
+                    </a>
+                  </Link>
                 )}
                 <div className="flex flex-row justify-content-center align-items-center">
                   <Link href="/donate">
@@ -832,89 +837,6 @@ const Index: NextPage = () => {
                     </div>
                   </Accordion.Collapse>
                 </Accordion>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="padding-spacer-top padding-spacer-bottom mt-n8 shape-parent bg-dark overflow-hidden text-white">
-          <div className="container" id="nft">
-            <div className="row justify-content-xl-center gh-1 gv-5 mb-n7">
-              <div className="col-12 col-lg-4 me-lg-auto me-xl-0">
-                <h2 className="h3 text-white">Angel Alliance Leaderboard</h2>
-                <p>
-                  Where do you stack up against the best of the Angel Alliance?
-                </p>
-                <Link href="/donate">
-                  <a className="btn btn-primary Button__gradient mt-30">
-                    Donate now
-                    <svg
-                      className="icon-arrow icon-arrow-right"
-                      width="25"
-                      height="10"
-                      viewBox="0 0 25 10"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20 1L24 5L20 9"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M7 5L24 5"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                </Link>
-              </div>
-              <div className="d-none d-xl-block col-1" />
-              <div className="col-12 col-lg-6 col-xl-5">
-                {topDonors.slice(0, 5).map((donor, index) => {
-                  return (
-                    <div
-                      className="progress mb-40"
-                      style={{
-                        height: "30px",
-                      }}
-                      key={`${donor.allianceMember}-${donor.totalDonation}`}
-                    >
-                      <OverlayTrigger
-                        placement={"top"}
-                        overlay={
-                          <Tooltip id={`tooltip-top`}>Donations</Tooltip>
-                        }
-                      >
-                        <div
-                          className="progress-bar text-dark"
-                          role="progressbar"
-                          style={{
-                            width: `${
-                              (donor.totalDonation /
-                                topDonors[0].totalDonation) *
-                              100
-                            }%`,
-                          }}
-                          aria-valuenow={donor.totalDonation}
-                          aria-valuemin={0}
-                          aria-valuemax={topDonors[0].totalDonation}
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Donations"
-                        >
-                          {donor.allianceMember}: $
-                          {humanize.compactInteger(donor.totalDonation, 1)}
-                        </div>
-                      </OverlayTrigger>
-                    </div>
-                  );
-                })}
               </div>
             </div>
           </div>
