@@ -81,7 +81,7 @@ const donationGoal = (amount) => {
   }
 
   if (amount < 1000000) {
-    return 2000000;
+    return 2500000;
   }
 
   return 10000000;
