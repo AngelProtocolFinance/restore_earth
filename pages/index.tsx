@@ -81,18 +81,21 @@ const donationGoal = (amount) => {
   }
 
   if (amount < 500000) {
-    return 1250000;
+    const goal = amount * 2 + amount * 0.5 + 250000;
+    return goal;
   }
 
   if (amount < 750000) {
-    return 1875000;
+    const goal = amount * 2 + amount * 0.5 + 125000;
+    return goal;
   }
 
   if (amount < 1000000) {
-    return 2500000;
+    const goal = amount * 2 + amount * 0.5 + 62500;
+    return goal;
   }
 
-  return 10000000;
+  return 2500000;
 };
 
 const Index: NextPage = () => {
