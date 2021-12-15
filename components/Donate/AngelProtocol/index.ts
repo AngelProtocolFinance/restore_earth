@@ -173,6 +173,7 @@ const TCAList = [
   "OnePlanet",
   "Neptune",
   "Tiiik",
+  "Jolly Jalapenos",
   "Flipside Crypto",
   "Orion Money",
   "Tsunami Protocol",
