@@ -97,11 +97,8 @@ a {
 }
 
 .btn-outline-dark {
-  border: 1px solid $color-grey-light !important;
-
   &:hover {
-    background-color: $color-dark !important;
-    border: 1px solid $primary !important;
+    background-color: #111 !important;
   }
 }
 
