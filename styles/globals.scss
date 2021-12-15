@@ -96,6 +96,15 @@ a {
   }
 }
 
+.btn-outline-dark {
+  border: 1px solid $color-grey-light !important;
+
+  &:hover {
+    background-color: $color-dark !important;
+    border: 1px solid $primary !important;
+  }
+}
+
 // .donate__step {
 //   border-bottom: 5px solid $color-grey;
 //   color: $color-grey-dark;

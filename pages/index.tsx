@@ -19,6 +19,7 @@ import {
   useAccordionButton,
 } from "react-bootstrap";
 
+import galacticPunkLogo from "public/images/logos/gplogo.png";
 import processImage from "../public/images/process.svg";
 import iconSun from "../public/images/icons/sun.svg";
 import iconPlant from "../public/images/icons/plant.svg";
@@ -238,9 +239,11 @@ const Index: NextPage = () => {
                       Donate now
                     </a>
                   </Link>
-                  <a href="#nft" className="btn btn-outline-light">
-                    Earn NFTs
-                  </a>
+                  <Link href="#nft">
+                    <a className="btn btn-outline-dark px-rem-2">
+                      <img src={galacticPunkLogo.src} height={30} width={150} />
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="d-none d-xl-block col-1"></div>
