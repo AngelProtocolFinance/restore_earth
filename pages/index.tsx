@@ -109,12 +109,10 @@ const Index: NextPage = () => {
     getCampaignProgress()
       .then((data: any) => {
         const donations = parseInt(data.totalUsd);
-        if (donations < 1000000) {
-          setTotalDonations(donations);
+        setTotalDonations(donations);
 
-          const goal = donationGoal(donations);
-          setTotalDonationsGoals(goal);
-        }
+        const goal = donationGoal(donations);
+        setTotalDonationsGoals(goal);
       })
       .catch((error) => {
         console.error(error);
