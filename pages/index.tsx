@@ -96,12 +96,12 @@ const donationGoal = (amount) => {
     return goal;
   }
 
-  if (amount > 1000000) {
-    const goal = amount * 2 + amount * 0.5 + 10000;
+  if (amount >= 1000000) {
+    const goal = amount * 2 + amount * 0.5 + 25000;
     return goal;
   }
 
-  return 2500000;
+  return 3000000;
 };
 
 const Index: NextPage = () => {
