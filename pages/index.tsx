@@ -96,6 +96,11 @@ const donationGoal = (amount) => {
     return goal;
   }
 
+  if (amount > 1000000) {
+    const goal = amount * 2 + amount * 0.5 + 10000;
+    return goal;
+  }
+
   return 2500000;
 };
 
