@@ -82,22 +82,22 @@ const donationGoal = (amount) => {
   }
 
   if (amount < 500000) {
-    const goal = amount * 2 + amount * 0.5 + 250000;
+    const goal = amount * 2.5 + 250000;
     return goal;
   }
 
   if (amount < 750000) {
-    const goal = amount * 2 + amount * 0.5 + 125000;
+    const goal = amount * 2.5 + 125000;
     return goal;
   }
 
   if (amount < 1000000) {
-    const goal = amount * 2 + amount * 0.5 + 62500;
+    const goal = amount * 2.5 + 62500;
     return goal;
   }
 
   if (amount >= 1000000) {
-    const goal = amount * 2 + amount * 0.5 + 25000;
+    const goal = amount * 2.5 + 25000;
     return goal;
   }
 
