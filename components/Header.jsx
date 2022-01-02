@@ -56,15 +56,6 @@ const Header = ({ wallet = undefined }) => {
                   </a>
                 </Link>
               )}
-              <ul className="nav m-0 text-white">
-                <li className="nav-item navbar-dropdown">
-                  <Link href="/donate">
-                    <a className="nav-link">
-                      <span className="nav-link-name">Donate now</span>
-                    </a>
-                  </Link>
-                </li>
-              </ul>
             </div>
           </nav>
         </header>
