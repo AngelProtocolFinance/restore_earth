@@ -223,8 +223,16 @@ const Index: NextPage = () => {
                 </div>
                 <hr className="mt-0 border-white" />
                 <p className="lead fw-normal">
-                  Amplify your impact this holiday season by giving through
-                  Angel Protocol.
+                  The Restore Earth campaign is complete, with over $1.5M
+                  raised! Follow our{" "}
+                  <Link href="https://discord.gg/RhqA652ySA">
+                    <a className="text-white">Discord</a>
+                  </Link>{" "}
+                  &amp;{" "}
+                  <Link href="https://twitter.com/angelprotocol">
+                    <a className="text-white">Twitter</a>
+                  </Link>{" "}
+                  channels for further updates.
                 </p>
                 {topDonor && topDonor != "" && (
                   <Link href="/leaderboard">
