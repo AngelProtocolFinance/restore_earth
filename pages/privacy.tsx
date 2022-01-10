@@ -81,7 +81,10 @@ const Privacy = () => {
         of parental consent, we will delete that information. If you believe we
         might have any information from or about a child under 13, please
         contact us at:{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
+        <Link href="mailto:support@angelprotocol.io">
+          support@angelprotocol.io
+        </Link>
+        .
       </p>
       <h3 className="h5">
         Information We Collect About You and How We Collect It
@@ -352,7 +355,10 @@ const Privacy = () => {
             your data (the registration form). You can also always opt out by
             checking or unchecking the relevant boxes or by sending us an email
             stating your request to{" "}
-            <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.{" "}
+            <Link href="mailto:support@angelprotocol.io">
+              support@angelprotocol.io
+            </Link>
+            .{" "}
           </li>
           <li>
             Promotional Offers from the Company. If you do not wish to have your
@@ -361,8 +367,10 @@ const Privacy = () => {
             relevant box located on the form on which we collect your data (the
             registration form) or at any other time by sending us an email
             stating your request to{" "}
-            <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
-            If we have sent you a promotional email, you may send us a return
+            <Link href="mailto:support@angelprotocol.io">
+              support@angelprotocol.io
+            </Link>
+            . If we have sent you a promotional email, you may send us a return
             email asking to be omitted from future email distributions.
           </li>
           <li>
@@ -382,8 +390,10 @@ const Privacy = () => {
         personal information, which are described below. If you have questions
         about the legal bases under which we are processing your information,
         please contact us at{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>. The
-        legal bases under which We may process your personal information
+        <Link href="mailto:support@angelprotocol.io">
+          support@angelprotocol.io
+        </Link>
+        . The legal bases under which We may process your personal information
         include:
         <ul>
           <li>To provide our services to you.</li>
@@ -412,8 +422,10 @@ const Privacy = () => {
       <p>
         Under the GDPR you have certain rights regarding your personal
         information. You may email{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link> to
-        request the following actions:
+        <Link href="mailto:support@angelprotocol.io">
+          support@angelprotocol.io
+        </Link>{" "}
+        to request the following actions:
         <ul>
           <li>
             To access personal data about you that we possess. This includes
@@ -487,7 +499,10 @@ const Privacy = () => {
         any “sales” that may be occurring, and to not be discriminated against
         for exercising these rights. California consumers may make a request
         pursuant to their rights under the CCPA by contacting us at
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
+        <Link href="mailto:support@angelprotocol.io">
+          support@angelprotocol.io
+        </Link>
+        .
       </p>
       <h3 className="h5">Data Security</h3>
       <p>
@@ -526,7 +541,10 @@ const Privacy = () => {
       <p>
         To ask questions or comment about this privacy policy and our privacy
         practices, contact us at{" "}
-        <Link href="mailto:hi@angelprotocol.io">hi@angelprotocol.io</Link>.
+        <Link href="mailto:support@angelprotocol.io">
+          support@angelprotocol.io
+        </Link>
+        .
       </p>{" "}
     </>
   );

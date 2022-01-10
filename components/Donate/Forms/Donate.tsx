@@ -631,8 +631,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           <p className="p-rem-4 bg-grey-light border-solid">{errorMessage}</p>
           <p>
             If this transaction keeps failing, please let us know at{" "}
-            <Link href="mailto:hi@angelprotocol.com&subject=RestoreEarth">
-              <a className="link">hi@angelprotocol.io</a>
+            <Link href="mailto:support@angelprotocol.io&subject=RestoreEarth">
+              <a className="link">support@angelprotocol.io</a>
             </Link>
           </p>
           <Button variant="primary" type="submit">
@@ -648,8 +648,8 @@ const Donate = ({ setStep, wallet, onDonationSuccess }) => {
           <Form>
             <p>
               There was an error sending KYC data, please let us know at{" "}
-              <Link href="mailto:hi@angelprotocol.com&subject=RestoreEarth">
-                <a className="link">hi@angelprotocol.io</a>
+              <Link href="mailto:support@angelprotocol.io&subject=RestoreEarth">
+                <a className="link">support@angelprotocol.io</a>
               </Link>
             </p>
             <Button variant="primary" type="submit">
