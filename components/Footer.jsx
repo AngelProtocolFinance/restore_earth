@@ -36,6 +36,11 @@ const Footer = () => {
                 </a>
               </Link>
             </div>
+            <div className="col-12 pt-rem-8">
+              <Link href="mailto:support@angelprotocol.io&subject=RestoreEarth">
+                <a className="link">support@angelprotocol.io</a>
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
