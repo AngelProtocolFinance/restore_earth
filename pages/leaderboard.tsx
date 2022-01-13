@@ -201,34 +201,6 @@ const Leaderboard = () => {
                 Note: Only donations that had a protocol or project selected for
                 attribution in the donation process will be reflected here.
               </p>
-              <Link href="/donate">
-                <a className="btn btn-primary Button__gradient my-rem-4">
-                  Donate now
-                  <svg
-                    className="icon-arrow icon-arrow-right"
-                    width="25"
-                    height="10"
-                    viewBox="0 0 25 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 1L24 5L20 9"
-                      stroke="currentColor"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M7 5L24 5"
-                      stroke="currentColor"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </Link>
             </div>
             <div className="d-none d-xl-block col-1" />
             <div className="col-12 col-lg-6 col-xl-5">

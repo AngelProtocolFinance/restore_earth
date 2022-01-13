@@ -81,7 +81,7 @@ const DonatePage: NextPage = () => {
       <Header />
 
       <Page>
-        <div className="pt-rem-12 padding-spacer-bottom">
+        {/* <div className="pt-rem-12 padding-spacer-bottom">
           <div className="container-fluid px-rem-4">
             <div className="row gh-1 justify-content-center">
               <div className="col-12 col-sm-10 col-md-6 col-lg-5">
@@ -108,7 +108,7 @@ const DonatePage: NextPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </Page>
       <Footer />
     </>
