@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Scrollspy from "react-scrollspy";
 import Link from "next/link";
 
-import angelProtocolLogo from "public/images/angel-protocol.png";
+import angelGivingLogo from "public/images/angelgiving-beta-H-logo-wht.svg";
 import terraLogo from "public/images/chains/terra.png";
 import { getTopDonors } from "components/Donate/AngelProtocol";
 
@@ -41,7 +41,7 @@ const Header = ({ wallet = undefined }) => {
                 <img
                   width="100"
                   height="47"
-                  src={angelProtocolLogo.src}
+                  src={angelGivingLogo.src}
                   alt=""
                 />
               </a>

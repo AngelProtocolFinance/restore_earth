@@ -1,8 +1,7 @@
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 
-import angelProtocolLogo from "public/images/angel-protocol.png";
+import angelGivingLogo from "public/images/angelgiving-beta-H-logo-wht.svg";
 
 const Footer = () => {
   return (
@@ -20,9 +19,9 @@ const Footer = () => {
             </div>
             <div className="col-12">
               <div className="d-flex flex-row align-items-center justify-content-center">
-                <span className="small">Powered by</span>
-                <Image
-                  src={angelProtocolLogo}
+                <span className="small">Powered by&nbsp;</span>
+                <img
+                  src={angelGivingLogo.src}
                   alt="Angel Protocol Logo"
                   width={120}
                   height={56}
@@ -39,7 +38,7 @@ const Footer = () => {
             <div className="col-12 pt-rem-2">
               <Link href="mailto:support@angelprotocol.io&subject=RestoreEarth">
                 <a className="text-white link">
-                  <span className="font-xs">support@angelprotocol.io</span>
+                  <span className="font-xs">support@angelgiving.io</span>
                 </a>
               </Link>
             </div>

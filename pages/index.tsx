@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -138,7 +137,7 @@ const Index: NextPage = () => {
         <title>Restore Earth</title>
         <meta
           name="description"
-          content="Amplify your impact this holiday season by giving through Angel Protocol."
+          content="Amplify your impact this holiday season by giving through Angel Giving."
         />
       </Head>
       <Header />
@@ -256,11 +255,11 @@ const Index: NextPage = () => {
             </div>
 
             <div className="Planets d-none d-sm-grid">
-              <Image className="img-fluid" src={earth1} alt="earth" />
-              <Image className="img-fluid" src={earth2} alt="earth" />
-              <Image className="img-fluid" src={earth3} alt="earth" />
-              <Image className="img-fluid" src={earth4} alt="earth" />
-              <Image className="img-fluid" src={earth5} alt="earth" />
+              <img className="img-fluid" src={earth1.src} alt="earth" />
+              <img className="img-fluid" src={earth2.src} alt="earth" />
+              <img className="img-fluid" src={earth3.src} alt="earth" />
+              <img className="img-fluid" src={earth4.src} alt="earth" />
+              <img className="img-fluid" src={earth5.src} alt="earth" />
             </div>
           </div>
         </div>
@@ -285,7 +284,7 @@ const Index: NextPage = () => {
           <div className="container pt-60" id="learn">
             <div className="row justify-content-xl-center gh-1 gv-2 mb-n7">
               <div className="col-12 col-lg-4 me-lg-auto me-xl-0">
-                <div className="subtitle mt-n10">Angel Protocol</div>
+                <div className="subtitle mt-n10">Angel Giving</div>
                 <h2 className="h3">
                   Donate.
                   <br />
@@ -295,7 +294,7 @@ const Index: NextPage = () => {
                 </h2>
                 <Link href="https://www.angelprotocol.io/">
                   <a className="btn btn-dark d-none d-lg-block" target="_blank">
-                    Explore Angel Protocol
+                    Explore Angel Giving
                     <svg
                       className="icon-arrow icon-arrow-right"
                       width="25"
@@ -379,15 +378,15 @@ const Index: NextPage = () => {
                 </div>
 
                 <p className="mb-12">
-                  Angel Protocol empowers charitable organizations to create
+                  Angel Giving empowers charitable organizations to create
                   non-custodial endowments on the Terra blockchain. All
                   donations sent to the endowments are automatically invested in
                   low-risk / high-yield DeFi products.
                 </p>
                 <p>
-                  Donations via Angel Protocol currently earn over 15% yield for
+                  Donations via Angel Giving currently earn over 15% yield for
                   partner non-profits every year, in perpetuity. Thanks to Angel
-                  Protocol, when donors give once, they give forever.
+                  Giving, when donors give once, they give forever.
                 </p>
                 <hr />
                 <div className="row gh-1 gv-2 justify-content-around justify-content-sm-center text-center text-sm-start">
@@ -611,7 +610,7 @@ const Index: NextPage = () => {
               <div className="col-12 col-lg-10">
                 <Link href="https://www.angelprotocol.io/">
                   <a target="_blank" className="btn btn-dark">
-                    Explore Angel Protocol
+                    Explore Angel Giving
                     <svg
                       className="icon-arrow icon-arrow-right"
                       width="25"

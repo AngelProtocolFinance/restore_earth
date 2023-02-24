@@ -1,4 +1,3 @@
-import Image from "next/image";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { useState, useEffect } from "react";
 import Web3 from "web3";
